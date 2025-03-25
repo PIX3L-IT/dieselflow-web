@@ -1,0 +1,11 @@
+{
+  "name": "dieselflow-web",
+  "version": "1.0.0",
+  "description": "version web para dieselflow",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
