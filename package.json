@@ -4,8 +4,19 @@
   "description": "version web para dieselflow",
   "main": "app.js",
   "scripts": {
+    "start": "pm2 start app.js --name dieselflow-web -f --watch --restart-delay=5000 --update-env",
+    "stop": "pm2 stop dieselflow-web",
+    "restart": "pm2 restart dieselflow-web",
+    "delete": "pm2 delete 0",
+    "logs": "pm2 logs --lines 100",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "compression": "^1.8.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.13.0"
+  }
 }
