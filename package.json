@@ -4,7 +4,7 @@
   "description": "version web para dieselflow",
   "main": "app.js",
   "scripts": {
-    "start": "pm2 start app.js --name dieselflow-web -f --watch --restart-delay=5000 --update-env",
+    "start": "nodemon app.js",
     "stop": "pm2 stop dieselflow-web",
     "restart": "pm2 restart dieselflow-web",
     "delete": "pm2 delete 0",
@@ -14,9 +14,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.1692.0",
     "compression": "^1.8.0",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "mongoose": "^8.13.0"
+    "mongoose": "^8.13.0",
+    "multer": "^1.4.5-lts.2",
+    "multer-s3": "^2.10.0",
+    "nodemon": "^3.1.9"
   }
 }
