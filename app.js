@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const bodyParser = require("body-parser");
 const compression = require("compression");
+const cors = require('cors');
 
 const uploadImagesRoutes = require("./backend/routes/images/uploadImages");
 const fetchImagesRoutes = require("./backend/routes/images/fetchImages");
@@ -15,6 +16,15 @@ const fetchImagesRoutes = require("./backend/routes/images/fetchImages");
 const app = express();
 const port = process.env.PORT;
 const uri = process.env.MONGO_URI;
+
+// Middlewares
+app.use(cors());
+app.use(express.json());
+
+// Importar rutas
+const authRoutes = require('./backend/routes/users/auth');
+app.use('/api', authRoutes);
+
 
 // Conectar a MongoDB
 mongoose
