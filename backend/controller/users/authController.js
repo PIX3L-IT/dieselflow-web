@@ -16,7 +16,7 @@ const registerUser = async (req, res) => {
   }
 };
 
-// Login user
+// Login user (con cookies)
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
@@ -30,15 +30,30 @@ const loginUser = async (req, res) => {
     process.env.JWT_SECRET,
     { expiresIn: process.env.JWT_EXPIRATION }
   );
-  
+
   const refreshToken = jwt.sign(
     { id: user._id },
     process.env.JWT_REFRESH_SECRET,
     { expiresIn: process.env.JWT_REFRESH_EXPIRATION }
   );
 
-  res.json({ accessToken, refreshToken });
+  // Mandar los tokens como cookies seguras
+  res
+    .cookie('accessToken', accessToken, {
+      httpOnly: true,
+      secure: true, // solo HTTPS
+      sameSite: 'Strict',
+      maxAge: 1000 * 60 * 15 // 15 minutos o lo que tengas en tu env
+    })
+    .cookie('refreshToken', refreshToken, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'Strict',
+      maxAge: 1000 * 60 * 60 * 24 * 7 // 7 días
+    })
+    .json({ message: 'Login exitoso' });
 };
+
 
 // Protected route
 const getProtected = (req, res) => {
@@ -65,9 +80,15 @@ const refreshToken = (req, res) => {
   }
 };
 
+// Login page
+const login = (req, res) => {
+  res.render('users/login', { title: 'Login' });
+};
+
 module.exports = {
   registerUser,
   loginUser,
   getProtected,
-  refreshToken
+  refreshToken,
+  login
 };

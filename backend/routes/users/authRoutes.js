@@ -5,7 +5,8 @@ const {
   registerUser,
   loginUser,
   getProtected,
-  refreshToken
+  refreshToken,
+  login
 } = require('../../controller/users/authController');
 
 // POST /api/register
@@ -19,6 +20,9 @@ router.get('/protected', verifyToken, getProtected);
 
 // POST /api/refresh
 router.post('/refresh', refreshToken);
+
+// GET
+router.get('/login', login);
 
 module.exports = router;
 

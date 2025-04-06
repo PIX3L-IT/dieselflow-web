@@ -9,6 +9,9 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const compression = require("compression");
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
+
+
 
 const uploadImagesRoutes = require("./backend/routes/images/uploadImages");
 const fetchImagesRoutes = require("./backend/routes/images/fetchImages");
@@ -19,6 +22,7 @@ const uri = process.env.MONGO_URI;
 // Middlewares
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 
 // Importar rutas
 const authRoutes = require('./backend/routes/users/authRoutes');
