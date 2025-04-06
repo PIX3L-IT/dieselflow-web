@@ -9,6 +9,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const compression = require("compression");
 
+const sendEmailRoutes = require('./backend/routes/reports/sendEmail.routes');
 const uploadImagesRoutes = require("./backend/routes/images/uploadImages");
 const fetchImagesRoutes = require("./backend/routes/images/fetchImages");
 
@@ -30,6 +31,9 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(compression());
 
+
+// Usar la ruta para enviar correos
+app.use("/send-email", sendEmailRoutes);
 // Usar las rutas para subir y obtener imágenes
 app.use("/upload", uploadImagesRoutes);
 app.use("/image", fetchImagesRoutes);
