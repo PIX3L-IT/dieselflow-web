@@ -37,22 +37,14 @@ const loginUser = async (req, res) => {
     { expiresIn: process.env.JWT_REFRESH_EXPIRATION }
   );
 
-  // Mandar los tokens como cookies seguras
-  res
-    .cookie('accessToken', accessToken, {
-      httpOnly: true,
-      secure: true, // solo HTTPS
-      sameSite: 'Strict',
-      maxAge: 1000 * 60 * 15 // 15 minutos o lo que tengas en tu env
-    })
-    .cookie('refreshToken', refreshToken, {
-      httpOnly: true,
-      secure: true,
-      sameSite: 'Strict',
-      maxAge: 1000 * 60 * 60 * 24 * 7 // 7 días
-    })
-    .json({ message: 'Login exitoso' });
+  // Mandar los tokens en la respuesta JSON
+  res.json({
+    message: 'Login exitoso',
+    accessToken: accessToken,
+    refreshToken: refreshToken,
+  });
 };
+
 
 
 // Protected route
