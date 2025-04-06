@@ -38,7 +38,9 @@ app.use("/image", fetchImagesRoutes);
 app.get("/", (req, res) => {
   res.render("testing/index.ejs");
 });
-
+//app.js
+const userRoutes = require("./backend/routes/users/users");
+app.use("/users", userRoutes);
 // Manejo de rutas no encontradas
 app.use((req, res) => {
   res.status(404).json({
