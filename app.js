@@ -12,8 +12,6 @@ const cors = require('cors');
 
 const uploadImagesRoutes = require("./backend/routes/images/uploadImages");
 const fetchImagesRoutes = require("./backend/routes/images/fetchImages");
-const userRoutes = require("./backend/routes/users/auth");
-
 const app = express();
 const port = process.env.PORT;
 const uri = process.env.MONGO_URI;
@@ -23,8 +21,8 @@ app.use(cors());
 app.use(express.json());
 
 // Importar rutas
-const authRoutes = require('./backend/routes/users/auth');
-app.use('/api', authRoutes);
+const authRoutes = require('./backend/routes/users/authRoutes');
+app.use('/auth', authRoutes);
 
 
 // Conectar a MongoDB
@@ -44,7 +42,6 @@ app.use(compression());
 // Usar las rutas para subir y obtener imágenes
 app.use("/upload", uploadImagesRoutes);
 app.use("/image", fetchImagesRoutes);
-app.use("/user", userRoutes);
 
 // Ruta principal
 app.get("/", (req, res) => {

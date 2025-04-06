@@ -1,13 +1,9 @@
-const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const User = require('../../models/users/User')
-const verifyToken = require('../../../frontend-web/utils/verifyToken');
+const User = require('../../models/users/User');
 
-const router = express.Router();
-
-// POST /api/register
-router.post('/register', async (req, res) => {
+// Register user
+const registerUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
@@ -18,10 +14,10 @@ router.post('/register', async (req, res) => {
   } catch (err) {
     res.status(400).json({ error: 'Error al registrar usuario', details: err.message });
   }
-});
+};
 
-// POST /api/login
-router.post('/login', async (req, res) => {
+// Login user
+const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   const user = await User.findOne({ email });
@@ -42,18 +38,15 @@ router.post('/login', async (req, res) => {
   );
 
   res.json({ accessToken, refreshToken });
-});
+};
 
-
-// GET /api/protected
-router.get('/protected', verifyToken, (req, res) => {
+// Protected route
+const getProtected = (req, res) => {
   res.json({ message: 'Acceso permitido', usuario: req.user });
-});
+};
 
-module.exports = router;
-
-// POST /api/refresh
-router.post('/refresh', (req, res) => {
+// Refresh token
+const refreshToken = (req, res) => {
   const { refreshToken } = req.body;
   if (!refreshToken) return res.status(401).json({ message: 'Token de refresco requerido' });
 
@@ -70,4 +63,11 @@ router.post('/refresh', (req, res) => {
   } catch (err) {
     res.status(403).json({ message: 'Refresh token inválido o expirado' });
   }
-});
+};
+
+module.exports = {
+  registerUser,
+  loginUser,
+  getProtected,
+  refreshToken
+};
