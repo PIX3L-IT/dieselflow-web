@@ -54,34 +54,36 @@
 
   <script>
     const loginForm = document.getElementById('loginForm');
-
+  
     loginForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const email = loginForm.email.value;
       const password = loginForm.password.value;
-
+  
       try {
-        const res = await fetch('/api/login', {
+        const res = await fetch('/auth/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           credentials: 'include', // Esto permite que las cookies viajen
           body: JSON.stringify({ email, password })
         });
-
+  
         const data = await res.json();
-
+  
         if (res.ok) {
           alert(data.message || 'Login exitoso ✅');
-          // Puedes redirigir después de loguear
-          // window.location.href = '/dashboard';
+          window.location.href = '/auth/protected'; // 🔁 Redirección después del login
+        } else if (res.status === 401) {
+          alert(data.message || 'Credenciales incorrectas');
         } else {
           alert(data.message || 'Error en el login');
         }
+  
       } catch (err) {
         console.error('Error:', err);
         alert('Hubo un problema con el servidor');
       }
     });
-  </script>
+  </script>  
 </body>
 </html>

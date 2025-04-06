@@ -57,8 +57,9 @@ const loginUser = async (req, res) => {
 
 // Protected route
 const getProtected = (req, res) => {
-  res.json({ message: 'Acceso permitido', usuario: req.user });
+  res.render('users/dieselflow');
 };
+
 
 // Refresh token
 const refreshToken = (req, res) => {
