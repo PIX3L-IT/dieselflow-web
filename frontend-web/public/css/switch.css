@@ -1,11 +1,13 @@
 /* Switch */
 .form-switch {
-  position: relative;
   display: flex;
   align-items: center;
-  gap: 0.5em;
-  font-size: 2rem; /* Valor de escalamiento */
+  font-size: 1.5rem; /* Valor de escalamiento */
   padding: 0;
+}
+
+.form-check {
+  margin-bottom: 0;
 }
 
 .form-check-input.custom-toggle {
@@ -41,8 +43,7 @@
   pointer-events: none;
   position: relative;
   color: #1d2951;
-  right: 2.4em;
+  right: 1.6em;
   font-size: 0.6em;
   opacity: 0;
-  transition: opacity 0.2s ease;
 }
