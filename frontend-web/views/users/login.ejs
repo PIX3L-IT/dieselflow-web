@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 80px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      width: 300px;
+      gap: 10px;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px;
+      font-size: 16px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+  <h1>Iniciar Sesión</h1>
+
+  <form id="loginForm">
+    <input type="email" name="email" placeholder="Correo electrónico" required />
+    <input type="password" name="password" placeholder="Contraseña" required />
+    <button type="submit">Entrar</button>
+  </form>
+
+  <script>
+    const loginForm = document.getElementById('loginForm');
+  
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = loginForm.email.value;
+      const password = loginForm.password.value;
+  
+      try {
+        const res = await fetch('/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include', // Esto permite que las cookies viajen
+          body: JSON.stringify({ email, password })
+        });
+  
+        const data = await res.json();
+  
+        if (res.ok) {
+          alert(data.message || 'Login exitoso ✅');
+          window.location.href = '/auth/protected'; // 🔁 Redirección después del login
+        } else if (res.status === 401) {
+          alert(data.message || 'Credenciales incorrectas');
+        } else {
+          alert(data.message || 'Error en el login');
+        }
+  
+      } catch (err) {
+        console.error('Error:', err);
+        alert('Hubo un problema con el servidor');
+      }
+    });
+  </script>  
+</body>
+</html>
