@@ -28,7 +28,7 @@ app.set("views", path.join(__dirname, "frontend-web", "views"));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "frontend-web", "public")));
 app.use(compression());
 
 // Usar las rutas para subir y obtener imágenes
