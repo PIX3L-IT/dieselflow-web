@@ -11,6 +11,7 @@ const compression = require("compression");
 
 const uploadImagesRoutes = require("./backend/routes/images/uploadImages");
 const fetchImagesRoutes = require("./backend/routes/images/fetchImages");
+const componentRoutes = require("./backend/routes/testing/viewComponents");
 
 const app = express();
 const port = process.env.PORT;
@@ -33,6 +34,7 @@ app.use(compression());
 // Usar las rutas para subir y obtener imágenes
 app.use("/upload", uploadImagesRoutes);
 app.use("/image", fetchImagesRoutes);
+app.use("/component", componentRoutes);
 
 // Ruta principal
 app.get("/", (req, res) => {
