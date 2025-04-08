@@ -1,0 +1,19 @@
+<div class="modal">
+  <div class="modal-content clean">
+    <!-- CÍRCULOS -->
+    <img src="/imgs/modal1.png" class="modal-corner top-left">
+    <img src="/imgs/modal2.png" class="modal-corner top-right">
+    <img src="/imgs/modal3.png" class="modal-corner bottom-left">
+    <img src="/imgs/modal4.png" class="modal-corner bottom-right">
+
+    <!-- CONTENIDO -->
+    <h2 class="modal-title"><%= titulo %></h2>
+    <p class="modal-message"><%= mensaje %></p>
+
+    <% if (botonTexto && botonLink) { %>
+      <div class="btn-group">
+        <a href="<%= botonLink %>"><button><%= botonTexto %></button></a>
+      </div>
+    <% } %>
+  </div>
+</div>
