@@ -10,3 +10,7 @@ exports.getModal = (req, res) => {
 exports.getSwitch = (req, res) => {
   res.render("includes/switch");
 };
+
+exports.getText = (req, res) => {
+  res.render("includes/texto");
+}
