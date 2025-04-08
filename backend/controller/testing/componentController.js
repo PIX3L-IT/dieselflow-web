@@ -1,9 +1,6 @@
 exports.getNavbar = (req, res) => {
   res.render('includes/navbar', { active: '' });
 };
-  // Enviar la lista de URLs firmadas al cliente
-  res.render("includes/navbar", { active: "" });
-};
 
 exports.getModal = (req, res) => {
   res.render("testing/modalTest");
