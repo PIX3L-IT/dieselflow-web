@@ -1,6 +1,5 @@
 exports.getNavbar = (req, res) => {
-  // Enviar la lista de URLs firmadas al cliente
-  res.render("includes/navbar", { active: "" });
+  res.render('includes/navbar', { active: '' });
 };
 
 exports.getModal = (req, res) => {
@@ -14,3 +13,11 @@ exports.getSwitch = (req, res) => {
 exports.getText = (req, res) => {
   res.render("includes/texto");
 }
+
+exports.getInputEmail = (req, res) => {
+    res.render('includes/inputEmail', { active: '' });
+};
+
+exports.getInputPassword = (req, res) => {
+    res.render('includes/inputPassword', { active: '' });
+};

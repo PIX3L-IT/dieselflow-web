@@ -4,6 +4,8 @@ const componentController = require("../../controller/testing/componentControlle
 
 // Ruta para mostrar navbar
 router.get("/navbar", componentController.getNavbar);
+router.get("/inputEmail",componentController.getInputEmail);
+router.get("/inputPassword",componentController.getInputPassword);
 
 // Ruta para mostrar modal
 router.get("/modal", componentController.getModal);
