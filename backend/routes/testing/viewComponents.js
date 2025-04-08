@@ -4,5 +4,7 @@ const componentController = require("../../controller/testing/componentControlle
 
 // Ruta para mostrar el componente
 router.get("/navbar", componentController.getNavbar);
+router.get("/inputEmail",componentController.getInputEmail);
+router.get("/inputPassword",componentController.getInputPassword);
 
 module.exports = router;
