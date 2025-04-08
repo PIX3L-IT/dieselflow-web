@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Test Modal</title>
+  <link rel="stylesheet" href="/css/modal.css">
+</head>
+<body>
+  <%- include('../includes/modal', {
+    titulo: '¡Correo enviado!',
+    mensaje: 'Si la dirección de correo ingresada está asociada a una cuenta, recibirás un correo con las instrucciones para restablecer tu contraseña. Por favor, revisa tu bandeja de entrada y carpeta de spam',
+    botonConfirmacionTexto: 'Volver a iniciar sesión',
+    botonConfirmacionLink: '/aceptar',
+    botonCancelarTexto: '',
+    botonCancelarLink: ''
+  }) %>  
+</body>
+</html>
