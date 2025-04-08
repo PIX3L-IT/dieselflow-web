@@ -10,10 +10,17 @@
     <h2 class="modal-title"><%= titulo %></h2>
     <p class="modal-message"><%= mensaje %></p>
 
-    <% if (botonTexto && botonLink) { %>
-      <div class="btn-group">
-        <a href="<%= botonLink %>"><button><%= botonTexto %></button></a>
-      </div>
-    <% } %>
+    <div class="btn-group">
+      <% if (botonConfirmacionTexto && botonConfirmacionLink) { %>
+        <a href="<%= botonConfirmacionLink %>">
+          <button class="btn-confirmacion"><%= botonConfirmacionTexto %></button>
+        </a>
+      <% } %>
+      <% if (botonCancelarTexto && botonCancelarLink) { %>
+        <a href="<%= botonCancelarLink %>">
+          <button class="btn-cancelar"><%= botonCancelarTexto %></button>
+        </a>
+      <% } %>
+    </div>
   </div>
 </div>

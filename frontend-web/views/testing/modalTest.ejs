@@ -7,10 +7,12 @@
 </head>
 <body>
   <%- include('../includes/modal', {
-    titulo: '¡Correo enviado!',
-    mensaje: 'Si la dirección de correo ingresada está asociada a una cuenta, recibirás un correo con las instrucciones para restablecer tu contraseña. Por favor, revisa tu bandeja de entrada y carpeta de spam.',
-    botonTexto: 'Volver a iniciar sesión',
-    botonLink: '/'
+    titulo: '¿Estás segura que quieres registrar a Usuaro?',
+    mensaje: 'Esto no se puede deshacer, ¿seguro de continuar?',
+    botonConfirmacionTexto: '',
+    botonConfirmacionLink: '',
+    botonCancelarTexto: 'Cancelar',
+    botonCancelarLink: '/cancelar'
   }) %>  
 </body>
 </html>
