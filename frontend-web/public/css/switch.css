@@ -1,0 +1,48 @@
+/* Switch */
+.form-switch {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  font-size: 2rem; /* Valor de escalamiento */
+  padding: 0;
+}
+
+.form-check-input.custom-toggle {
+  width: 2.5em;
+  height: 1.4em;
+  cursor: pointer;
+  margin: 0;
+}
+
+/* estilo al hacer focus */
+.form-check-input:focus {
+  box-shadow: none;
+  border-color: rgb(222, 226, 230);
+}
+
+.form-check-input.custom-toggle:checked {
+  background-color: #1d2951;
+  border-color: #1d2951;
+}
+
+/* Mostrar icono y color cuando se haga check */
+.form-check-input.custom-toggle:checked + .fa-check {
+  opacity: 1;
+}
+
+/* Cambiar círculo de color cuando no este clickeado */
+.form-check-input.custom-toggle:not(:checked) {
+  --bs-form-switch-bg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E%3Ccircle r='3' fill='rgba(0%2C%200%2C%200%2C%200.25)'/%3E%3C/svg%3E");
+}
+
+/* Estilo de icono de checkmark */
+.fa-check {
+  pointer-events: none;
+  position: relative;
+  color: #1d2951;
+  right: 2.4em;
+  font-size: 0.6em;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
