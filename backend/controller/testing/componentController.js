@@ -10,6 +10,10 @@ exports.getSwitch = (req, res) => {
   res.render("includes/switch");
 };
 
+exports.getText = (req, res) => {
+  res.render("includes/texto");
+}
+
 exports.getInputEmail = (req, res) => {
     res.render('includes/inputEmail', { active: '' });
 };
