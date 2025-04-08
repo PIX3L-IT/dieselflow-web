@@ -1,0 +1,76 @@
+ /* === NAVBAR === */
+ .navbar {
+    width: 180px;
+    background-color: #182747;
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: 'Jaldi', sans-serif;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    z-index: 10;
+    padding: 1rem 0;
+  }
+  
+  .navbar nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .navbar .logo {
+    padding-bottom: 1rem;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+  
+  .menu-item {
+    width: 140px;
+    padding: 0.8rem;
+    border-radius: 10px;
+    margin: 0.5rem 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    font-size: 0.9rem;
+  }
+  
+  .menu-item:hover {
+    background-color: #2d3f73cc;
+  }
+  
+  .active-item {
+    background-color: #2D3F73;
+  }
+  
+  .user-section {
+    margin-top: auto;
+    padding: 1.2rem 1rem 0;
+    border-top: 1px solid #ffffff33;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .user-info {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.85rem;
+    text-align: center;
+  }

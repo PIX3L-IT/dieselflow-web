@@ -1,0 +1,50 @@
+<aside class="navbar">
+  <div>
+    <div class="logo">DieselFlow</div>
+    <nav>
+      <ul>
+        <li>
+          <a href="/" class="menu-item <%= active === 'inicio' ? 'active-item' : '' %>">
+            <i class="fas fa-chart-bar" style="font-size: 20px;"></i>
+            Inicio
+          </a>
+        </li>
+        <li>
+          <a href="/usuarios" class="menu-item <%= active === 'usuarios' ? 'active-item' : '' %>">
+            <i class="fas fa-user" style="font-size: 20px;"></i>
+            Usuarios
+          </a>
+        </li>
+        <li>
+          <a href="/unidades" class="menu-item <%= active === 'unidades' ? 'active-item' : '' %>">
+            <img src="/a.png" alt="Unidades" style="width: 40px; height: auto;" />
+            Unidades
+          </a>
+        </li>
+        <li>
+          <a href="/reportes" class="menu-item <%= active === 'reportes' ? 'active-item' : '' %>">
+            <i class="fas fa-list" style="font-size: 20px;"></i>
+            Reportes
+          </a>
+        </li>
+        <li>
+          <a href="/formularios" class="menu-item <%= active === 'formularios' ? 'active-item' : '' %>">
+            <i class="fas fa-paperclip" style="font-size: 20px;"></i>
+            Formularios
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="user-section">
+    <div class="user-info">
+      <i class="fas fa-user-circle" style="font-size: 18px;"></i>
+      <span>Fernando<br>Mondragón</span>
+    </div>
+    <a href="/logout" class="menu-item <%= active === 'logout' ? 'active-item' : '' %>">
+      <i class="fas fa-sign-out-alt" style="font-size: 18px;"></i>
+      Cerrar Sesión
+    </a>
+  </div>
+</aside>
