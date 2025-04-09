@@ -1,8 +1,11 @@
 .text {
-  font-family: "Jaldi", sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 19.5px;
-  line-height: 33px;
-  color: #182747;
+    font-family: "Jaldi", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.20rem;
+    line-height: 33px;
+    margin-top: 1.5rem;       
+    margin-left: 1rem;
+    margin-bottom: 0.5rem;
+    color: #182747;
 }

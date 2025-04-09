@@ -19,4 +19,6 @@ router.get("/text", componentController.getText);
 // Ruta para mostrar
 router.get("/card", componentController.getCard);
 
+// Ruta para mostrar subtitulos
+router.get("/subtitle", componentController.getSubtitle);
 module.exports = router;
