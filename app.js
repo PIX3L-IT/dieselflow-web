@@ -9,7 +9,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const compression = require("compression");
 
-const sendEmailRoutes = require('./backend/routes/reports/sendEmail.routes');
+const sendEmailRoutes = require('./backend/routes/reports/sendEmailRoutes');
 const uploadImagesRoutes = require("./backend/routes/images/uploadImages");
 const fetchImagesRoutes = require("./backend/routes/images/fetchImages");
 

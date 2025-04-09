@@ -7,7 +7,7 @@ exports.get_sendEmail = (req, res) => {
 };
 
 exports.post_sendEmail = (req, res) => {
-    const email = 'a00836936@tec.mx';
+    const email = 'a01710217@tec.mx';
     const message = 'Este es un mensaje de prueba';
     const subject = 'Prueba de envío de correo electrónico';
   

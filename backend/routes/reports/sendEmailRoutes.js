@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const sendEmailController = require("../../controller/reports/sendEmail.controller");
+const sendEmailController = require("../../controller/reports/sendEmailController");
 
 // Ruta enviar correo
 router.get("/", sendEmailController.get_sendEmail);
