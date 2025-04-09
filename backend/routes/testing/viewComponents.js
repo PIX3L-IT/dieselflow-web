@@ -13,4 +13,10 @@ router.get("/modal", componentController.getModal);
 // Ruta para mostrar switch
 router.get("/switch", componentController.getSwitch);
 
+// Ruta para mostrar texto
+router.get("/text", componentController.getText);
+
+// Ruta para mostrar
+router.get("/card", componentController.getCard);
+
 module.exports = router;
