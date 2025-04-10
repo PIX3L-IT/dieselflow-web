@@ -25,3 +25,7 @@ exports.getInputPassword = (req, res) => {
 exports.getCard = (req, res) => {
   res.render("includes/card");
 };
+
+exports.getLoader = (req, res) => {
+  res.render("includes/loader")
+}

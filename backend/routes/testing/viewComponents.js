@@ -19,4 +19,7 @@ router.get("/text", componentController.getText);
 // Ruta para mostrar
 router.get("/card", componentController.getCard);
 
+//Ruta para mostrar Loader
+router.get("/loader", componentController.getLoader);
+
 module.exports = router;
