@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const verifyToken = require('../../../frontend-web/utils/verifyToken');
+const verifyToken = require('../../utils/verifyToken');
 const {
   registerUser,
   loginUser,
   getProtected,
   refreshToken,
-  login
+  login,
+  refreshAccessToken
 } = require('../../controller/users/authController');
 
 // POST /api/register
@@ -19,7 +20,7 @@ router.post('/login', loginUser);
 router.get('/protected', verifyToken, getProtected);
 
 // POST /api/refresh
-router.post('/refresh', refreshToken);
+router.post('/refresh', refreshAccessToken);
 
 // GET
 router.get('/login', login);
