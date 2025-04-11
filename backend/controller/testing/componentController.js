@@ -29,3 +29,7 @@ exports.getCard = (req, res) => {
 exports.getSubtitle = (req, res) => {
   res.render("includes/subtitle");
 }
+
+exports.get404 = (req, res) => {
+  res.render("includes/404",  { active: "" });
+}

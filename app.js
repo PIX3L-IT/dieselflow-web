@@ -43,9 +43,7 @@ app.get("/", (req, res) => {
 
 // Manejo de rutas no encontradas
 app.use((req, res) => {
-  res.status(404).json({
-    message: "No se encuentra el endpoint o ruta que estás buscando",
-  });
+  res.status(404).render("includes/404", { active: "" });
 });
 
 app.listen(port, () => {
