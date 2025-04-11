@@ -1,17 +1,20 @@
+/* loader.css */
 .loader {
-	height: 100vh;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	transition: opacity 0.75s, visibility 0.75s;
-}
+	position: fixed; /* so it's positioned relative to the viewport */
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 9999; /* high z-index to stay on top */
+  }
+  
+  
 
 .car__body {
 	animation: shake 0.2s ease-in-out infinite alternate;
 }
 
 .car__line {
-	transform: translate(5px, 18px);
+	transform: translate(5px, 45px);
 	transform-origin: center;
 	stroke-linecap: round;
 	stroke-dasharray: 22;
@@ -69,3 +72,4 @@
 		stroke-dashoffset: -22;
 	}
 }
+

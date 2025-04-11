@@ -29,3 +29,7 @@ exports.getCard = (req, res) => {
 exports.getLoader = (req, res) => {
   res.render("includes/loader")
 }
+
+exports.getIndex = (req, res) => {
+  res.render("testing/index")
+}

@@ -22,4 +22,8 @@ router.get("/card", componentController.getCard);
 //Ruta para mostrar Loader
 router.get("/loader", componentController.getLoader);
 
+//Ruta para mostrar index
+router.get("/index", componentController.getIndex);
+
+
 module.exports = router;

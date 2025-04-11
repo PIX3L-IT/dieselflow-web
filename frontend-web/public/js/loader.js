@@ -1,12 +1,23 @@
-window.addEventListener("load", () => {
-    const loader = document.querySelector(".loader");
+// Mostrar el loader (por si quieres activarlo manualmente)
+function showLoader() {
+    const LOADER = document.querySelector('.loader');
+    loader?.classList.remove('hide-loader');
+}
 
-    // Wait 2 seconds before starting the hide animation
+// Ocultar el loader después de un tiempo mínimo (por defecto: 2 segundos)
+function hideLoader(minDuration = 2000) {
+    const loader = document.querySelector('.loader');
+    if (!loader) return;
+
+    const start = performance.now();
+    const delay = Math.max(minDuration - (performance.now() - start), 0);
+
     setTimeout(() => {
-        loader.classList.add("hide-loader");
+        loader.classList.add('hide-loader');
 
-        loader.addEventListener("transitionend", () => {
-            document.body.removeChild(loader);
+        // Eliminar del DOM cuando termine la transición
+        loader.addEventListener('transitionend', () => {
+            loader.remove();
         });
-    }, 2000); // 2000 ms = 2 seconds
-});
+    }, delay);
+}
