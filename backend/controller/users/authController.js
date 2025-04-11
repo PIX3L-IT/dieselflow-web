@@ -16,35 +16,49 @@ const registerUser = async (req, res) => {
   }
 };
 
-// Login user (con cookies)
+// Login user
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
-  const user = await User.findOne({ email });
-  if (!user || !(await bcrypt.compare(password, user.password))) {
-    return res.status(401).json({ message: 'Credenciales inválidas' });
+  try {
+    const user = await User.findOne({ email });
+    if (!user || !(await bcrypt.compare(password, user.password))) {
+      return res.status(401).json({ message: 'Credenciales inválidas' });
+    }
+
+    const accessToken = jwt.sign(
+      { id: user._id, email: user.email },
+      process.env.JWT_SECRET,
+      { expiresIn: process.env.JWT_EXPIRATION }
+    );
+
+    const refreshToken = jwt.sign(
+      { id: user._id },
+      process.env.JWT_REFRESH_SECRET,
+      { expiresIn: process.env.JWT_REFRESH_EXPIRATION }
+    );
+
+    // Setear ambos tokens como cookies httpOnly
+    res.cookie('accessToken', accessToken, {
+      httpOnly: true,
+      maxAge: 60 * 1000,
+      sameSite: 'Strict',
+      secure: false
+    });
+
+    res.cookie('refreshToken', refreshToken, {
+      httpOnly: true,
+      maxAge: 120 * 1000,
+      sameSite: 'Strict',
+      secure: false
+    });
+
+    res.json({ message: 'Login exitoso' });
+
+  } catch (err) {
+    res.status(500).json({ message: 'Error interno al iniciar sesión', details: err.message });
   }
-
-  const accessToken = jwt.sign(
-    { id: user._id, email: user.email },
-    process.env.JWT_SECRET,
-    { expiresIn: process.env.JWT_EXPIRATION }
-  );
-
-  const refreshToken = jwt.sign(
-    { id: user._id },
-    process.env.JWT_REFRESH_SECRET,
-    { expiresIn: process.env.JWT_REFRESH_EXPIRATION }
-  );
-
-  // Mandar los tokens en la respuesta JSON
-  res.json({
-    message: 'Login exitoso',
-    accessToken: accessToken,
-    refreshToken: refreshToken,
-  });
 };
-
 
 
 // Protected route
@@ -53,10 +67,12 @@ const getProtected = (req, res) => {
 };
 
 
-// Refresh token
-const refreshToken = (req, res) => {
-  const { refreshToken } = req.body;
-  if (!refreshToken) return res.status(401).json({ message: 'Token de refresco requerido' });
+// Refresh token usando cookie
+const refreshAccessToken = (req, res) => {
+  const refreshToken = req.cookies.refreshToken;
+  if (!refreshToken) {
+    return res.status(401).json({ message: 'Refresh token requerido' });
+  }
 
   try {
     const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
@@ -67,9 +83,34 @@ const refreshToken = (req, res) => {
       { expiresIn: process.env.JWT_EXPIRATION }
     );
 
-    res.json({ accessToken: newAccessToken });
+    const newRefreshToken = jwt.sign(
+      { id: decoded.id },
+      process.env.JWT_REFRESH_SECRET,
+      { expiresIn: process.env.JWT_REFRESH_EXPIRATION }
+    );
+
+    // Guardar ambos tokens como cookies
+    res.cookie('accessToken', newAccessToken, {
+      httpOnly: true,
+      maxAge: 60 * 1000,
+      sameSite: 'Strict',
+      secure: false
+    });
+
+    res.cookie('refreshToken', newRefreshToken, {
+      httpOnly: true,
+      maxAge: 120 * 1000,
+      sameSite: 'Strict',
+      secure: false
+    });
+
+    res.json({
+      accessToken: newAccessToken,
+      refreshToken: newRefreshToken
+    });
+
   } catch (err) {
-    res.status(403).json({ message: 'Refresh token inválido o expirado' });
+    return res.status(403).json({ message: 'Refresh token inválido o expirado' });
   }
 };
 
@@ -82,6 +123,6 @@ module.exports = {
   registerUser,
   loginUser,
   getProtected,
-  refreshToken,
+  refreshAccessToken,
   login
 };
