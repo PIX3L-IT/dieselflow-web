@@ -14,6 +14,7 @@ const uploadImagesRoutes = require("./backend/routes/images/uploadImages");
 const fetchImagesRoutes = require("./backend/routes/images/fetchImages");
 const componentRoutes = require("./backend/routes/testing/viewComponents");
 const authRoutes = require("./backend/routes/users/authRoutes");
+const userRoutes = require("./backend/routes/users/users");
 
 
 const app = express();
@@ -42,6 +43,9 @@ app.use("/auth", authRoutes);
 app.use("/upload", uploadImagesRoutes);
 app.use("/image", fetchImagesRoutes);
 app.use("/component", componentRoutes);
+
+// Ruta de testing para obtener los usuarios
+app.use("/users", userRoutes);
 
 // Ruta principal
 app.get("/", (req, res) => {
