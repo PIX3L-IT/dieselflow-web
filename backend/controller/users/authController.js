@@ -56,7 +56,9 @@ const loginUser = async (req, res) => {
     res.json({ message: 'Login exitoso' });
 
   } catch (err) {
-    res.status(500).json({ message: 'Error interno al iniciar sesión', details: err.message });
+    res.status(500).render('includes/500',{
+      active: "" 
+    });
   }
 };
 
