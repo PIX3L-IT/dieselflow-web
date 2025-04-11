@@ -7,10 +7,10 @@
     <title>S3 Testing</title>
 </head>
 
-<body>
+<body class="hidden-content">
     <!-- include loader -->
     <%- include('../includes/loader.ejs') %>
-    <div id="main-content hidden-content" >
+    <div id="main-content" >
         <div class="container">
             <h1>Subida de archivos con S3 SDK</h1>
             <form action="/upload/s3_sdk" method="POST" enctype="multipart/form-data">
