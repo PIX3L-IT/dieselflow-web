@@ -25,3 +25,7 @@ exports.getInputPassword = (req, res) => {
 exports.getCard = (req, res) => {
   res.render("includes/card");
 };
+
+exports.getButton = (req, res) => {
+  res.render("includes/button", { active: "" });
+}

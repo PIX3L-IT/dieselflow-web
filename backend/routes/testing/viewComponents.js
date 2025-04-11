@@ -19,4 +19,7 @@ router.get("/text", componentController.getText);
 // Ruta para mostrar
 router.get("/card", componentController.getCard);
 
+// Ruta para mostrar boton estándar
+router.get("/button", componentController.getButton);
+
 module.exports = router;
