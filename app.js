@@ -7,12 +7,18 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const bodyParser = require("body-parser");
+const cookieParser = require('cookie-parser');
 const compression = require("compression");
 
 const uploadImagesRoutes = require("./backend/routes/images/uploadImages");
 const fetchImagesRoutes = require("./backend/routes/images/fetchImages");
+const componentRoutes = require("./backend/routes/testing/viewComponents");
+const authRoutes = require("./backend/routes/users/authRoutes");
+const userRoutes = require("./backend/routes/users/users");
+
 
 const app = express();
+app.use(cookieParser());
 const port = process.env.PORT;
 const uri = process.env.MONGO_URI;
 
@@ -24,26 +30,33 @@ mongoose
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "frontend-web", "views"));
+app.use('/utils', express.static(path.join(__dirname, "frontend-web", "utils")));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "frontend-web", "public")));
 app.use(compression());
+
+app.use("/auth", authRoutes);
 
 // Usar las rutas para subir y obtener imágenes
 app.use("/upload", uploadImagesRoutes);
 app.use("/image", fetchImagesRoutes);
+app.use("/component", componentRoutes);
+
+// Ruta de testing para obtener los usuarios
+app.use("/users", userRoutes);
 
 // Ruta principal
 app.get("/", (req, res) => {
   res.render("testing/index.ejs");
 });
 
+
+
 // Manejo de rutas no encontradas
 app.use((req, res) => {
-  res.status(404).json({
-    message: "No se encuentra el endpoint o ruta que estás buscando",
-  });
+  res.status(404).render("includes/404", { active: "" });
 });
 
 app.listen(port, () => {

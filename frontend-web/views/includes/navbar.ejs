@@ -1,0 +1,54 @@
+<link rel="stylesheet" href="/css/navbar.css">
+<link rel="stylesheet" href="/icons/font/bootstrap-icons.css">
+
+
+<aside class="navbar">
+  <div>
+    <div class="logo">GUACHI-no</div>
+    <nav>
+      <ul>
+        <li>
+          <a href="/" class="menu-item <%= active === 'inicio' ? 'active-item' : '' %>">
+            <i class="bi bi-bar-chart-line" style="font-size: 30px;"></i>
+            Inicio
+          </a>
+        </li>
+        <li>
+          <a href="/" class="menu-item <%= active === 'usuarios' ? 'active-item' : '' %>">
+            <i class="bi bi-person" style="font-size: 30px;"></i>
+            Usuarios
+          </a>
+        </li>
+        <li>
+          <a href="/" class="menu-item <%= active === 'unidades' ? 'active-item' : '' %>">
+            <img src="/imgs/truck.png" alt="Unidades" style="width: 70px; height: auto;" />
+            Unidades
+          </a>
+        </li>
+        <li>
+          <a href="/" class="menu-item <%= active === 'reportes' ? 'active-item' : '' %>">
+            <i class="bi bi-card-checklist" style="font-size: 30px;"></i>
+            Reportes
+          </a>
+        </li>
+        <li>
+          <a href="/" class="menu-item <%= active === 'formularios' ? 'active-item' : '' %>">
+            <i class="bi bi-paperclip" style="font-size: 30px;"></i>
+            Formularios
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="user-section">
+    <div class="user-info">
+      <i class="bi bi-person-circle" style="font-size: 30px;"></i>
+      <span>Fernando<br>Mondragón</span>
+    </div>
+    <a href="/" class="menu-item <%= active === 'logout' ? 'active-item' : '' %>">
+      <i class="bi bi-box-arrow-right" style="font-size: 30px;"></i>
+      Cerrar Sesión
+    </a>
+  </div>
+</aside>
