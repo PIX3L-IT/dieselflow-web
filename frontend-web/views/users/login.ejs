@@ -64,15 +64,31 @@
         const res = await fetch('/auth/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          credentials: 'include', // Esto permite que las cookies viajen
+          credentials: 'include', // manda y recibe cookies
           body: JSON.stringify({ email, password })
         });
   
         const data = await res.json();
   
         if (res.ok) {
+          localStorage.setItem('refreshToken', data.refreshToken);
           alert(data.message || 'Login exitoso ✅');
-          window.location.href = '/auth/protected'; // 🔁 Redirección después del login
+  
+          // Ahora prueba acceder a ruta protegida
+          const protectedRes = await fetch('/auth/protected', {
+            method: 'GET',
+            credentials: 'include'
+          });
+  
+          if (protectedRes.ok) {
+            const html = await protectedRes.text();
+            document.open();
+            document.write(html);
+            document.close();
+          } else {
+            alert('Error al acceder a contenido protegido');
+          }
+  
         } else if (res.status === 401) {
           alert(data.message || 'Credenciales incorrectas');
         } else {

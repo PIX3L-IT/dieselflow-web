@@ -9,13 +9,53 @@
       text-align: center;
       margin-top: 100px;
     }
+
     h1 {
       color: #28a745;
+    }
+
+    button {
+      margin-top: 30px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
 <body>
   <h1>Bienvenid@ a DieselFlow</h1>
   <p>Has accedido correctamente a una ruta protegida.</p>
+
+  <!-- Botón con ID (sin onclick) -->
+  <button id="btnProbar">Volver a probar acceso protegido</button>
+
+  <script type="module">
+    import { fetchWithAuth } from '/utils/verifyTokenRefresh.js';
+
+    // Escuchar el click del botón por su ID
+    document.getElementById('btnProbar').addEventListener('click', probarRutaProtegida);
+
+    async function probarRutaProtegida() {
+      try {
+        const res = await fetchWithAuth('/auth/protected');
+        const text = await res.text();
+
+        if (res.ok) {
+          alert('¡Acceso exitoso otra vez!');
+        } else {
+          alert('Error al acceder. Quizá el refresh falló.');
+        }
+      } catch (err) {
+        console.log('Error al intentar acceder a la ruta protegida');
+      }
+    }
+  </script>
 </body>
 </html>
