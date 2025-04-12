@@ -24,4 +24,8 @@ router.get("/subtitle", componentController.getSubtitle);
 
 // Ruta para mostrar 404
 router.get("/404", componentController.get404);
+
+// Ruta para mostrar backArrow
+router.get("/backArrow", componentController.getBackArrow);
+
 module.exports = router;

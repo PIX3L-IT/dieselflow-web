@@ -33,3 +33,7 @@ exports.getSubtitle = (req, res) => {
 exports.get404 = (req, res) => {
   res.render("includes/404",  { active: "" });
 }
+
+exports.getBackArrow = (req, res) => {
+  res.render("includes/backArrow");
+}
