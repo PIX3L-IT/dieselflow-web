@@ -19,6 +19,9 @@ router.get("/text", componentController.getText);
 // Ruta para mostrar card
 router.get("/card", componentController.getCard);
 
+// Ruta para mostrar boton estándar
+router.get("/button", componentController.getButton);
+
 // Ruta para mostrar subtitulos
 router.get("/subtitle", componentController.getSubtitle);
 
