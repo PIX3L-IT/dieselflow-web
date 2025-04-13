@@ -1,0 +1,93 @@
+<link rel="stylesheet" href="/css/table.css">
+<table id="myTable" class="custom-table">
+    <thead>
+      <tr>
+        <% columns.forEach(column => { %>
+          <th><%= column.label %></th>
+        <% }) %>
+      </tr>
+    </thead>
+    <tbody>
+      <% data.forEach(item => { %>
+        <tr>
+          <% columns.forEach(column => { %>
+            <td>
+              <% 
+                const value = item[column.key];
+                if (column.key.toLowerCase().includes('date')) { 
+              %>
+                <%= new Date(value).toLocaleDateString() %>
+              <% } else if (typeof value === 'boolean') { %>
+                <%= value ? 'Activo' : 'Inactivo' %>
+              <% } else { %>
+                <%= value %>
+              <% } %>
+            </td>
+          <% }) %>
+        </tr>
+      <% }) %>      
+    </tbody>
+  </table>
+
+  
+  <div id="pagination">
+    <button id="prev-button" <%= currentPage > 1 ? '' : 'disabled' %>>‹</button>
+    <span><%= currentPage %> / <%= totalPages %></span>
+    <button id="next-button" <%= currentPage < totalPages ? '' : 'disabled' %>>›</button>
+  </div>
+  
+  <script>
+    let currentPage = <%= currentPage %>;
+  
+    document.getElementById("prev-button").addEventListener("click", () => {
+      if (currentPage > 1) cargarPagina(currentPage - 1);
+    });
+  
+    document.getElementById("next-button").addEventListener("click", () => {
+      if (currentPage < <%= totalPages %>) cargarPagina(currentPage + 1);
+    });
+  
+    function cargarPagina(page) {
+      fetch(`<%= BaseRoute %>?page=${page}`, {
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest'
+        }
+      })
+      .then(res => res.json())
+      .then(data => {
+        const tbody = document.querySelector("tbody");
+        tbody.innerHTML = "";
+  
+        data.data.forEach(item => {
+          const row = document.createElement("tr");
+          data.columns.forEach(column => {
+            const value = item[column.key];
+            const td = document.createElement("td");
+  
+            if (column.key.toLowerCase().includes('date')) {
+              td.textContent = new Date(value).toLocaleDateString();
+            } else if (typeof value === 'boolean') {
+              td.textContent = value ? 'Activo' : 'Inactivo';
+            } else {
+              td.textContent = value ?? 'No registrado';
+            }
+  
+            row.appendChild(td);
+          });
+          tbody.appendChild(row);
+        });
+  
+        currentPage = data.currentPage;
+        const paginationDiv = document.getElementById("pagination");
+        paginationDiv.innerHTML = `
+          <button id="prev-button" ${!data.hasPrevPage ? 'disabled' : ''}>‹</button>
+          <span>${data.currentPage} / ${data.totalPages}</span>
+          <button id="next-button" ${!data.hasNextPage ? 'disabled' : ''}>›</button>
+        `;
+  
+        document.getElementById("prev-button").addEventListener("click", () => cargarPagina(data.currentPage - 1));
+        document.getElementById("next-button").addEventListener("click", () => cargarPagina(data.currentPage + 1));
+      });
+    }
+  </script>
+  

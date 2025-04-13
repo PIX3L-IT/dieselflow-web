@@ -1,0 +1,81 @@
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+<link rel="stylesheet" href="/css/table.css">
+<h1>Este componente solo prueba la datatable con los plugins de datatable</h1>
+
+<table id="myTable" class="custom-table">
+  <thead>
+    <tr>
+      <% columns.forEach(column => { %>
+        <th><%= column.label %></th>
+      <% }) %>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<div id="pagination">
+  <button id="prev-button" disabled>‹</button>
+  <span id="pagination-info">1 / 1</span>
+  <button id="next-button" disabled>›</button>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
+<script>
+  let currentPage = 1;
+  const baseRoute = "/component/data-table";
+
+  const table = $('#myTable').DataTable({
+    ajax: {
+      url: `${baseRoute}?page=1`,
+      dataSrc: function (json) {
+        updatePagination(json);
+        return json.data.map(item => {
+          const actionBtn = `<button onclick="alert('ID: ${item._id}')">Ver</button>`;
+          return {
+            ...item,
+            acciones: actionBtn
+          };
+        });
+      }
+    },
+    columns: [
+      <% columns.forEach(column => { %>
+        { data: '<%= column.key %>' },
+      <% }) %>
+      { data: 'acciones', orderable: false, searchable: false }
+    ],
+    paging: false, 
+    ordering: true,
+    searching: true,
+    dom: 'Bfrtip',
+    buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+  });
+
+  function updatePagination(data) {
+    document.getElementById("pagination-info").innerText = `${data.currentPage} / ${data.totalPages}`;
+    document.getElementById("prev-button").disabled = !data.hasPrevPage;
+    document.getElementById("next-button").disabled = !data.hasNextPage;
+    currentPage = data.currentPage;
+  }
+
+  document.getElementById("prev-button").addEventListener("click", () => {
+    if (currentPage > 1) {
+      table.ajax.url(`${baseRoute}?page=${currentPage - 1}`).load();
+    }
+  });
+
+  document.getElementById("next-button").addEventListener("click", () => {
+    table.ajax.url(`${baseRoute}?page=${currentPage + 1}`).load();
+  });
+</script>
+
