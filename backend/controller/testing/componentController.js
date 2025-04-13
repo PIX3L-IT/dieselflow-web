@@ -11,7 +11,7 @@ exports.getSwitch = (req, res) => {
 };
 
 exports.getText = (req, res) => {
-  res.render("includes/texto");
+  res.render("includes/text");
 };
 
 exports.getInputEmail = (req, res) => {
@@ -28,4 +28,12 @@ exports.getCard = (req, res) => {
 
 exports.getButton = (req, res) => {
   res.render("includes/button", { active: "" });
+}
+
+exports.getSubtitle = (req, res) => {
+  res.render("includes/subtitle");
+}
+
+exports.get404 = (req, res) => {
+  res.render("includes/404",  { active: "" });
 }

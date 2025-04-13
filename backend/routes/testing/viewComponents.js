@@ -16,10 +16,15 @@ router.get("/switch", componentController.getSwitch);
 // Ruta para mostrar texto
 router.get("/text", componentController.getText);
 
-// Ruta para mostrar
+// Ruta para mostrar card
 router.get("/card", componentController.getCard);
 
 // Ruta para mostrar boton estándar
 router.get("/button", componentController.getButton);
 
+// Ruta para mostrar subtitulos
+router.get("/subtitle", componentController.getSubtitle);
+
+// Ruta para mostrar 404
+router.get("/404", componentController.get404);
 module.exports = router;
