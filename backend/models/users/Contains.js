@@ -9,4 +9,4 @@ const containsSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Contains", containsSchema);
+module.exports = mongoose.model("Contains", containsSchema, "contains");

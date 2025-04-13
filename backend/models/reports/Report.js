@@ -13,4 +13,4 @@ const reportSchema = new mongoose.Schema({
   endTime: { type: Date, required: true },
 });
 
-module.exports = mongoose.model("Report", reportSchema);
+module.exports = mongoose.model("Report", reportSchema, "report");
