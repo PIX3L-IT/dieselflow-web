@@ -11,7 +11,7 @@ exports.getSwitch = (req, res) => {
 };
 
 exports.getText = (req, res) => {
-  res.render("includes/texto");
+  res.render("includes/text");
 };
 
 exports.getInputEmail = (req, res) => {
@@ -25,6 +25,10 @@ exports.getInputPassword = (req, res) => {
 exports.getCard = (req, res) => {
   res.render("includes/card");
 };
+
+exports.getButton = (req, res) => {
+  res.render("includes/button", { active: "" });
+}
 
 exports.getSubtitle = (req, res) => {
   res.render("includes/subtitle");
