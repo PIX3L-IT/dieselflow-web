@@ -13,6 +13,7 @@ const compression = require("compression");
 const uploadImagesRoutes = require("./backend/routes/images/uploadImages");
 const fetchImagesRoutes = require("./backend/routes/images/fetchImages");
 const componentRoutes = require("./backend/routes/testing/viewComponents");
+const loginRoutes = require("./backend/routes/users/loginRoutes");
 const authRoutes = require("./backend/routes/users/authRoutes");
 const userRoutes = require("./backend/routes/users/users");
 
@@ -37,9 +38,8 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "frontend-web", "public")));
 app.use(compression());
 
+app.use("/login", loginRoutes);
 app.use("/auth", authRoutes);
-
-// Usar las rutas para subir y obtener imágenes
 app.use("/upload", uploadImagesRoutes);
 app.use("/image", fetchImagesRoutes);
 app.use("/component", componentRoutes);
@@ -49,10 +49,8 @@ app.use("/users", userRoutes);
 
 // Ruta principal
 app.get("/", (req, res) => {
-  res.render("testing/index.ejs");
+  res.render('users/login', { title: 'Login' });
 });
-
-
 
 // Manejo de rutas no encontradas
 app.use((req, res) => {
