@@ -1,4 +1,4 @@
-const BaseTableFactory = require('../testing/factories/tableFactory');
+const BaseTableFactory = require('./tableFactory');
 const UnitTest = require('../../models/units/Unit');
 const UserTest = require('../../models/users/User');
 
@@ -51,7 +51,7 @@ exports.renderUnitsClassic = (req, res) => {
     model: UnitTest,
     baseRoute: '/component/simple-table',
     columns: unitColumns,
-    viewName: 'includes/partials/simpleTable'
+    viewName: 'includes/simpleTable'
   });
 
   factory.render(req, res);
@@ -71,7 +71,7 @@ exports.renderUsersDatatable = (req, res) => {
     model: UserTest,
     baseRoute: '/component/data-table',
     columns: userColumns,
-    viewName: 'includes/partials/dataTable'
+    viewName: 'includes/dataTable'
   });
 
   factory.render(req, res);
