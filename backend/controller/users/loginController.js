@@ -55,7 +55,7 @@ const loginUser = async (req, res) => {
 
     if (type === "Administrador") {
       return res.render('includes/navbar', { 
-        active: "",
+        active: "inicio",
         accessToken: accessToken,
         refreshToken: refreshToken,
         username: userLogin.username,
