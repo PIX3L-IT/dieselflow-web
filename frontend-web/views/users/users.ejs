@@ -1,0 +1,108 @@
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/button.css">
+<link rel="stylesheet" href="/css/text.css">
+<link rel="stylesheet" href="/css/users.css">
+<link rel="stylesheet" href="/css/error.css">
+<link rel="stylesheet" href="/css/navbar.css">
+<link rel="stylesheet" href="/css/filter.css">
+
+
+<div class="layout">
+    <%- include('../includes/navbar.ejs', { active: 'usuarios' }) %>
+    <div class="header-content">
+        <%- include('../includes/title.ejs', { title: 'Usuarios' }) %>
+        <div class="filter-container">
+            <div class="filter-toggle">
+                <input type="radio" id="conductores" name="userType" value="conductores">
+                <label for="conductores">Conductores</label>
+                
+                <input type="radio" id="administradores" name="userType" value="administradores" checked>
+                <label for="administradores">Administradores</label>
+            </div>
+        </div>
+    </div>
+    
+    <div class="main-user-content">
+        <div class="usuarios-section">
+            <div class="row row-cols-1 row-cols-md-2 g-3">
+                <div class="col">
+                    <div class="d-flex align-items-center gap-2">
+                        <%- include('../includes/card.ejs', { text: 'Usuario 1' }) %>
+                        <%- include('../includes/userStatsButton.ejs') %>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="d-flex align-items-center gap-2">
+                        <%- include('../includes/card.ejs', { text: 'Usuario 1' }) %>
+                        <%- include('../includes/userStatsButton.ejs') %>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="d-flex align-items-center gap-2">
+                        <%- include('../includes/card.ejs', { text: 'Usuario 1' }) %>
+                        <%- include('../includes/userStatsButton.ejs') %>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="d-flex align-items-center gap-2">
+                        <%- include('../includes/card.ejs', { text: 'Usuario 1' }) %>
+                        <%- include('../includes/userStatsButton.ejs') %>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="d-flex align-items-center gap-2">
+                        <%- include('../includes/card.ejs', { text: 'Usuario 1' }) %>
+                        <%- include('../includes/userStatsButton.ejs') %>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="d-flex align-items-center gap-2">
+                        <%- include('../includes/card.ejs', { text: 'Usuario 1' }) %>
+                        <%- include('../includes/userStatsButton.ejs') %>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="d-flex align-items-center gap-2">
+                        <%- include('../includes/card.ejs', { text: 'Usuario 1' }) %>
+                        <%- include('../includes/userStatsButton.ejs') %>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="d-flex align-items-center gap-2">
+                        <%- include('../includes/card.ejs', { text: 'Usuario 1' }) %>
+                        <%- include('../includes/userStatsButton.ejs') %>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="d-flex align-items-center gap-2">
+                        <%- include('../includes/card.ejs', { text: 'Usuario 1' }) %>
+                        <%- include('../includes/userStatsButton.ejs') %>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="d-flex align-items-center gap-2">
+                        <%- include('../includes/card.ejs', { text: 'Usuario 1' }) %>
+                        <%- include('../includes/userStatsButton.ejs') %>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="d-flex align-items-center gap-2">
+                        <%- include('../includes/card.ejs', { text: 'Usuario 1' }) %>
+                        <%- include('../includes/userStatsButton.ejs') %>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="d-flex align-items-center gap-2">
+                        <%- include('../includes/card.ejs', { text: 'Usuario 1' }) %>
+                        <%- include('../includes/userStatsButton.ejs') %>
+                    </div>
+                </div>
+            </div>    
+          </div>
+        <div class="button-section">
+          <div class="button-container" style="width: fit-content">
+              <button type="button" class="btn button button-primary">Registrar usuario</button>
+          </div>
+        </div>
+    </div>
+</div>

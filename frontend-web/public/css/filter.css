@@ -1,0 +1,29 @@
+.filter-container {
+    max-width: 600px;
+    height: fit-content;
+}
+
+.filter-toggle {
+    display: inline-flex;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.filter-toggle label {
+    background-color: #ffffff;
+    color: #1d2951;
+    font-size: 1.2rem;
+    padding: 0.8rem 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-toggle input[type="radio"] {
+    display: none;
+}
+
+.filter-toggle input[type="radio"]:checked + label {
+    background-color: #1d2951;
+    color: white;
+}
+

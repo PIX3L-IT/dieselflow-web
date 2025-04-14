@@ -14,7 +14,7 @@ const uploadImagesRoutes = require("./backend/routes/images/uploadImages");
 const fetchImagesRoutes = require("./backend/routes/images/fetchImages");
 const componentRoutes = require("./backend/routes/testing/viewComponents");
 const authRoutes = require("./backend/routes/users/authRoutes");
-const userRoutes = require("./backend/routes/users/users");
+const userRoutes = require("./backend/routes/users/userRoutes");
 
 
 const app = express();

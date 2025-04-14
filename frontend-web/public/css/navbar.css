@@ -3,10 +3,11 @@
     width: 180px;
     background-color: #182747;
     color: #FEFEFE;
-    height: 100vh;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-content: center;
     font-family: 'Jaldi', sans-serif;
     position: fixed;
     top: 0;
@@ -16,7 +17,7 @@
     padding: 1rem 0;
   }
   
-  .navbar nav ul {
+  .navbar .custom-navbar ul {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -33,7 +34,7 @@
   }
   
   .menu-item {
-    width: 140px;
+    width: 165px;
     padding: 0.8rem;
     border-radius: 10px;
     margin: 0.5rem 0;
@@ -73,4 +74,8 @@
     gap: 0.3rem;
     font-size: 0.85rem;
     text-align: center;
+  }
+
+  body {
+    line-height:normal !important;
   }
