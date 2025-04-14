@@ -5,7 +5,7 @@
 
 body {
     margin: 0;
-    background-color: #1f3a68;
+    background-color: #304879;
     font-family: 'Segoe UI', sans-serif;
     display: flex;
     justify-content: center;
@@ -15,7 +15,7 @@ body {
 
 .login-container {
     position: relative;
-    background-color: white;
+    background-color: #FEFEFE;
     border-radius: 8px;
     padding: 50px 40px;
     width: 80%;
@@ -36,21 +36,27 @@ body {
 
 .form-group label {
     display: block;
+    margin-top: 7px;
     margin-bottom: 5px;
+    margin-left: 60px;
+    font-size: 30px;
 }
 
 .form-group input {
     width: 100%;
+    max-width: 636px;
+    height: 53px;
     padding: 10px;
     border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 14px;
+    margin-left: 60px;
+    border: 1px solid #000000;
+    font-size: 17px;
 }
 
 .forgot-password {
     display: block;
     margin-top: 5px;
-    font-size: 17px;
+    font-size: 20px;
     text-align: center;
 }
 
@@ -63,13 +69,12 @@ body {
     margin-top: 20px;
     background-color: #908C89;
     color: white;
-    font-weight: bold;
     padding: 12px;
     border: none;
     width: 100%;
     max-width: 499;
     border-radius: 8px;
-    font-size: 20px;
+    font-size: 30px;
     cursor: pointer;
     height: 71px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
@@ -80,8 +85,9 @@ body {
 }
 
 .logo {
-    width: 300px;
-    margin-bottom: 10px;
+    width: 250px;
+    margin-bottom: 7px;
+    height: 235px;
   }
   
 .modal-corner {
