@@ -40,7 +40,8 @@
       dataSrc: function (json) {
         updatePagination(json);
         return json.data.map(item => {
-          const actionBtn = `<button onclick="alert('ID: ${item._id}')">Ver</button>`;
+          const actionBtn =
+             `<button onclick="alert('ID: ${item._id}')">Ver</button>`;
           return {
             ...item,
             acciones: actionBtn
@@ -62,20 +63,25 @@
   });
 
   function updatePagination(data) {
-    document.getElementById("pagination-info").innerText = `${data.currentPage} / ${data.totalPages}`;
-    document.getElementById("prev-button").disabled = !data.hasPrevPage;
-    document.getElementById("next-button").disabled = !data.hasNextPage;
+    document.getElementById("pagination-info")
+      .innerText = `${data.currentPage} / ${data.totalPages}`;
+    document.getElementById("prev-button")
+      .disabled = !data.hasPrevPage;
+    document.getElementById("next-button")
+      .disabled = !data.hasNextPage;
     currentPage = data.currentPage;
   }
 
-  document.getElementById("prev-button").addEventListener("click", () => {
-    if (currentPage > 1) {
-      table.ajax.url(`${baseRoute}?page=${currentPage - 1}`).load();
-    }
-  });
+  document.getElementById("prev-button")
+    .addEventListener("click", () => {
+      if (currentPage > 1) {
+        table.ajax.url(`${baseRoute}?page=${currentPage - 1}`).load();
+      }
+    });
 
-  document.getElementById("next-button").addEventListener("click", () => {
-    table.ajax.url(`${baseRoute}?page=${currentPage + 1}`).load();
-  });
+  document.getElementById("next-button")
+    .addEventListener("click", () => {
+      table.ajax.url(`${baseRoute}?page=${currentPage + 1}`).load();
+    });
 </script>
 
