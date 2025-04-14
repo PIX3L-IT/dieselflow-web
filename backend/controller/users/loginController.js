@@ -59,14 +59,9 @@ const loginUser = async (req, res) => {
       sameSite: 'Strict',
       secure: false
     });
-
-    res.json({ message: 'Login exitoso', rol: type });
-
+    
   } catch (err) {
     console.error(err);
-    res.status(500).render('includes/500', {
-      active: ""
-    });
   }
 };
 

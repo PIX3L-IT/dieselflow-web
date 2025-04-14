@@ -17,7 +17,6 @@ const loginRoutes = require("./backend/routes/users/loginRoutes");
 const authRoutes = require("./backend/routes/users/authRoutes");
 const userRoutes = require("./backend/routes/users/users");
 
-
 const app = express();
 app.use(cookieParser());
 const port = process.env.PORT;
@@ -36,6 +35,7 @@ app.use('/utils', express.static(path.join(__dirname, "frontend-web", "utils")))
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "frontend-web", "public")));
+app.use(express.json());
 app.use(compression());
 
 app.use("/login", loginRoutes);

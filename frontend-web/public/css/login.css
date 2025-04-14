@@ -55,7 +55,7 @@ body {
 
 .forgot-password {
     display: block;
-    margin-top: 5px;
+    margin-top: 15px;
     font-size: 20px;
     text-align: center;
 }
@@ -80,20 +80,25 @@ body {
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
 }
 
-.login-button:hover {
+.login-button:enabled:hover {
     background-color: #082043;
+}
+
+.login-button:enabled {
+    background-color: #0056d2;
+    cursor: pointer;
 }
 
 .logo {
     width: 250px;
     margin-bottom: 7px;
     height: 235px;
-  }
-  
+}
+
 .modal-corner {
     position: absolute;
     width: 150px;
-    z-index: 10; 
+    z-index: 10;
 }
 
 .top-right {
@@ -106,3 +111,45 @@ body {
     left: 0px;
 }
 
+.input-group-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #555;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    max-width: 636px;
+    margin-left: 60px;
+  }
+  
+  .input-group input {
+    width: 100%;
+    height: 53px;
+    padding: 10px 40px 10px 10px; 
+    border-radius: 8px;
+    border: 1px solid #000000;
+    font-size: 17px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    color: #182747;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .input-group-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #555;
+    cursor: pointer;
+    font-size: 20px;
+    z-index: 2;
+  }
+  
