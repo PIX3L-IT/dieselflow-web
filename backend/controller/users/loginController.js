@@ -24,14 +24,7 @@ const loginUser = async (req, res) => {
     }
 
     if (!userLogin || !(await bcrypt.compare(password, userLogin.password))) {
-      return res.status(401).json({ message: 'Credenciales inválidas' });
-    }
-
-    if (userLogin.idRole.roleName !== type) {
-      return res.status(403).json({
-        message:
-          `Acceso denegado. Se requiere rol: ${type}`
-      });
+      return res.render('users/login', { error: 'Credenciales inválidas' });
     }
 
     const accessToken = jwt.sign(
@@ -59,9 +52,25 @@ const loginUser = async (req, res) => {
       sameSite: 'Strict',
       secure: false
     });
-    
+
+    if (type === "Administrador") {
+      return res.render('includes/navbar', { 
+        active: "",
+        accessToken: accessToken,
+        refreshToken: refreshToken,
+        username: userLogin.username,
+        lastname: userLogin.lastName,
+      });
+    }
+
+    return res.json({
+      accessToken: accessToken,
+      refreshToken: refreshToken,
+    });
+
   } catch (err) {
     console.error(err);
+    return res.status(500).render('users/login', { error: 'Hubo un error al procesar la solicitud' });
   }
 };
 

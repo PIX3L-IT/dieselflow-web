@@ -35,7 +35,6 @@ app.use('/utils', express.static(path.join(__dirname, "frontend-web", "utils")))
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "frontend-web", "public")));
-app.use(express.json());
 app.use(compression());
 
 app.use("/login", loginRoutes);
@@ -49,7 +48,7 @@ app.use("/users", userRoutes);
 
 // Ruta principal
 app.get("/", (req, res) => {
-  res.render('users/login', { title: 'Login' });
+  res.render('users/login', { error: null });
 });
 
 // Manejo de rutas no encontradas
