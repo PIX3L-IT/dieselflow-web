@@ -42,14 +42,14 @@
     let currentPage = <%= currentPage %>;
   
     document.getElementById("prev-button").addEventListener("click", () => {
-      if (currentPage > 1) cargarPagina(currentPage - 1);
+      if (currentPage > 1) updatePagination(currentPage - 1);
     });
   
     document.getElementById("next-button").addEventListener("click", () => {
-      if (currentPage < <%= totalPages %>) cargarPagina(currentPage + 1);
+      if (currentPage < <%= totalPages %>) updatePagination(currentPage + 1);
     });
   
-    function cargarPagina(page) {
+    function updatePagination(page) {
       fetch(`<%= BaseRoute %>?page=${page}`, {
         headers: {
           'X-Requested-With': 'XMLHttpRequest'
@@ -92,9 +92,9 @@
         `;
   
         document.getElementById("prev-button")
-          .addEventListener("click", () => cargarPagina(data.currentPage - 1));
+          .addEventListener("click", () => updatePagination(data.currentPage - 1));
         document.getElementById("next-button")
-          .addEventListener("click", () => cargarPagina(data.currentPage + 1));
+          .addEventListener("click", () => updatePagination(data.currentPage + 1));
       });
     }
   </script>
