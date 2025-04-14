@@ -37,3 +37,21 @@ exports.getSubtitle = (req, res) => {
 exports.get404 = (req, res) => {
   res.render("includes/404",  { active: "" });
 }
+
+exports.getSearchbarUsers = (req, res) => {
+  res.render("includes/searchbar", {
+    active: "",
+    placeholder: "Buscar usuario",
+    endpoint: "/users/search",
+    context: "users"
+  });
+};
+
+exports.getSearchbarUnits = (req, res) => {
+  res.render("includes/searchbar", {
+    active: "",
+    placeholder: "Buscar unidad",
+    endpoint: "/units/search",
+    context: "units"
+  });
+};
