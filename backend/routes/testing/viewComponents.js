@@ -28,6 +28,11 @@ router.get("/subtitle", componentController.getSubtitle);
 // Ruta para mostrar 404
 router.get("/404", componentController.get404);
 
+// Ruta para mostrar searchbar
+router.get("/searchbar-users", componentController.getSearchbarUsers);
+router.get("/searchbar-units", componentController.getSearchbarUnits);
+
+
 // Ruta para mostrar texto input
 router.get("/input", componentController.getInput);
 
