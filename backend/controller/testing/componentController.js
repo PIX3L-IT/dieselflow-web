@@ -55,3 +55,7 @@ exports.getSearchbarUnits = (req, res) => {
     context: "units"
   });
 };
+
+exports.getInput = (req, res) => {
+  res.render("includes/input",  { active: "" });
+}
