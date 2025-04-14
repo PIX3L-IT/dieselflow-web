@@ -27,6 +27,12 @@ const loginUser = async (req, res) => {
       return res.render('users/login', { error: 'Credenciales inválidas' });
     }
 
+    if (userLogin.idRole.roleName !== type) {
+      return res.render('users/login', {
+        error: 'Credenciales inválidas'
+      });
+    }
+
     const accessToken = jwt.sign(
       { id: userLogin._id, email: userLogin.email },
       process.env.JWT_SECRET,
