@@ -16,12 +16,12 @@ body {
 .login-container {
     position: relative;
     background-color: #FEFEFE;
-    border-radius: 8px;
+    border-radius: 20px;
     padding: 50px 40px;
     width: 80%;
     max-width: 869px;
     text-align: center;
-    height: 681px;
+    height: 775px;
 }
 
 .login-container h1 {
@@ -102,13 +102,13 @@ body {
 }
 
 .top-right {
-    top: 0px;
-    right: 0px;
+    top: -1px;
+    right: -1px;
 }
 
 .bottom-left {
-    bottom: 0px;
-    left: 0px;
+    bottom: -1px;
+    left: -1px;
 }
 
 .input-group-icon {
