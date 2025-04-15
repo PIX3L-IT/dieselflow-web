@@ -35,6 +35,7 @@ app.use('/utils', express.static(path.join(__dirname, "frontend-web", "utils")))
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "frontend-web", "public")));
+app.use(express.json());
 app.use(compression());
 
 app.use("/login", loginRoutes);
