@@ -106,3 +106,7 @@ exports.getInput = (req, res) => {
 exports.getBackArrow = (req, res) => {
   res.render("includes/backArrow");
 };
+
+exports.getNoDataBanner = (req, res) => {
+  res.render("includes/noDataBanner"); 
+};
