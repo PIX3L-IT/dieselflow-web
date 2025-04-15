@@ -1,6 +1,6 @@
 const User = require("../../models/users/User");
 
-async function getAllUsers(req, res) {
+exports.getAllUsers = async (req, res) => {
   try {
     const users = await User.find();
     res.status(200).json(users);
@@ -12,4 +12,10 @@ async function getAllUsers(req, res) {
   }
 }
 
-module.exports = { getAllUsers };
+exports.getConfirmEmail = (req, res, next) => {
+  res.render("users/confirmEmail");
+};
+
+exports.getResetPassword = (req, res, next) => {
+  res.render("users/resetPassword");
+}
