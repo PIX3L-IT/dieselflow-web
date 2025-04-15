@@ -101,4 +101,8 @@ exports.getSearchbarUnits = (req, res) => {
 
 exports.getInput = (req, res) => {
   res.render("includes/input",  { active: "" });
-}
+};
+
+exports.getBackArrow = (req, res) => {
+  res.render("includes/backArrow");
+};
