@@ -29,7 +29,7 @@
                     <% users.forEach(function(user) { %>
                         <div class="col user-card <%= user.idRole.roleName   %>">
                             <div class="d-flex align-items-center gap-2">
-                                <%- include('../includes/card.ejs', { text: user.username }) %>
+                                <%- include('../includes/card.ejs', { text: user.username, userStatus: user.userStatus }) %>
                                     <%- include('../includes/userStatsButton.ejs') %>
                             </div>
                         </div>
