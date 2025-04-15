@@ -7,6 +7,10 @@ router.get("/navbar", componentController.getNavbar);
 router.get("/inputEmail",componentController.getInputEmail);
 router.get("/inputPassword",componentController.getInputPassword);
 
+// Ruta para mostrar tablas
+router.get('/simple-table', componentController.renderUnitsClassic);
+router.get('/data-table', componentController.renderUsersDatatable);
+
 // Ruta para mostrar modal
 router.get("/modal", componentController.getModal);
 
@@ -31,10 +35,12 @@ router.get("/statsButton", componentController.getStatsButton);
 // Ruta para mostrar 404
 router.get("/404", componentController.get404);
 
+// Ruta para mostrar backArrow
+router.get("/backArrow", componentController.getBackArrow);
+
 // Ruta para mostrar searchbar
 router.get("/searchbar-users", componentController.getSearchbarUsers);
 router.get("/searchbar-units", componentController.getSearchbarUnits);
-
 
 // Ruta para mostrar texto input
 router.get("/input", componentController.getInput);
