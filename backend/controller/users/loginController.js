@@ -23,7 +23,7 @@ const loginUser = async (req, res) => {
       ).populate("idRole");
     }
 
-    if (!userLogin || !(await bcrypt.compare(password, userLogin.password))) {
+    if (!userLogin || !userLogin.userStatus || !(await bcrypt.compare(password, userLogin.password))) {
       return res.render('users/login', { error: 'Credenciales inválidas' });
     }
 
