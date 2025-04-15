@@ -107,6 +107,10 @@ exports.getBackArrow = (req, res) => {
   res.render("includes/backArrow");
 };
 
+exports.getNoDataBanner = (req, res) => {
+  res.render("includes/noDataBanner"); 
+};
+
 exports.getStatsButton = (req, res) => {
   res.render("includes/userStatsButton");
 }

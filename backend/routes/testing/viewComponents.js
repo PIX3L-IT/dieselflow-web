@@ -45,4 +45,7 @@ router.get("/searchbar-units", componentController.getSearchbarUnits);
 // Ruta para mostrar texto input
 router.get("/input", componentController.getInput);
 
+// Ruta para mostrar no data banner
+router.get("/noDataBanner",componentController.getNoDataBanner);
+
 module.exports = router;
