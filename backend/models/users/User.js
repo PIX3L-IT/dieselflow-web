@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Report = require("../reports/Report");
 
 const userSchema = new mongoose.Schema({
   idRole: {
@@ -6,6 +7,7 @@ const userSchema = new mongoose.Schema({
     ref: "Role",
     required: true,
   },
+  idUnit: { type: mongoose.Schema.Types.ObjectId, ref: "Unit" }, 
   username: { type: String, required: true, maxlength: 30 },
   lastName: { type: String, required: true, maxlength: 50 },
   password: { type: String, required: true, maxlength: 100 },
@@ -15,4 +17,40 @@ const userSchema = new mongoose.Schema({
   accessCode: { type: String, required: true, maxlength: 10 },
 });
 
-module.exports = mongoose.model("User", userSchema, "user");
+const User = mongoose.model("User", userSchema, "user");
+
+class UserClass {
+  static async getUserWithUnit(userId) {
+    return await User.findOne({ _id: userId }).populate("idUnit");
+  }
+
+  static async getDieselByDay(userId) {
+    return await Report.model.aggregate([
+      { $match: { idUser: new mongoose.Types.ObjectId(userId) } },
+      {
+        $group: {
+          _id: {
+            day: { $dateToString: { format: "%Y-%m-%d", date: "$loadDate" } }
+          },
+          totalLiters: { $sum: "$liters" }
+        }
+      },
+      { $sort: { "_id.day": 1 } }
+    ]);
+  }  
+
+  static async getPaginated(userId, page, limit) {
+    const skip = page * limit;
+    const reports = await Report.find({ idUser: userId })
+      .sort({ loadDate: -1 })
+      .skip(skip)
+      .limit(limit)
+      .populate("idUnit");
+
+    const total = await Report.countDocuments({ idUser: userId });
+    return { reports, total };
+  }
+
+}
+
+module.exports = UserClass;

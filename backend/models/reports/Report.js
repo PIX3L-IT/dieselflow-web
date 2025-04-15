@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// 🔧 Schema
 const reportSchema = new mongoose.Schema({
   idUnit: { type: mongoose.Schema.Types.ObjectId, ref: "Unit", required: true },
   idUser: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
@@ -13,4 +14,26 @@ const reportSchema = new mongoose.Schema({
   endTime: { type: Date, required: true },
 });
 
-module.exports = mongoose.model("Report", reportSchema, "report");
+delete mongoose.connection.models['Report'];
+
+const ReportModel = mongoose.model("Report", reportSchema, "report");
+
+class ReportClass {
+  static async countUserTrips(userId) {
+    return await ReportModel.countDocuments({ idUser: userId });
+  }
+
+  static async getPaginatedReports(userId, page, limit = 5) {
+    return await ReportModel.find({ idUser: userId })
+      .sort({ loadDate: -1 })
+      .skip(page * limit)
+      .limit(limit)
+      .populate("idUnit");
+  }
+
+  static get model() {
+    return ReportModel;
+  }
+}
+
+module.exports = ReportClass;
