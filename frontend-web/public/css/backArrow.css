@@ -1,0 +1,13 @@
+.backArrow {
+    width: 28px;
+    height: 49px;
+    background-color: #182747; 
+    mask: url('../imgs/back-arrow.svg')
+    no-repeat center;
+    mask-size: contain;
+    border: none;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    cursor: pointer;
+}
