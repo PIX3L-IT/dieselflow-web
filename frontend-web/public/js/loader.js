@@ -1,4 +1,4 @@
-let loaderStartTime = performance.now(); // Save this when the loader is first shown
+let loaderStartTime = performance.now();
 
 // Mostrar el loader (por si quieres activarlo manualmente)
 function showLoader() {
@@ -8,7 +8,6 @@ function showLoader() {
 }
 
 // Ocultar el loader después de un tiempo mínimo (por defecto: 2 segundos)
-
 function hideLoader(minDuration = 2000) {
     const loader = document.querySelector('.loader');
     if (!loader) return;

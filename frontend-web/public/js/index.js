@@ -1,7 +1,6 @@
 window.addEventListener("load", () => {
     const INDEX = document.querySelector('.main-content');
-    //index?.classList.add('fade-in')
-    hideLoader(); // Se activa una vez toda la página está cargada
+    hideLoader(); 
     INDEX?.classList.remove('.hidden-content')
     INDEX?.classList.add('.fade-in')
 });
