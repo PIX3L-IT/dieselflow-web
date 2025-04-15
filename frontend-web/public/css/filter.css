@@ -5,7 +5,7 @@
 }
 
 .filter-toggle {
-    display: inline-flex;
+    display: flex;
     overflow: hidden;
     border-radius: 10px;
 }

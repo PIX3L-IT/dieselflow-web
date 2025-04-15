@@ -2,31 +2,29 @@
 .button-section {
     display: flex; 
     justify-content: end;
-    margin-top: 0.25rem;
-    margin-right: 0.5rem;
-    min-width: 44rem;
+    min-width: 46.5rem;
+    padding-top: 1rem;
+    padding-right: 2rem;
+    padding-bottom: 1rem;
 }
 
 .usuarios-section {
-    max-width: 69.1rem;
-    min-width: 20rem;
-    height: 71.5vh;
+    padding: 0rem 1.5rem 0rem 1.5rem;
+    height: 100%;
     overflow-x:hidden;
     width: 100%;
+    min-width: 46.5rem;
+    align-items: flex-start;
 }
 
-.layout {
-    display:flex;
-    height:auto;
-}
-
-.main-user-content {
-    padding: 0.5rem 1.5rem 0.5rem 0rem;
-    margin-top: 100px;
-    margin-left: 12.5rem;
-    height: auto;
-    position:absolute;
-    max-width: 100%;
+.content{
+    max-width: 100%; 
+    max-height: 100%;
+    margin-left: 11.25rem; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    height: 100%;
 }
 
 .usuarios-section::-webkit-scrollbar {
@@ -49,11 +47,12 @@
     width: 100%;
     justify-content: space-between;
     padding-right: 2.1rem;
-    margin-left: 12.5rem;
-    margin-top: 40px;
+    padding-left: 1.5rem;
+    padding-top: 2.5rem;
+    padding-bottom: 1.5rem;
 }
 
-@media (max-width: 940px) {
+@media (max-width: 1000px) {
     .row-cols-md-2>* {
         flex: 0 0 auto;
         width: 100%;
