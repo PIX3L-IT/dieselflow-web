@@ -2,9 +2,7 @@
     width: 28px;
     height: 49px;
     background-color: #182747; 
-    -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 51"><path d="M25.4167 50.9163L0 25.4997L25.4167 0.0830078L29.9281 4.59447L9.02292 25.4997L29.9281 46.4049L25.4167 50.9163Z"/></svg>') 
-    no-repeat center;
-    mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 51"><path d="M25.4167 50.9163L0 25.4997L25.4167 0.0830078L29.9281 4.59447L9.02292 25.4997L29.9281 46.4049L25.4167 50.9163Z"/></svg>') 
+    mask: url('../imgs/back-arrow.svg')
     no-repeat center;
     mask-size: contain;
     border: none;

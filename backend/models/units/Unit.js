@@ -7,4 +7,4 @@ const unitSchema = new mongoose.Schema({
   unitStatus: { type: Boolean, required: true },
 });
 
-module.exports = mongoose.model("Unit", unitSchema);
+module.exports = mongoose.model("Unit", unitSchema, "unit");
