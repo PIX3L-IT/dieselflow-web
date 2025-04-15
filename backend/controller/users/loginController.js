@@ -24,13 +24,19 @@ const loginUser = async (req, res) => {
     }
 
     if (!userLogin || !userLogin.userStatus || !(await bcrypt.compare(password, userLogin.password))) {
-      return res.render('users/login', { error: 'Credenciales inválidas' });
+      if (type === "Administrador") {
+        return res.render('users/login', { error: 'Credenciales inválidas' });
+      }
+      return res.status(401).json({ error: "Credenciales inválidas" });
     }
 
     if (userLogin.idRole.roleName !== type) {
-      return res.render('users/login', {
-        error: 'Credenciales inválidas'
-      });
+      if (type === "Administrador") {
+        return res.render('users/login', {
+          error: 'Credenciales inválidas'
+        });
+      }
+      return res.status(401).json({ error: "Credenciales inválidas" });
     }
 
     const accessToken = jwt.sign(
@@ -60,7 +66,7 @@ const loginUser = async (req, res) => {
     });
 
     if (type === "Administrador") {
-      return res.render('includes/navbar', { 
+      return res.render('includes/navbar', {
         active: "inicio",
         accessToken: accessToken,
         refreshToken: refreshToken,
@@ -72,11 +78,15 @@ const loginUser = async (req, res) => {
     return res.json({
       accessToken: accessToken,
       refreshToken: refreshToken,
+      error: ""
     });
 
   } catch (err) {
     console.error(err);
-    return res.status(500).render('users/login', { error: 'Hubo un error al procesar la solicitud' });
+    if (type === "Administrador") {
+      return res.status(500).render('users/login', { error: 'Hubo un error al procesar la solicitud' });
+    }
+    return res.status(500).json({ error: "Hubo un error al procesar la solicitud" });
   }
 };
 
