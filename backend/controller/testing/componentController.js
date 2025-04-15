@@ -106,7 +106,6 @@ exports.getInput = (req, res) => {
 exports.getBackArrow = (req, res) => {
   res.render("includes/backArrow");
 };
-}
 
 exports.getStatsButton = (req, res) => {
   res.render("includes/userStatsButton");

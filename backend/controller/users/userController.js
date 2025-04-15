@@ -5,10 +5,8 @@ exports.getUsers = async (req, res) => {
   try {
 
     const {role, search } = req.query;
-
-    // Filtro por rol
     const filter = {};
-
+    
     if (search) {
       filter['username'] = { $regex: search, $options: 'i' };
     }
@@ -16,13 +14,11 @@ exports.getUsers = async (req, res) => {
     
     const users = await User.find(filter).populate('idRole').exec();
     
-    // Si se proporciona un rol, filtrar los usuarios por el nombre del rol
     const filteredUsers = role
     ? users.filter(user => user.idRole && user.idRole.roleName === role)
     : users;  
 
-    // res.status(200).json(filteredUsers); 
-    res.render('users/users');
+    res.render('users/users', { users: filteredUsers, role });
 
   } catch (error) {
     console.error("Error al obtener los usuarios:", error);

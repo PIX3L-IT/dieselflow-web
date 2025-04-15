@@ -1,15 +1,18 @@
+/* Users */
 .button-section {
-    width: 100%; 
     display: flex; 
     justify-content: end;
-    margin-top: 0.25rem;  
-    padding-right: 0.6rem;  
+    margin-top: 0.25rem;
+    margin-right: 0.5rem;
+    min-width: 44rem;
 }
 
 .usuarios-section {
-    width: 100%; 
+    max-width: 69.1rem;
+    min-width: 20rem;
     height: 71.5vh;
     overflow-x:hidden;
+    width: 100%;
 }
 
 .layout {
@@ -18,11 +21,12 @@
 }
 
 .main-user-content {
-    padding: 0.5rem 2rem 0.5rem 2rem;
-    margin-top: 110px;
-    margin-left: 180px;
+    padding: 0.5rem 1.5rem 0.5rem 0rem;
+    margin-top: 100px;
+    margin-left: 12.5rem;
     height: auto;
     position:absolute;
+    max-width: 100%;
 }
 
 .usuarios-section::-webkit-scrollbar {
@@ -30,7 +34,7 @@
 }
   
 .usuarios-section::-webkit-scrollbar-thumb {
-    background-color: #888; 
+    background-color: #8F8B88; 
     border-radius: 10px;
     border: 2px solid #f1f1f1; 
 }
@@ -41,8 +45,17 @@
 
 .header-content {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     width: 100%;
     justify-content: space-between;
-    padding-right: 2.6rem;
+    padding-right: 2.1rem;
+    margin-left: 12.5rem;
+    margin-top: 40px;
+}
+
+@media (max-width: 940px) {
+    .row-cols-md-2>* {
+        flex: 0 0 auto;
+        width: 100%;
+    }
 }

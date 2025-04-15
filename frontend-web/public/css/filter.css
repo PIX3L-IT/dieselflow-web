@@ -1,3 +1,4 @@
+/* filter */
 .filter-container {
     max-width: 600px;
     height: fit-content;
@@ -11,11 +12,16 @@
 
 .filter-toggle label {
     background-color: #ffffff;
-    color: #1d2951;
-    font-size: 1.2rem;
-    padding: 0.8rem 1.5rem;
+    color: #182747;
+    font-size: 1rem;
+    padding: 0.6rem 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
+}
+
+.filter-toggle label:hover {
+    background-color: #8f8b88;
+    color: white;
 }
 
 .filter-toggle input[type="radio"] {
@@ -23,7 +29,7 @@
 }
 
 .filter-toggle input[type="radio"]:checked + label {
-    background-color: #1d2951;
+    background-color: #182747;
     color: white;
 }
 
