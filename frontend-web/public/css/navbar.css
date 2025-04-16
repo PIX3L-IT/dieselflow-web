@@ -1,5 +1,5 @@
  /* === NAVBAR === */
- .navbar {
+ .side-navbar {
     width: 180px;
     background-color: #182747;
     color: #FEFEFE;
@@ -16,7 +16,7 @@
     padding: 1rem 0;
   }
   
-  .navbar nav ul {
+  .side-navbar nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -25,7 +25,7 @@
     align-items: center;
   }
   
-  .navbar .logo {
+  .side-navbar .logo {
     padding-bottom: 1rem;
     text-align: center;
     font-weight: bold;
@@ -73,4 +73,11 @@
     gap: 0.3rem;
     font-size: 0.85rem;
     text-align: center;
+  }
+
+  .pageContent {
+    background-color: #FEFEFE;
+    margin-left: 200px; 
+    margin-top: 25px;
+    width: auto;
   }
