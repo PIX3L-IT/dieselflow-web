@@ -4,7 +4,7 @@ const User = require('../../models/users/User');
 const Role = require('../../models/users/Role')
 
 // POST Login
-const loginUser = async (req, res) => {
+exports.postLogin = async (req, res) => {
   const { user, password, type } = req.body;
 
   try {
@@ -42,13 +42,15 @@ const loginUser = async (req, res) => {
     }
 
     const accessToken = jwt.sign(
-      { id: userLogin._id, email: userLogin.email },
+      { id: userLogin._id, email: userLogin.email, 
+        username: userLogin.username, lastname: userLogin.lastName },
       process.env.JWT_SECRET,
       { expiresIn: process.env.JWT_EXPIRATION }
     );
 
     const refreshToken = jwt.sign(
-      { id: userLogin._id },
+      { id: userLogin._id, username: userLogin.username, 
+        lastname: userLogin.lastName },
       process.env.JWT_REFRESH_SECRET,
       { expiresIn: process.env.JWT_REFRESH_EXPIRATION}
     );
@@ -95,11 +97,7 @@ const loginUser = async (req, res) => {
 };
 
 // GET Login
-const login = (req, res) => {
+exports.getLogin = (req, res) => {
   res.render('users/login');
 };
 
-module.exports = {
-  loginUser,
-  login
-};

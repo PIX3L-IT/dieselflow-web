@@ -9,6 +9,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const cookieParser = require('cookie-parser');
 const compression = require("compression");
+const jwt = require("jsonwebtoken");
 
 const uploadImagesRoutes = require("./backend/routes/images/uploadImages");
 const fetchImagesRoutes = require("./backend/routes/images/fetchImages");
@@ -53,8 +54,38 @@ app.use("/", unitsRoutes);
 
 // Ruta principal
 app.get("/", (req, res) => {
-  res.render('users/login', { error: null });
+  const accessToken = req.cookies.accessToken;
+  const refreshToken = req.cookies.refreshToken;
+
+  try {
+    let payload = null;
+
+    // Intenta verificar el accessToken
+    if (accessToken) {
+      payload = jwt.verify(accessToken, process.env.JWT_SECRET);
+    }
+    // Si no hay accessToken o está expirado, intenta con refreshToken
+    else if (refreshToken) {
+      payload = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
+    }
+
+    // Si uno de los tokens es válido, renderiza el navbar
+    if (payload) {
+      return res.render("includes/navbar", {
+        active: "inicio",
+        accessToken,
+        refreshToken,
+        username: payload.username,
+        lastname: payload.lastname,
+      });
+    }
+  } catch (err) {
+    res.render("users/login", { error: null });
+  }
+
+  res.render("users/login", { error: null });
 });
+
 
 // Manejo de rutas no encontradas
 app.use((req, res) => {

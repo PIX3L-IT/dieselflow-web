@@ -1,12 +1,12 @@
 const jwt = require('jsonwebtoken');
 
 // Protected route
-const getProtected = (req, res) => {
+exports.getProtected = (req, res) => {
   res.render('users/dieselflow');
 };
 
 // Refresh token usando cookie
-const refreshAccessToken = (req, res) => {
+exports.refreshAccessToken = (req, res) => {
   const refreshToken = req.cookies.refreshToken;
   if (!refreshToken) {
     return res.status(401).json({ message: 'Refresh token requerido' });
@@ -53,7 +53,3 @@ const refreshAccessToken = (req, res) => {
   }
 };
 
-module.exports = {
-  getProtected,
-  refreshAccessToken,
-};
