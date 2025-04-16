@@ -18,7 +18,8 @@ async function getFilters(req, res, next) {
     res.render('statistics/report',{
         units,
         drivers,
-        active: "reports"
+        active: "reportes",
+        reports: ''
       });
   } catch (error) {
     console.error("Error al obtener los elementos de filtros:", error);
