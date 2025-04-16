@@ -106,6 +106,14 @@ exports.getInput = (req, res) => {
 exports.getBackArrow = (req, res) => {
   res.render("includes/backArrow");
 };
+
+exports.getNoDataBanner = (req, res) => {
+  res.render("includes/noDataBanner"); 
+};
+
+exports.getHeader = (req, res) => { 
+  res.render("testing/pruebahead")
+};
 exports.getLoader = (req, res) => {
   res.render("includes/loader")
 }
