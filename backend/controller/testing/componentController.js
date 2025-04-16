@@ -110,3 +110,7 @@ exports.getBackArrow = (req, res) => {
 exports.getNoDataBanner = (req, res) => {
   res.render("includes/noDataBanner"); 
 };
+
+exports.getHeader = (req, res) => { 
+  res.render("includes/head")
+};
