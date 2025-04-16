@@ -111,6 +111,17 @@ exports.getNoDataBanner = (req, res) => {
   res.render("includes/noDataBanner"); 
 };
 
+exports.getHeader = (req, res) => { 
+  res.render("testing/pruebahead")
+};
+exports.getLoader = (req, res) => {
+  res.render("includes/loader")
+}
+
+exports.getIndex = (req, res) => {
+  res.render("testing/index")
+}
+
 exports.getStatsButton = (req, res) => {
   res.render("includes/userStatsButton");
 }

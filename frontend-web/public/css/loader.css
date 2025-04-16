@@ -1,0 +1,75 @@
+/* === LOADER === */
+.loader {
+	position: fixed; 
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 9999; 
+  }
+  
+  
+
+.car__body {
+	animation: shake 0.2s ease-in-out infinite alternate;
+}
+
+.car__line {
+	transform: translate(5px, 45px);
+	transform-origin: center;
+	stroke-linecap: round;
+	stroke-dasharray: 22;
+	animation: line 0.8s ease-in-out infinite;
+	animation-fill-mode: both;
+}
+
+.car__line--top {
+	animation-delay: 0s;
+}
+
+.car__line--middle {
+	animation-delay: 0.2s;
+}
+
+.car__line--bottom {
+	animation-delay: 0.4s;
+}
+
+.hide-loader {
+	opacity: 0;
+  	visibility: hidden;
+}
+@keyframes shake {
+	0% {
+		transform: translateY(-1%);
+	}
+	100% {
+		transform: translateY(2%);
+	}
+}
+
+@keyframes line {
+	0% {
+		stroke-dashoffset: 22;
+	}
+
+	25% {
+		stroke-dashoffset: 22;
+	}
+
+	50% {
+		stroke-dashoffset: 0;
+	}
+
+	51% {
+		stroke-dashoffset: 0;
+	}
+
+	80% {
+		stroke-dashoffset: -22;
+	}
+
+	100% {
+		stroke-dashoffset: -22;
+	}
+}
+

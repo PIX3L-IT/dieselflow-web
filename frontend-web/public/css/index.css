@@ -1,0 +1,13 @@
+.fade-in {
+    opacity: 0;
+    transition: opacity 1s ease-in visibility 0.75s ease-in;
+  }
+  
+  .fade-in.show {
+    opacity: 1;
+  }
+
+.hidden-content{
+    visibility: 0;
+    opacity: 0;
+}

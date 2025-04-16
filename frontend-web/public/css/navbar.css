@@ -26,7 +26,7 @@
     align-items: center;
   }
   
-  .navbar .logo {
+  .side-navbar .logo {
     padding-bottom: 1rem;
     text-align: center;
     font-weight: bold;
@@ -78,4 +78,11 @@
 
   body {
     line-height:normal !important;
+  }
+
+  .pageContent {
+    background-color: #FEFEFE;
+    margin-left: 200px; 
+    margin-top: 25px;
+    width: auto;
   }
