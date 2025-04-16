@@ -1,13 +1,14 @@
 flatpickr("#startDate", {
-    altInput: false,
+    altInput: true,
+    altFormat: "j M Y",
     clickOpens: false,
-    dateFormat: 'd M Y',
+    dateFormat: 'Y-m-d',
     maxDate: "today",
     locale: 'es',
     appendTo: document.body,
     positionElement: document.getElementById("startDateBtn"),
-    onChange: function(selectedDates, dateStr) {
-      document.querySelector("#startDateBtn .label").textContent = ' ' + dateStr;
+    onChange: function(selectedDates, dateStr, instance) {
+      document.querySelector("#startDateBtn .label").textContent = ' ' + instance.altInput.value;
     }
     });
 
@@ -16,15 +17,16 @@ flatpickr("#startDate", {
 });
 
 flatpickr("#endDate", {
-    altInput: false,
+    altInput: true,
+    altFormat: "j M Y",
     clickOpens: false,
-    dateFormat: 'd M Y',
+    dateFormat: 'Y-m-d',
     maxDate: 'today',
     locale: 'es',
     appendTo: document.body,
     positionElement: document.getElementById("endDateBtn"),
-    onChange: function(selectedDates, dateStr) {
-      document.querySelector("#endDateBtn .label").textContent = ' ' + dateStr;
+    onChange: function(selectedDates, dateStr, instance) {
+      document.querySelector("#endDateBtn .label").textContent = ' ' + instance.altInput.value;
     }
     });
 

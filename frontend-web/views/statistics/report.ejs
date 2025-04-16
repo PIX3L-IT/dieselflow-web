@@ -33,8 +33,8 @@
 
     <div class="col-auto" style="margin-bottom: 10px;">
       <div class="dropdown">
-        <button class="btn btn-filter btn-lg dropdown-toggle" type="button" id="driverSelect" 
-        data-bs-toggle="dropdown" aria-expanded="false">
+        <button class="btn btn-filter btn-lg dropdown-toggle" type="button" 
+          id="driverSelect" data-bs-toggle="dropdown" aria-expanded="false">
         <i class="bi bi-person-fill" style="color: #3962B4;"></i> 
           <span class="label"> Conductor </span>
         </button>
@@ -43,10 +43,12 @@
             <a class="dropdown-item" data-value="todos"> Todos </a>
           </li>
           <% drivers.forEach(driver => { %>
-          <li><a class="dropdown-item" data-value="<%= driver.username %> <%= driver.lastName %>">
+          <li><a class="dropdown-item"
+            data-value="<%= driver.username %> <%= driver.lastName %>">
               <%= driver.username %> <%= driver.lastName %></a></li>
             <% }); %>
         </ul>
+        <input type="hidden" id="selectedUnit">
       </div>
     </div> 
 
@@ -62,22 +64,50 @@
             <a class="dropdown-item" data-value="todos"> Todos </a> 
           </li>
           <% units.forEach(unit => { %>
-          <li><a class="dropdown-item" data-value="<%= unit.unitName %>">
+          <li><a class="dropdown-item"
+            data-value="<%= unit.unitName %>">
               <%= unit.unitName %></a></li>
             <% }); %>
         </ul>
+        <input type="hidden" id="selectedDriver">
       </div>
     </div> 
 
     <div class="col-auto" style="margin-bottom: 10px;">   
         <div class="button-container">
-          <button type="button" id="generateBtn" 
+          <button type="button" id="generarBtn" 
             class="btn button button-primary btn-lg">
             Generar 
           </button>
         </div>
     </div>
 
+  </div>
+
+  <!-- ERRORES -->
+  <div class="error-message d-none" id="date-mismatch" 
+    style="margin-left: 18px; margin-bottom: 10px;">
+    La fecha de inicio debe ser antes de la fecha fin.
+  </div>
+
+  <div class="error-message d-none" id="no-startDate" 
+    style="margin-left: 18px; margin-bottom: 10px;">
+    Por favor seleccione una fecha inicio.
+  </div>
+
+  <div class="error-message d-none" id="no-endDate" 
+    style="margin-left: 18px; margin-bottom: 10px;">
+    Por favor seleccione una fecha fin.
+  </div>
+
+  <div class="error-message d-none" id="no-unit" 
+    style="margin-left: 18px; margin-bottom: 10px;">
+    Por favor seleccione una unidad.
+  </div>
+
+  <div class="error-message d-none" id="no-driver" 
+    style="margin-left: 18px; margin-bottom: 10px;">
+    Por favor seleccione un conductor.
   </div>
 
   <!-- ALERTA / TABLA -->
@@ -95,5 +125,6 @@
 <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
 
 <script type="text/javascript" src="/../../js/reportButtons.js"></script>
+<script type="text/javascript" src="/../../js/validationReport.js"></script>
 
 <%- include('../includes/foot.ejs') %>
