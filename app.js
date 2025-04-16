@@ -39,17 +39,17 @@ app.use(express.static(path.join(__dirname, "frontend-web", "public")));
 app.use(express.json());
 app.use(compression());
 
-app.use("/login", loginRoutes);
-app.use("/auth", authRoutes);
-app.use("/upload", uploadImagesRoutes);
-app.use("/image", fetchImagesRoutes);
-app.use("/component", componentRoutes);
+app.use("/", loginRoutes);
+app.use("/", authRoutes);
+app.use("/", uploadImagesRoutes);
+app.use("/", fetchImagesRoutes);
+app.use("/", componentRoutes);
 
 // Ruta de testing para obtener los usuarios
-app.use("/users", userRoutes);
+app.use("/", userRoutes);
 
 // Ruta de testing para obtener las unidades
-app.use("/units", unitsRoutes);
+app.use("/", unitsRoutes);
 
 // Ruta principal
 app.get("/", (req, res) => {

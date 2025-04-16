@@ -1,5 +1,5 @@
 const loginForm = document.getElementById('loginForm');
-  
+
 document.addEventListener('DOMContentLoaded', () => {
   const userInput = document.getElementById('user');
   const passwordInput = document.getElementById('password');
@@ -15,7 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
   passwordInput.addEventListener('input', toggleButtonState);
 });
 
-document.getElementById('togglePassword').addEventListener('click', function () {
+document.getElementById('togglePassword').
+  addEventListener('click', function () {
   const input = document.getElementById('password');
   const icon = this.querySelector('i');
 

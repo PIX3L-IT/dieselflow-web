@@ -14,7 +14,8 @@ const loginUser = async (req, res) => {
     if (parts.length === 2) {
       // Caso: username + lastname
       const [username, lastName] = parts;
-      userLogin = await User.findOne({ username, lastName }).populate("idRole");
+      userLogin = await User.findOne({ username, lastName })
+        .populate("idRole");
     } else {
       // Caso: correo o username solo
       const esEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(user);
@@ -23,7 +24,8 @@ const loginUser = async (req, res) => {
       ).populate("idRole");
     }
 
-    if (!userLogin || !userLogin.userStatus || !(await bcrypt.compare(password, userLogin.password))) {
+    if (!userLogin || !userLogin.userStatus || 
+        !(await bcrypt.compare(password, userLogin.password))) {
       if (type === "Administrador") {
         return res.render('users/login', { error: 'Credenciales inválidas' });
       }
@@ -48,7 +50,7 @@ const loginUser = async (req, res) => {
     const refreshToken = jwt.sign(
       { id: userLogin._id },
       process.env.JWT_REFRESH_SECRET,
-      { expiresIn: process.env.JWT_REFRESH_EXPIRATION }
+      { expiresIn: process.env.JWT_REFRESH_EXPIRATION}
     );
 
     res.cookie('accessToken', accessToken, {
@@ -84,9 +86,11 @@ const loginUser = async (req, res) => {
   } catch (err) {
     console.error(err);
     if (type === "Administrador") {
-      return res.status(500).render('users/login', { error: 'Hubo un error al procesar la solicitud' });
+      return res.status(500).render('users/login', 
+        { error: 'Hubo un error al procesar la solicitud' });
     }
-    return res.status(500).json({ error: "Hubo un error al procesar la solicitud" });
+    return res.status(500).json({ 
+        error: "Hubo un error al procesar la solicitud" });
   }
 };
 

@@ -48,7 +48,8 @@ const refreshAccessToken = (req, res) => {
     });
 
   } catch (err) {
-    return res.status(403).json({ message: 'Refresh token inválido o expirado' });
+    return res.status(403).json({ 
+      message: 'Refresh token inválido o expirado' });
   }
 };
 

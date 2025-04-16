@@ -6,7 +6,7 @@ const {
 } = require('../../controller/users/loginController');
 
 // POST /login
-router.post('/', loginUser);
+router.post('/dashboard', loginUser);
 
 module.exports = router;
 
