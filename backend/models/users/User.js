@@ -41,13 +41,13 @@ class UserClass {
 
   static async getPaginated(userId, page, limit) {
     const skip = page * limit;
-    const reports = await Report.find({ idUser: userId })
+    const reports = await Report.model.find({ idUser: userId })
       .sort({ loadDate: -1 })
       .skip(skip)
       .limit(limit)
       .populate("idUnit");
 
-    const total = await Report.countDocuments({ idUser: userId });
+    const total = await Report.model.countDocuments({ idUser: userId });
     return { reports, total };
   }
 

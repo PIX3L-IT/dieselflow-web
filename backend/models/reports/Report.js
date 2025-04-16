@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-// 🔧 Schema
 const reportSchema = new mongoose.Schema({
   idUnit: { type: mongoose.Schema.Types.ObjectId, ref: "Unit", required: true },
   idUser: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
@@ -24,11 +23,14 @@ class ReportClass {
   }
 
   static async getPaginatedReports(userId, page, limit = 5) {
-    return await ReportModel.find({ idUser: userId })
+    const reports = await ReportModel.find({ idUser: userId })
       .sort({ loadDate: -1 })
       .skip(page * limit)
       .limit(limit)
       .populate("idUnit");
+  
+    const total = await ReportModel.countDocuments({ idUser: userId });
+    return { reports, total };
   }
 
   static get model() {
