@@ -114,3 +114,10 @@ exports.getNoDataBanner = (req, res) => {
 exports.getHeader = (req, res) => { 
   res.render("testing/pruebahead")
 };
+exports.getLoader = (req, res) => {
+  res.render("includes/loader")
+}
+
+exports.getIndex = (req, res) => {
+  res.render("testing/index")
+}

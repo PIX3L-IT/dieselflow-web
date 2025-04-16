@@ -7,24 +7,29 @@
     <title>S3 Testing</title>
 </head>
 
-<body>
-    <div class="container">
-        <h1>Subida de archivos con S3 SDK</h1>
-        <form action="/upload/s3_sdk" method="POST" enctype="multipart/form-data">
-            <label for="file">Selecciona archivos</label>
-            <input id="file" name="file" type="file" multiple />
-            <button type="submit">Subir</button>
-        </form>
-    </div>
+<body class="hidden-content">
+    <%- include('../includes/loader.ejs') %>
+    <div id="main-content" >
+        <div class="container">
+            <h1>Subida de archivos con S3 SDK</h1>
+            <form action="/upload/s3_sdk" method="POST" enctype="multipart/form-data">
+                <label for="file">Selecciona archivos</label>
+                <input id="file" name="file" type="file" multiple />
+                <button type="submit">Subir</button>
+            </form>
+        </div>
 
-    <div class="container">
-        <h1>Subida de archivos con S3 Multer</h1>
-        <form action="/upload/s3_multer" method="POST" enctype="multipart/form-data">
-            <label for="file">Selecciona archivos</label>
-            <input id="file" name="file" type="file" multiple />
-            <button type="submit">Subir</button>
-        </form>
+        <div class="container">
+            <h1>Subida de archivos con S3 Multer</h1>
+            <form action="/upload/s3_multer" method="POST" enctype="multipart/form-data">
+                <label for="file">Selecciona archivos</label>
+                <input id="file" name="file" type="file" multiple />
+                <button type="submit">Subir</button>
+            </form>
+        </div>
     </div>
+    <script src="/js/loader.js"></script>
+    <script src="/js/index.js"></script>
     
 </body>
 

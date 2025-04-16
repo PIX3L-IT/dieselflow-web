@@ -23,6 +23,12 @@ router.get("/text", componentController.getText);
 // Ruta para mostrar card
 router.get("/card", componentController.getCard);
 
+//Ruta para mostrar L=loader
+router.get("/loader", componentController.getLoader);
+
+//Ruta para mostrar index
+router.get("/index", componentController.getIndex);
+
 // Ruta para mostrar boton estándar
 router.get("/button", componentController.getButton);
 
