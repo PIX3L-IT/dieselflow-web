@@ -46,16 +46,10 @@ app.use("/image", fetchImagesRoutes);
 app.use("/component", componentRoutes);
 
 // Ruta de testing para obtener los usuarios
-app.use("/users", userRoutes);
+app.use("/", userRoutes);
 
 // Ruta de testing para obtener las unidades
 app.use("/units", unitsRoutes);
-
-// Ruta principal
-app.get("/", (req, res) => {
-  res.render("testing/index.ejs");
-});
-
 
 
 // Manejo de rutas no encontradas

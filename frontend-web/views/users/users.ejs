@@ -1,12 +1,5 @@
-<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="/css/button.css">
-<link rel="stylesheet" href="/css/text.css">
-<link rel="stylesheet" href="/css/users.css">
-<link rel="stylesheet" href="/css/error.css">
-<link rel="stylesheet" href="/css/navbar.css">
-<link rel="stylesheet" href="/css/filter.css">
+<%- include('../includes/head.ejs') %>
 
-<body>
     <%- include('../includes/navbar.ejs', { active: 'usuarios' }) %>
         <div class="content">
             <div class="header-content">
@@ -30,7 +23,7 @@
                         <div class="col user-card <%= user.idRole.roleName   %>">
                             <div class="d-flex align-items-center gap-2">
                                 <%- include('../includes/card.ejs', { text: user.username, userStatus: user.userStatus }) %>
-                                    <%- include('../includes/userStatsButton.ejs') %>
+                                <%- include('../includes/userStatsButton.ejs') %>
                             </div>
                         </div>
                         <% }); %>
@@ -45,8 +38,6 @@
                 </div>
             </div>
         </div>
+        <script src="/js/filterUsers.js"></script>
 
-</body>
-
-
-<script src="/js/filterUsers.js"></script>
+<%- include('../includes/foot.ejs') %>
