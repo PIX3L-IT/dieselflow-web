@@ -1,0 +1,36 @@
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+<script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+<%- include('../includes/title.ejs', { title: 'Reportes' }) %>
+
+<div class="container">
+  <div class="row align-items-start">
+    <div class="col">
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="driverSelect" 
+        data-bs-toggle="dropdown" aria-expanded="false">
+          Conductor
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="driverSelect">
+          <% drivers.forEach(driver => { %>
+          <li><a class="dropdown-item" data-value="<%= driver.username %> <%= driver.lastName %>">
+              <%= driver.username %> <%= driver.lastName %></a></li>
+            <% }); %>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="unitSelect" 
+        data-bs-toggle="dropdown" aria-expanded="false">
+          Unidad
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="unitSelect">
+          <% units.forEach(unit => { %>
+          <li><a class="dropdown-item" data-value="<%= unit.unitName %>">
+              <%= unit.unitName %></a></li>
+            <% }); %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
