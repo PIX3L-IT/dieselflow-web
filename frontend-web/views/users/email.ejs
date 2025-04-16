@@ -3,15 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/title.css">
+    <link rel="stylesheet" href="/css/text.css">
+    <style>
+
+    </style>
     <title>Recuperación de contraseña</title>
 </head>
 <body>
-    <h1>Recuperación de  contraseña</h1>
-    <p>Hola,</p>
-    <p>Recibiste este correo porque solicitaste un restablecimiento de contraseña para tu cuenta.</p>
-    <p>Por favor, haz clic en el siguiente enlace para restablecer tu contraseña:</p>
-    <p>Si no solicitaste este cambio, puedes ignorar este correo.</p>
-    <p>Gracias,</p>
-    <p>El equipo de DieselFlow</p>
+    <h1 class="title">Recuperación de contraseña</h1>
+    <p class="text">
+        Buen día, <%= user.username %> <%= user.lastName %>.
+    </p>
+    <p class="text">
+        Alguien ha solicitado una nueva contraseña para la cuenta asociada a este email.
+    </p>
+    <p class="text">
+        Aún no se ha realizado ningún cambio en su cuenta.
+    </p>
+    <p class="text">
+        Puede restablecer su contraseña haciendo clic en el siguiente enlace: <a href="<%= link %>">Restablecer contraseña</a>.
+    </p>
+    <p class="text">
+        Si no puede hacer clic en el enlace, copie y pegue la URL en su navegador: <%= link %>.
+    </p>
+    <p class="text">
+        Si no ha solicitado una nueva contraseña, infórmenos inmediatamente respondiendo a este correo electrónico.
+    </p>
+    <p class="text">
+        Si no solicitó este cambio, ignore este correo electrónico y no se realizarán cambios en su cuenta.
+    </p>
+    <p class="text">
+        Atentamente,
+        El equipo de DieselFlow
+    </p>
 </body>
 </html>
