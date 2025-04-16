@@ -11,11 +11,3 @@ exports.getAllUsers = async (req, res) => {
     });
   }
 }
-
-exports.getConfirmEmail = (req, res, next) => {
-  res.render("users/confirmEmail");
-};
-
-exports.getResetPassword = (req, res, next) => {
-  res.render("users/resetPassword");
-}

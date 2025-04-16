@@ -10,9 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const submitButton = document.querySelector(".single-input-form button[type='submit']");
     if (submitButton) {
         submitButton.addEventListener("click", (e) => {
-            e.preventDefault(); // Evita que se envíe el formulario
             if (modal) {
-            modal.style.display = "flex"; // Mostrar el modal centrado
+                modal.style.display = "flex"; // Mostrar el modal centrado
             }
         });
     }
