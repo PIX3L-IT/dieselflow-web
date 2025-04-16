@@ -86,11 +86,36 @@ app.get("/", (req, res) => {
   res.render("users/login", { error: null });
 });
 
-
 // Manejo de rutas no encontradas
 app.use((req, res) => {
-  res.status(404).render("includes/404", { active: "" });
+  const accessToken = req.cookies.accessToken;
+  const refreshToken = req.cookies.refreshToken;
+
+  let hasToken = false;
+  let payload = null;
+  
+  try {
+    if (accessToken) {
+      payload = jwt.verify(accessToken, process.env.JWT_SECRET);
+      hasToken = true;
+    } else if (refreshToken) {
+      payload = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
+      hasToken = true;
+    }
+  } catch (err) {
+    // No redirijas ni renderices aquí, solo deja que el flujo continúe sin token
+  }
+
+  res.status(404).render("includes/404", {
+    active: "",
+    hasToken,
+    accessToken,
+    refreshToken,
+    username: payload ? payload.username : null,
+    lastname: payload ? payload.lastname : null
+  });
 });
+
 
 app.listen(port, () => {
   console.log(`Servidor escuchando en el puerto ${port}`);

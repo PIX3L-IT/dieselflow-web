@@ -10,10 +10,20 @@ body {
   .main-content {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* puedes usar center si quieres centrar verticalmente */
-    align-items: flex-start;     /* esto alinea con el título a la izquierda */
+    justify-content: flex-start; 
+    align-items: flex-start;     
     padding: 2rem;
-    margin-left: 220px; /* espacio del sidebar */
+    margin-left: 220px; 
+    height: 100vh;
+    box-sizing: border-box;
+  }
+
+  .main-content-no-margin {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+    align-items: flex-start;     
+    padding: 2rem;
     height: 100vh;
     box-sizing: border-box;
   }
@@ -116,5 +126,12 @@ body {
       font-size: 1.2rem;
     }
   }
+  
+  .large-button {
+    padding: 1.2rem 2.5rem;
+    font-size: 1.8rem;
+    border-radius: 12px;
+  }
+  
   
   
