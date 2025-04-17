@@ -13,21 +13,11 @@ body {
     justify-content: flex-start; 
     align-items: flex-start;     
     padding: 2rem;
-    margin-left: 220px; 
+    margin-left: 170px; 
     height: 100vh;
     box-sizing: border-box;
   }
 
-  .main-content-no-margin {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; 
-    align-items: flex-start;     
-    padding: 2rem;
-    height: 100vh;
-    box-sizing: border-box;
-  }
-  
   .form-container {
     width: 100%;
     max-width: 600px;
