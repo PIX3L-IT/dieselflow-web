@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Jaldi&display=swap');
+
+.main-driver-content {
+  margin-left: 220px; 
+  padding: 40px 20px;
+  box-sizing: border-box;
+  max-width: calc(100% - 220px); 
+  font-family: 'Jaldi', sans-serif;
+}
+
+.driver-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+.driver-header .stat-box-container {
+    flex-shrink: 0;
+}
+
+.driver-title {
+  font-size: 40px;
+  font-weight: bold;
+  color: #182747;
+}
+
+.stat-box-container {
+  display: flex;
+  gap: 30px;
+}
+
+.stat-box {
+  background-color: #E8F4FD;
+  border-radius: 20px;
+  padding: 30px 20px;
+  width: 250px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.stat-title {
+    white-space: nowrap;      
+    overflow: hidden;        
+    text-overflow: ellipsis;  
+  }
+
+.stat-value {
+  font-size: 70px;
+  font-weight: bold;
+  color: #182747;
+  line-height: 1;
+}
+
+.chart-section {
+    flex: 1;
+    margin-top: -60;
+}
+
+#chart-container {
+  width: 100%;
+  height: 400px;
+  margin-top: 20px;
+}
+
+.table-section h3 {
+  margin-top: 50px;
+  font-size: 24px;
+  color: #182747;
+}

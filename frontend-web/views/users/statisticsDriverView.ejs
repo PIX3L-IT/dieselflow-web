@@ -1,25 +1,29 @@
-<%- include('../includes/title.ejs', { title: 'Driver Statistics' }) %>
 <%- include('../includes/navbar.ejs') %>
-
-<div class="container mt-4">
-  <h1>Driver: <%= unit?.username || 'Unknown Driver' %></h1>
-  <p>Total Trips: <%= totalTrips %></p>
-</div>
-
-<div class="container">
-  <h2>Diesel Consumption by Day</h2>
-  <div id="chart-container" style="width: 100%; height: 400px;"></div>
-</div>
-
-<div class="container">
-  <h3>Last Reports (Page <%= currentPage %> of <%= totalPages %>)</h3>
-  <%- include('../includes/simpleTable', {
-        data: tableData,
-        columns: tableColumns,
-        currentPage: currentPage,
-        totalPages: totalPages,
-        BaseRoute: BaseRoute
-      }) %>
+<link rel="stylesheet" href="/css/driverStatistics.css">
+<div class="main-driver-content">
+  <div class="driver-header">
+    <div>
+      <h1 class="driver-title"><%= unit?.username || 'Unknown Driver' %></h1>
+      <div class="stat-box-container">
+        <%- include('../includes/statBox', { title: 'Viajes hechos', value: totalTrips }) %>
+        <%- include('../includes/statBox', { title: 'Rendimientos malos', value: '3' }) %>
+      </div>
+    </div>
+    <div class="chart-section">
+      <h2>Diesel Consumption by Day</h2>
+      <div id="chart-container"></div>
+    </div>
+  </div>
+  <div class="table-section">
+    <h3>Last Reports (Page <%= currentPage %> of <%= totalPages %>)</h3>
+    <%- include('../includes/simpleTable', {
+          data: tableData,
+          columns: tableColumns,
+          currentPage: currentPage,
+          totalPages: totalPages,
+          BaseRoute: BaseRoute
+        }) %>
+  </div>
 </div>
 
 <script src="https://d3js.org/d3.v7.min.js"></script>
