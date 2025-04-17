@@ -16,7 +16,7 @@ const componentRoutes = require("./backend/routes/testing/viewComponents");
 const authRoutes = require("./backend/routes/users/authRoutes");
 const userRoutes = require("./backend/routes/users/userRoutes");
 const unitsRoutes = require("./backend/routes/units/unitRoutes");
-const driverRoutes = require("./backend/routes/users/statisticsConductorRoute");
+const driverRoutes = require("./backend/routes/users/statisticsDriverRoute");
 
 const app = express();
 app.use(cookieParser());

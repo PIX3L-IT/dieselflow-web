@@ -1,6 +1,5 @@
 const driverModel = require('../../models/users/User');
 const reportModel = require('../../models/reports/Report');
-const BaseTableFactory = require('../../controller/testing/tableFactory');
 
 exports.getDriver = async (req, res) => {
   try {
@@ -36,7 +35,7 @@ exports.getDriver = async (req, res) => {
       tableColumns,
       currentPage: page,
       totalPages,
-      BaseRoute: `/conductor/${userId}`,
+      BaseRoute: `/conductor/page/${userId}/reports`,
       active: ""
     });
   } catch (err) {
@@ -50,20 +49,23 @@ exports.getPaginated = async (req, res) => {
     const userId = req.params.id;
     const page = parseInt(req.query.page) || 1;
     const limit = 5;
-    const { reports, total } = await driverModel.getPaginated(userId, page, limit);
-    const conductorColumns = [
-      { key: "loadDate", label: "Fecha de carga" },
-      { key: "liters", label: "Litros" },
-      { key: "mileage", label: "Kilometraje" },
-      { key: "efficiency", label: "Rendimiento" }
-    ];
-    const factory = new BaseTableFactory({
-      model: reportModel.model,
-      baseRoute: `/conductor/${userId}/reports`,
-      columns: conductorColumns,
-      viewName: 'users/statisticsDriverView'
-    });    
-    factory.render(req, res);
+
+    const { reports, total } = await reportModel.getPaginatedReports(userId, page - 1, limit);
+    const totalPages = Math.ceil(total / limit);
+    res.json({
+      data: reports,
+      columns: [
+        { key: "loadDate", label: "Fecha de carga" },
+        { key: "liters", label: "Litros" },
+        { key: "mileage", label: "Kilometraje" },
+        { key: "efficiency", label: "Rendimiento" }
+      ],
+      currentPage: page,
+      totalPages,
+      hasPrevPage: page > 1,
+      hasNextPage: page < totalPages
+    });
+
   } catch (err) {
     console.error(err);
     res.status(500).send("Error loading paginated data");

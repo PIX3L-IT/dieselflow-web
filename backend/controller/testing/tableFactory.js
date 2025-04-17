@@ -16,7 +16,6 @@ class BaseTableFactory {
         .sort({ _id: 1 })
         .skip((page - 1) * limit)
         .limit(limit);
-      console.log(data)
 
       return { data, total };
     }
