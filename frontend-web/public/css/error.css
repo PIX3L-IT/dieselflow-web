@@ -18,6 +18,10 @@ body {
   box-sizing: border-box;
 }
 
+.main-title {
+  margin-left: 200px;
+}
+
 .form-container {
   width: 100%;
   max-width: 600px;
