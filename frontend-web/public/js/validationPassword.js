@@ -28,10 +28,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!regex.test(password)) {
       passwordError.textContent = "La contraseña debe tener al menos 8 caracteres y un número.";
+      if (typeof window.disableButton === "function") {
+        window.disableButton();
+      }
     } else {
       passwordError.textContent = "";
+      if (typeof window.enableButton === "function") {
+        window.enableButton();
+      }
     }
 
+    validateBlankFields();
     validateConfirmPassword();
   }
 
@@ -42,8 +49,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (confirmPassword && password !== confirmPassword) {
       confirmPasswordError.textContent = "Las contraseñas no coinciden.";
+      if (typeof window.disableButton === "function") {
+        window.disableButton();
+      }
     } else {
       confirmPasswordError.textContent = "";
+      if (typeof window.enableButton === "function") {
+        window.enableButton();
+      }
+    }
+
+    validateBlankFields();
+  }
+
+  function validateBlankFields() {
+    // Validar que no esté vacío
+    if (confirmPasswordField.value === "" || passwordField.value === "") {
+      if (typeof window.disableButton === "function") {
+        window.disableButton();
+      }
     }
   }
 

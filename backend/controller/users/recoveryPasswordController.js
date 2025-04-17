@@ -14,14 +14,18 @@ exports.getConfirmEmail = (req, res, next) => {
 exports.postConfirmEmail = async (req, res, next) => {
     const email = req.body.email;
     try {
-        // Hacerlo desde el front
         if (!email) {
-            console.log("Se requiere un correo electrónico");
+            console.error("Se requiere un correo electrónico");
+            return res.redirect('/users/confirm-email');
         }
         const user = await User.findOne({ email }).populate('idRole').exec();
 
         if (user && user.idRole.roleName === 'Administrador') {
-            const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN });
+            const token = jwt.sign(
+                { email: user.email }, 
+                process.env.JWT_SECRET, 
+                { expiresIn: process.env.JWT_EXPIRES_IN }
+            );
             const resetPasswordLink = `${process.env.ENVIRONMENT_URL}/users/reset-password/?token=${token}`; 
 
             const templatePath = path.join(__dirname, '../../../frontend-web/views/users/email.ejs');
@@ -36,14 +40,29 @@ exports.postConfirmEmail = async (req, res, next) => {
         }
     } catch (error) {
         console.error("Error al buscar el usuario:", error);
+        return res.status(500).json({ message: 'Error del servidor' });
     }
 };
 
 exports.getResetPassword = (req, res, next) => {
     const token = req.query.token;
-    res.render("users/resetPassword", { 
-        token: token,
-    });
+
+    if (token) {
+        // Verificar el token JWT
+        jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+            if (err) {
+                console.error('Error al verificar el token JWT:', err);
+                res.redirect('/');
+            } else {
+                res.render("users/resetPassword", { 
+                    token: token,
+                });
+            }
+        });
+    } else {
+        console.error('Token no proporcionado');
+        res.redirect('/');
+    }
 };
 
 exports.postResetPassword = async (req, res, next) => {
@@ -55,7 +74,7 @@ exports.postResetPassword = async (req, res, next) => {
     jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
         if (err) {
             console.error('Error al verificar el token JWT:', err);
-            // response.redirect('/auth/login');
+            res.redirect('/');
         } else {
             // Token válido, proceder con la actualización de la contraseña
             try {
@@ -72,20 +91,34 @@ exports.postResetPassword = async (req, res, next) => {
                             { new: true }
                         );
                     
-                        if (!updatedUser) {
-                            return res.status(404).json({ message: 'Usuario no encontrado' });
+                        if (updatedUser) {
+                            return res.status(200).json({ 
+                                message: 'Contraseña actualizada correctamente', 
+                                user: updatedUser 
+                            });   
+                        } else {
+                            console.error('Usuario no encontrado');
+                            return res.status(404).json({ 
+                                message: 'Usuario no encontrado',
+                            });
                         }
-                        res.status(200).json({ message: 'Contraseña actualizada correctamente', user: updatedUser });   
                     } else {
-                        return res.status(404).json({ message: 'Usuario no encontrado' });
+                        console.error('Usuario no encontrado');
+                        return res.status(404).json({ 
+                            message: 'Usuario no encontrado',
+                        });
                     }
                 } else {
-                    return res.status(400).json({ message: 'Las contraseñas no coinciden' });
+                    console.error('Las contraseñas no coinciden');
+                    return res.status(400).json({ 
+                        message: 'Las contraseñas no coinciden',
+                    });
                 }
-                
             } catch (error) {
                 console.error('Error al actualizar la contraseña:', error);
-                res.status(500).json({ message: 'Error del servidor' });
+                return res.status(500).json({
+                    message: 'Error del servidor',
+                });
             }
         }
     });

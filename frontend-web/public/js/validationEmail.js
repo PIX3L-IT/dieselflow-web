@@ -13,9 +13,15 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!emailRegex.test(email)) {
       errorMessage.textContent = "El correo debe tener un formato válido y terminar en '.com' o '.mx'.";
       emailInput.classList.add("error");
+      if (typeof window.disableButton === "function") {
+        window.disableButton();
+      }
     } else {
       errorMessage.textContent = "";
       emailInput.classList.remove("error");
+      if (typeof window.enableButton === "function") {
+        window.enableButton();
+      }
     }
   }
 

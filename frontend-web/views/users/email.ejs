@@ -3,9 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/title.css">
     <link rel="stylesheet" href="/css/text.css">
     <style>
+        .title {
+            font-family: 'Jaldi', sans-serif;
+            font-size: 2.25rem;        
+            color: #1a2544;
+            margin-top: 2rem;            
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+        .text {
+            font-family: "Jaldi", sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 0.95rem;
+            line-height: 30px;
+            margin-top: 0.5rem;    
+            margin-bottom: 0.5rem;
+            color: #182747;
+        }
+
 
     </style>
     <title>Recuperación de contraseña</title>
@@ -15,27 +33,26 @@
     <p class="text">
         Buen día, <%= user.username %> <%= user.lastName %>.
     </p>
+    <br>
     <p class="text">
-        Alguien ha solicitado una nueva contraseña para la cuenta asociada a este email.
+        Alguien ha solicitado una nueva contraseña para la cuenta asociada a este email. Aún no se ha realizado ningún cambio en su cuenta.
     </p>
+    <br>
     <p class="text">
-        Aún no se ha realizado ningún cambio en su cuenta.
-    </p>
-    <p class="text">
-        Puede restablecer su contraseña haciendo clic en el siguiente enlace: <a href="<%= link %>">Restablecer contraseña</a>.
-    </p>
-    <p class="text">
+        Puede restablecer su contraseña haciendo clic en el siguiente enlace: <a href="<%= link %>">Restablecer contraseña</a>. 
         Si no puede hacer clic en el enlace, copie y pegue la URL en su navegador: <%= link %>.
     </p>
+    <br>
     <p class="text">
-        Si no ha solicitado una nueva contraseña, infórmenos inmediatamente respondiendo a este correo electrónico.
-    </p>
-    <p class="text">
+        Si no ha solicitado una nueva contraseña, infórmenos inmediatamente respondiendo a este correo electrónico. 
         Si no solicitó este cambio, ignore este correo electrónico y no se realizarán cambios en su cuenta.
     </p>
+    <br>
     <p class="text">
         Atentamente,
-        El equipo de DieselFlow
+    </p>
+    <p class="text">
+        El equipo de Dieselflow
     </p>
 </body>
 </html>

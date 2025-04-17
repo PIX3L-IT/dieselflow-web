@@ -2,7 +2,7 @@
     min-height: 100vh;
     width: 100%;
     box-sizing: border-box;
-    padding: 2rem 4rem 0 4rem;
+    padding: 1rem 4rem 0 4rem;
 }
 
 .container-email {
@@ -29,7 +29,7 @@
 .form-container.full-width {
     width: auto;
     max-width: none;
-    padding-top: 1rem;
+    padding-top: 0.5rem;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
     border-radius: 12px;
@@ -43,8 +43,33 @@
 
 .input-group-text {
     border: none;
+    background-color: transparent;
 }
 
 .modal {
     display: none;
+}
+
+.single-input-form label.text {
+    font-size: 1.4rem;
+    margin-left: 0rem;
+    margin-bottom: 0rem;
+    margin-top: 0rem;
+}
+
+.single-input-form input.text {
+    font-size: 1.2rem;
+    margin-left: 0rem;
+    margin-top: 0.5rem;
+    padding: 0.5rem 1.5rem;
+}
+
+.form-group .error-message {
+    font-size: 1rem;
+    margin-top: 0rem;
+    margin-bottom: 1rem;
+}
+
+.button-container button.disabled {
+    border: 1px solid #182747;
 }

@@ -1,17 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
     const modal = document.getElementById("popupModal");
   
-    // Ocultar el modal al cargar la página
-    if (modal) {
-        modal.style.display = "none";
-    }
-  
     // Escuchar el botón de "Enviar correo"
     const submitButton = document.querySelector(".single-input-form button[type='submit']");
     if (submitButton) {
         submitButton.addEventListener("click", (e) => {
             if (modal) {
-                modal.style.display = "flex"; // Mostrar el modal centrado
+                modal.style.display = "flex";
             }
         });
     }
