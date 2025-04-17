@@ -4,7 +4,7 @@ const verifyToken = require('../../utils/verifyToken');
 const loginController = require('../../controller/users/loginController');
 
 // POST /login
-router.post('/dashboard', loginController.postLogin);
+router.post('/tablero', loginController.postLogin);
 
 router.get('/login',loginController.getLogin);
 
