@@ -3,7 +3,7 @@ const router = express.Router();
 
 const {
     getFilters,
-    //postReport
+    postReport
   } = require('../../controller/reports/reportController');
 
 
@@ -11,6 +11,6 @@ const {
 router.get('/', getFilters);
 
 // POST /reports/generate
-//router.post('/reports/generate', postReport);
+router.post('/generate', postReport);
 
 module.exports = router;

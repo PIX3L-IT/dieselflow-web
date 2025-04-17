@@ -51,4 +51,28 @@ document.getElementById("generarBtn").addEventListener("click", function (e) {
         document.getElementById("no-endDate").classList.remove("d-none");
         hasError = true;
     }
+
+    if(!hasError) {
+        const data = {
+            startDate,
+            endDate,
+            selectedUnit,
+            selectedDriver
+        };
+    
+        fetch("/reports/generate", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+        .then(res => res.text())
+        .then(html => {
+            document.getElementById("reportContainer").innerHTML = html;
+        })
+        .catch(err => {
+            console.error("Error al generar el reporte", err);
+        });
+    }
 });

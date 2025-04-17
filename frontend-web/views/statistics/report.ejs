@@ -5,83 +5,85 @@
   <%- include('../includes/title.ejs', { title: 'Reportes' }) %>
 
   <!-- FILTROS -->
-  <div class="row align-items-start" style="margin-left: 7px;">
-
-    <div class="col-auto" style="margin-bottom: 10px;">
-      <div class="datepicker-wrapper">
-        <button type="button" class="btn btn-filter btn-lg" id="startDateBtn">
-          <i class="bi bi-calendar-fill" style="color: #3962B4;"></i>
-          <span class="label"> Fecha Inicio </span>
-        </button>
-        <input type="text" id="startDate" class="d-none" />
+  <div class="row align-items-start" style="margin-left: 7px;">  
+      <div class="col-auto" style="margin-bottom: 10px;">
+        <div class="datepicker-wrapper">
+          <button type="button" class="btn btn-filter btn-lg" id="startDateBtn">
+            <i class="bi bi-calendar-fill" 
+              style="color: #3962B4; margin-right: 5px;"></i>
+              <span class="label"> Fecha Inicio </span>
+          </button>
+            <input type="text" id="startDate" class="d-none" />
+        </div>
       </div>
-    </div>
-
-    <div class="col-auto d-flex align-items-center">
-      <i class="bi bi-chevron-right fs-2" style="color: #182747;"></i>
-    </div> 
-
-    <div class="col-auto" style="margin-bottom: 10px;">
-      <div class="datepicker-wrapper">
-        <button type="button" class="btn btn-filter btn-lg" id="endDateBtn">
-          <i class="bi bi-calendar-fill" style="color: #3962B4;"></i>
-          <span class="label"> Fecha Fin</span>
-        </button>
-        <input type="text" id="endDate" class="d-none" />
-      </div>
-    </div> 
-
-    <div class="col-auto" style="margin-bottom: 10px;">
-      <div class="dropdown">
-        <button class="btn btn-filter btn-lg dropdown-toggle" type="button" 
-          id="driverSelect" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="bi bi-person-fill" style="color: #3962B4;"></i> 
-          <span class="label"> Conductor </span>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="driverSelect">
-          <li>
-            <a class="dropdown-item" data-value="todos"> Todos </a>
-          </li>
-          <% drivers.forEach(driver => { %>
-          <li><a class="dropdown-item"
-            data-value="<%= driver.username %> <%= driver.lastName %>">
-              <%= driver.username %> <%= driver.lastName %></a></li>
-            <% }); %>
-        </ul>
-        <input type="hidden" id="selectedUnit">
-      </div>
-    </div> 
-
-    <div class="col-auto" style="margin-bottom: 10px;">
-      <div class="dropdown">
-        <button class="btn btn-filter btn-lg dropdown-toggle" type="button" id="unitSelect" 
-        data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="bi bi-truck-front-fill" style="color: #3962B4;"></i> 
-          <span class="label"> Unidad </span>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="unitSelect">
-          <li>
-            <a class="dropdown-item" data-value="todos"> Todos </a> 
-          </li>
-          <% units.forEach(unit => { %>
-          <li><a class="dropdown-item"
-            data-value="<%= unit.unitName %>">
-              <%= unit.unitName %></a></li>
-            <% }); %>
-        </ul>
-        <input type="hidden" id="selectedDriver">
-      </div>
-    </div> 
-
-    <div class="col-auto" style="margin-bottom: 10px;">   
+  
+      <div class="col-auto d-flex align-items-center">
+        <i class="bi bi-chevron-right fs-2" style="color: #182747;"></i>
+      </div> 
+    
+      <div class="col-auto" style="margin-bottom: 10px;">
+        <div class="datepicker-wrapper">
+          <button type="button" class="btn btn-filter btn-lg" id="endDateBtn">
+            <i class="bi bi-calendar-fill" 
+              style="color: #3962B4; margin-right: 5px;"></i>
+            <span class="label"> Fecha Fin</span>
+          </button>
+          <input type="text" id="endDate" class="d-none" />
+        </div>
+      </div> 
+  
+      <div class="col-auto" style="margin-bottom: 10px;">
+        <div class="dropdown">
+          <button class="btn btn-filter btn-lg dropdown-toggle" type="button" 
+            id="driverSelect" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-person-fill" 
+            style="color: #3962B4; margin-right: 5px;"></i> 
+            <span class="label"> Conductor </span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="driverSelect">
+            <li>
+              <a class="dropdown-item" data-value="todos"> Todos </a>
+            </li>
+            <% drivers.forEach(driver => { %>
+            <li><a class="dropdown-item"
+              data-value="<%= driver.username %> <%= driver.lastName %>">
+                <%= driver.username %> <%= driver.lastName %></a></li>
+              <% }); %>
+          </ul>
+          <input type="hidden" id="selectedUnit">
+        </div>
+      </div> 
+  
+      <div class="col-auto" style="margin-bottom: 10px;">
+        <div class="dropdown">
+          <button class="btn btn-filter btn-lg dropdown-toggle" type="button" id="unitSelect" 
+          data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-truck-front-fill" 
+            style="color: #3962B4; margin-right: 5px;"></i> 
+            <span class="label"> Unidad </span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="unitSelect">
+            <li>
+              <a class="dropdown-item" data-value="todos"> Todas </a> 
+            </li>
+            <% units.forEach(unit => { %>
+            <li><a class="dropdown-item"
+              data-value="<%= unit.unitName %>">
+                <%= unit.unitName %></a></li>
+              <% }); %>
+          </ul>
+          <input type="hidden" id="selectedDriver">
+        </div>
+      </div> 
+    
+      <div class="col-auto" style="margin-bottom: 10px;">   
         <div class="button-container">
           <button type="button" id="generarBtn" 
             class="btn button button-primary btn-lg">
-            Generar 
+            Generar
           </button>
         </div>
-    </div>
-
+      </div>
   </div>
 
   <!-- ERRORES -->
@@ -110,13 +112,16 @@
     Por favor seleccione un conductor.
   </div>
 
-  <!-- ALERTA / TABLA -->
-  <% if (!reports) { %>
-    <div class="alert alert-primary" role="alert" 
-      style="margin-left: 18px; margin-top: 10px;">
-        Seleccione los filtros deseados para generar el reporte.
+  <!-- REPORTE -->
+  <div id="reportContainer">
+    <!-- ALERTA / TABLA -->
+    <% if (!reportData) { %>
+      <div class="alert alert-primary" role="alert" 
+        style="margin-left: 18px; margin-top: 10px;">
+          Seleccione los filtros deseados para generar el reporte.
+      </div>
+    <% } %>
   </div>
-  <% } %>
 
 </div>
 
