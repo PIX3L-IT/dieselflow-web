@@ -3,7 +3,7 @@ const router = express.Router();
 const verifyToken = require('../../utils/verifyToken');
 const { getUsers } = require("../../controller/users/userController");
 
-router.get("/users", getUsers);
+router.get("/usuarios", getUsers);
 
 router.get("/search", async (req, res) => {
   const normalizeText = (str) =>
