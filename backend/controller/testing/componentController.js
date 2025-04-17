@@ -114,6 +114,14 @@ exports.getNoDataBanner = (req, res) => {
 exports.getHeader = (req, res) => { 
   res.render("testing/head")
 };
+
+exports.getStatBox = (req, res) => { 
+  res.render("includes/statBox", {
+    title: "example",
+    value: "2"
+  });
+}
+
 exports.getLoader = (req, res) => {
   res.render("includes/loader")
 }

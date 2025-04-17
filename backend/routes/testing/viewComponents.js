@@ -54,4 +54,7 @@ router.get("/noDataBanner",componentController.getNoDataBanner);
 // Ruta para mostrar el header
 router.get("/header", componentController.getHeader);
 
+// Ruta para mostrar stat box
+router.get("/statBox", componentController.getStatBox);
+
 module.exports = router;
