@@ -49,6 +49,16 @@ class ReportClass {
     ]);
   }
 
+  static async countBadEfficiencies(userId) {
+    return await Report.countDocuments({
+      idUser: userId,
+      $or: [
+        { efficiency: { $gt: 1.10 } },
+        { efficiency: { $lt: 0.90 } }
+      ]
+    });
+  }
+
   static get model() {
     return Report;
   }

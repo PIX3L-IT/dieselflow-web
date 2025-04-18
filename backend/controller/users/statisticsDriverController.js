@@ -26,6 +26,7 @@ exports.getDriver = async (req, res) => {
       { key: "mileage", label: "Kilometraje" },
       { key: "efficiency", label: "Rendimiento" }
     ];
+    const badEfficiencies = await reportModel.countBadEfficiencies(userId);
 
     res.render('users/statisticsDriverView', {
       unit: driver,
@@ -37,6 +38,7 @@ exports.getDriver = async (req, res) => {
       totalPages,
       BaseRoute: `/conductor/page/${userId}/reports`,
       active: "",
+      badEfficiencies: badEfficiencies,
       accessToken: req.cookies.accessToken,
       refreshToken:  req.cookies.refreshToken,
       hasToken: !!req.cookies.accessToken,

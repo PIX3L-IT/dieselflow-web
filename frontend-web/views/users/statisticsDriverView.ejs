@@ -5,8 +5,10 @@
     <div>
       <h1 class="driver-title"><%= unit?.username || 'Unknown Driver' %></h1>
       <div class="stat-box-container">
-        <%- include('../includes/statBox', { title: 'Viajes hechos', value: totalTrips }) %>
-        <%- include('../includes/statBox', { title: 'Rendimientos malos', value: '3' }) %>
+        <%- include('../includes/statBox', { title: 'Viajes hechos', 
+        value: totalTrips }) %>
+        <%- include('../includes/statBox', { title: 'Rendimientos malos',
+         value: badEfficiencies }) %>
       </div>
     </div>
     <div class="chart-section">
@@ -34,7 +36,8 @@
 
   const months = [...new Set(rawData.map(d => d.date.getMonth()))];
   const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-                      "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+                      "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre",
+                       "Diciembre"];
   let currentMonthIndex = months.length - 1;
 
   const margin = { top: 40, right: 20, bottom: 40, left: 50 },
@@ -146,7 +149,8 @@
       border-radius: 6px;
       cursor: pointer;
     ">‹</button>
-    <span id="monthLabel" style="font-size: 18px; font-weight: bold; color: #182747;"></span>
+    <span id="monthLabel" style="font-size: 18px; font-weight: bold; color: #182747;">
+    </span>
     <button id="next" style="
       background-color: #182747;
       color: white;
