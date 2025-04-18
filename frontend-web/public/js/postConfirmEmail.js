@@ -1,5 +1,5 @@
 const postConfirmEmail = (email) => {
-    fetch("/users/confirm-email", {
+    fetch("/usuarios/confirmar-email", {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",

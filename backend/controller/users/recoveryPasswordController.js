@@ -49,7 +49,7 @@ exports.postConfirmEmail = async (req, res, next) => {
             process.env.JWT_SECRET, 
             { expiresIn: process.env.JWT_EXPIRES_IN }
         );
-        const resetPasswordLink = `${process.env.ENVIRONMENT_URL}/users/reset-password/?token=${token}`; 
+        const resetPasswordLink = `${process.env.ENVIRONMENT_URL}/usuarios/restablecer-contrasenia/?token=${token}`; 
 
         const templatePath = path.join(
             __dirname, 

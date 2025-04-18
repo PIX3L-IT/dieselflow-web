@@ -1,56 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirmar correo</title>
-    <link rel="stylesheet" href="/css/title.css">
-    <link rel="stylesheet" href="/css/confirmEmail.css">
-    <link rel="stylesheet" href="/css/button.css">
-    <link rel="stylesheet" href="/css/text.css">
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/subtitle.css">
-    <link rel="stylesheet" href="/css/input.css">
-    <link rel="stylesheet" href="/css/modal.css">
-    
-</head>
-<body>
-    <main class="main-confirm-email">
-        <div class="container-email">
-            <div class="container-title-logo">
-                <h1 class="title title-confirm-email">Confirmación del correo</h1>
-                <img src="/imgs/logo.png" alt="">
-            </div>
-            <div class="form-container full-width">
-                <form class="single-input-form" action="/users/confirm-email" method="POST">
-                    <input type="hidden" name="person" value="Administrador" />
-                    <div class="form-group">
-                        <label for="email" class="text">Correo</label>
-                        <input type="email" id="email" name="email" placeholder="example@tubosGM.com" class="text" required>
-                        <small id="emailError" class="error-message"></small>
-                    </div>
-                    <div class="button-block">
-                        <div class="button-container">
-                            <button type="submit" class="btn button disabled button-primary">Enviar correo</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
+<%- include('../includes/head.ejs') %>
 
-        <%- include('../includes/modal', {
-            titulo: '¡Correo enviado!',
-            mensaje: 'Si la dirección de correo ingresada está asociada a una cuenta, recibirás un correo con las instrucciones para restablecer tu contraseña. Por favor, revisa tu bandeja de entrada y carpeta de spam',
-            botonConfirmacionTexto: 'Volver a iniciar sesión',
-            botonConfirmacionLink: '/aceptar',
-            botonCancelarTexto: '',
-            botonCancelarLink: ''
-        }) %>  
-        
-    </main>
-    <script src="/js/validationEmail.js"></script>
-    <script src="/js/modal.js"></script>
-    <script src="/js/enableDisableButton.js"></script>
-    <script src="/js/postConfirmEmail.js"></script>
-</body>
-</html>
+<link rel="stylesheet" href="/css/confirmEmail.css">
+<link rel="stylesheet" href="/css/button.css">
+<link rel="stylesheet" href="/css/subtitle.css">
+<link rel="stylesheet" href="/css/input.css">
+<link rel="stylesheet" href="/css/modal.css">
+
+<main class="main-confirm-email">
+    <div class="container-email">
+        <div class="container-title-logo">
+            <h1 class="title title-confirm-email">Confirmación del correo</h1>
+            <img src="/imgs/logo.png" alt="">
+        </div>
+        <div class="form-container full-width">
+            <form class="single-input-form" action="/usuarios/confirmar-email" method="POST">
+                <input type="hidden" name="person" value="Administrador" />
+                <div class="form-group">
+                    <label for="email" class="text">Correo</label>
+                    <input type="email" id="email" name="email" placeholder="example@tubosGM.com" class="text" required>
+                    <small id="emailError" class="error-message"></small>
+                </div>
+                <div class="button-block">
+                    <div class="button-container">
+                        <button type="submit" class="btn button disabled button-primary">Enviar correo</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <%- include('../includes/modal', {
+        titulo: '¡Correo enviado!',
+        mensaje: 'Si la dirección de correo ingresada está asociada a una cuenta, recibirás un correo con las instrucciones para restablecer tu contraseña. Por favor, revisa tu bandeja de entrada y carpeta de spam',
+        botonConfirmacionTexto: 'Volver a iniciar sesión',
+        botonConfirmacionLink: '/aceptar',
+        botonCancelarTexto: '',
+        botonCancelarLink: ''
+    }) %>  
+    
+</main>
+<script src="/js/validationEmail.js"></script>
+<script src="/js/modal.js"></script>
+<script src="/js/enableDisableButton.js"></script>
+<script src="/js/postConfirmEmail.js"></script>
+
+<%- include('../includes/foot.ejs') %>

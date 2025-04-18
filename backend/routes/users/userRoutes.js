@@ -27,12 +27,12 @@ router.get("/users/search", async (req, res) => {
   res.json({ results });
 });  
 
-router.get("/users/confirm-email", recoveryPasswordController.getConfirmEmail);
+router.get("/usuarios/confirmar-email", recoveryPasswordController.getConfirmEmail);
 
-router.post("/users/confirm-email", recoveryPasswordController.postConfirmEmail);
+router.post("/usuarios/confirmar-email", recoveryPasswordController.postConfirmEmail);
 
-router.get("/users/reset-password", recoveryPasswordController.getResetPassword);
+router.get("/usuarios/restablecer-contrasenia", recoveryPasswordController.getResetPassword);
 
-router.post("/users/reset-password", recoveryPasswordController.postResetPassword);
+router.post("/usuarios/restablecer-contrasenia", recoveryPasswordController.postResetPassword);
 
 module.exports = router;
