@@ -25,100 +25,102 @@
   </div>
 
   <div class="container my-4">
-    <form class="single-input-form">
+    <div class="user-form-wrapper">
+      <form class="single-input-form">
 
-      <!-- Nombre y Apellido -->
-      <div class="row mb-4">
-        <div class="col-md-6">
-          <h2 class="subtitle">Nombre</h2>
-          <input type="username" value="<%= user.username %>"disabled />
-        </div>
-        <div class="col-md-6">
-          <h2 class="subtitle">Apellido(s)</h2>
-          <input type="lastName" value="<%= user.lastName %>" disabled />
-        </div>
-      </div>
-
-      <!-- Correo -->
-      <div class="row mb-4">
-        <div class="col-md-12">
-          <h2 class="subtitle">Correo</h2>
-          <input type="email" value="<%= user.email %>" disabled />
-        </div>
-      </div>
-
-      <!-- Código de acceso y Contraseña -->
-      <div class="row mb-4">
-        <div class="col-md-6">
-          <h2 class="subtitle">Contraseña</h2>
-          <div class="input-group">
-            <input
-              type="password"
-              id="password"
-              value="<%= user.password %>"
-              disabled>
-            <span class="input-group-text" onclick="togglePasswordVisibility()">
-              <i class="bi bi-eye-slash" id="togglePasswordIcon"></i>
-            </span>
+        <!-- Nombre y Apellido -->
+        <div class="row mb-4">
+          <div class="col-md-6">
+            <h2 class="subtitle">Nombre</h2>
+            <input type="username" value="<%= user.username %>"disabled />
+          </div>
+          <div class="col-md-6">
+            <h2 class="subtitle">Apellido(s)</h2>
+            <input type="lastName" value="<%= user.lastName %>" disabled />
           </div>
         </div>
-        <div class="col-md-6">
-          <h2 class="subtitle">Código de acceso</h2>
-          <input type="text" value="<%= user.accessCode %>" disabled />
-        </div>
-      </div>
 
-
-      <!-- Rol -->
-      <div class="row mb-4">
-        <div class="col-md-12">
-          <h2 class="subtitle">Rol</h2>
-          <div class="rol-options">
-            <label>
-              <input type="radio" name="roleName" value="Administrador"
-                <%= user.idRole.roleName === 'Administrador' ? 'checked' : '' %>
-                disabled>
-              Administrador
-            </label>
-            <label>
-              <input type="radio" name="roleName" value="Conductor"
-                <%= user.idRole.roleName === 'Conductor' ? 'checked' : '' %>
-                disabled>
-              Conductor
-            </label>
-          </div>
-        </div>
-      </div>
-
-      <!-- Estado y Fecha -->
-      <div class="row mb-4">
-        <div class="col-md-6">
-          <h2 class="subtitle">Estado</h2>
-          <input type="text" value="<%= user.userStatus ? 'Activo' : 'Inactivo' %>" disabled />
-        </div>
-        <div class="col-md-6">
-          <h2 class="subtitle">Fecha de Registro</h2>
-          <input type="text" value="<%= user.registrationDate.toLocaleDateString('es-MX') %>" disabled />
-        </div>
-      </div>
-
-      <!-- Botón solo si es conductor -->
-      <% if (showModifyButton) { %>
-        <div class="row">
+        <!-- Correo -->
+        <div class="row mb-4">
           <div class="col-md-12">
-            <div class="button-container" style="width: fit-content; margin: auto;">
-              <button
-                id="submitBtn"
-                type="button"
-                class="btn button button-primary"
-                onclick="window.location.href='/usuarios/<%= user._id %>/edit'">
-                Modificar usuario
-              </button>
+            <h2 class="subtitle">Correo</h2>
+            <input type="email" value="<%= user.email %>" disabled />
+          </div>
+        </div>
+
+        <!-- Código de acceso y Contraseña -->
+        <div class="row mb-4">
+          <div class="col-md-6">
+            <h2 class="subtitle">Contraseña</h2>
+            <div class="input-group">
+              <input
+                type="password"
+                id="password"
+                value="<%= user.password %>"
+                disabled>
+              <span class="input-group-text" onclick="togglePasswordVisibility()">
+                <i class="bi bi-eye-slash" id="togglePasswordIcon"></i>
+              </span>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <h2 class="subtitle">Código de acceso</h2>
+            <input type="text" value="<%= user.accessCode %>" disabled />
+          </div>
+        </div>
+
+
+        <!-- Rol -->
+        <div class="row mb-4">
+          <div class="col-md-12">
+            <h2 class="subtitle">Rol</h2>
+            <div class="rol-options">
+              <label>
+                <input type="radio" name="roleName" value="Administrador"
+                  <%= user.idRole.roleName === 'Administrador' ? 'checked' : '' %>
+                  disabled>
+                Administrador
+              </label>
+              <label>
+                <input type="radio" name="roleName" value="Conductor"
+                  <%= user.idRole.roleName === 'Conductor' ? 'checked' : '' %>
+                  disabled>
+                Conductor
+              </label>
             </div>
           </div>
         </div>
-      <% } %>      
-    </form>
+
+        <!-- Estado y Fecha -->
+        <div class="row mb-4">
+          <div class="col-md-6">
+            <h2 class="subtitle">Estado</h2>
+            <input type="text" value="<%= user.userStatus ? 'Activo' : 'Inactivo' %>" disabled />
+          </div>
+          <div class="col-md-6">
+            <h2 class="subtitle">Fecha de Registro</h2>
+            <input type="text" value="<%= user.registrationDate.toLocaleDateString('es-MX') %>" disabled />
+          </div>
+        </div>
+
+        <!-- Botón solo si es conductor -->
+        <% if (showModifyButton) { %>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="button-container" style="width: fit-content; margin: auto;">
+                <button
+                  id="submitBtn"
+                  type="button"
+                  class="btn button button-primary"
+                  onclick="window.location.href='/usuarios/<%= user._id %>/edit'">
+                  Modificar usuario
+                </button>
+              </div>
+            </div>
+          </div>
+        <% } %>      
+      </form>
+    </div>
   </div>
 </div>
 

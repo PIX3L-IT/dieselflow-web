@@ -5,7 +5,7 @@ exports.getUser = async (req, res) => {
   try {
     const userId = req.params.id;
 
-    const user = await User.getOneUser(userId);
+    const user = await User.getOneUser(userId); // 🔁 usa método estático
 
     if (!user) {
       return res.status(404).render("includes/404", { active: "usuarios" });
