@@ -35,4 +35,9 @@ userSchema.statics.findByUsername = function(username) {
   return this.findOne({ username }).populate("idRole");
 };
 
+// Método estático para buscar por ID
+userSchema.statics.getOneUser = function(id) {
+  return this.findById(id).populate("idRole").exec();
+};
+
 module.exports = mongoose.model("User", userSchema, "user");

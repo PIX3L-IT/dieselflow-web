@@ -28,6 +28,6 @@ router.get("/users/search", async (req, res) => {
   res.json({ results });
 });  
 
-router.get("/usuarios/:id", getUser);
+router.get("/usuarios/:id", verifyToken, getUser);
 
 module.exports = router;

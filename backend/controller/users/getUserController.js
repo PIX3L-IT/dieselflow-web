@@ -1,11 +1,11 @@
 const User = require("../../models/users/User");
 const Role = require("../../models/users/Role");
 
-const getUser = async (req, res) => {
+exports.getUser = async (req, res) => {
   try {
     const userId = req.params.id;
 
-    const user = await User.findById(userId).populate("idRole");
+    const user = await User.getOneUser(userId);
 
     if (!user) {
       return res.status(404).render("includes/404", { active: "usuarios" });
@@ -17,13 +17,14 @@ const getUser = async (req, res) => {
       active: "usuarios",
       user,
       showModifyButton,
+      username: req.user.username,
+      lastname: req.user.lastname
     });
 
   } catch (error) {
     console.error("Error al consultar usuario:", error);
-    res.status(500).send("Error del servidor");
+    res.status(500).render("includes/500", {
+      active: "usuarios"
+    });
   }
 };
-
-module.exports = { getUser };
-
