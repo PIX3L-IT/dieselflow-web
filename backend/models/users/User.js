@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const Report = require("../reports/Report");
 
 const userSchema = new mongoose.Schema({
   idRole: {
@@ -7,7 +6,10 @@ const userSchema = new mongoose.Schema({
     ref: "Role",
     required: true,
   },
-  idUnit: { type: mongoose.Schema.Types.ObjectId, ref: "Unit" }, 
+  idUnit: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Unit",
+  },
   username: { type: String, required: true, maxlength: 30 },
   lastName: { type: String, required: true, maxlength: 50 },
   password: { type: String, required: true, maxlength: 100 },
@@ -32,55 +34,9 @@ userSchema.statics.findByUsername = function(username) {
   return this.findOne({ username }).populate("idRole");
 };
 
-// Método estático para buscar por username y lastName
-userSchema.statics.findByUsernameAndLastName = function(username, lastName) {
-  return this.findOne({ username, lastName }).populate("idRole");
-};
-
-// Método estático para buscar por email
-userSchema.statics.findByEmail = function(email) {
-  return this.findOne({ email }).populate("idRole");
-};
-
-// Método estático para buscar por username solo
-userSchema.statics.findByUsername = function(username) {
-  return this.findOne({ username }).populate("idRole");
-};
-
-const User = mongoose.model("User", userSchema, "user");
-
-class UserClass {
-  static async getUserWithUnit(userId) {
-    return await User.findOne({ _id: userId }).populate("idUnit");
-  }
-
-  static async getDieselByDay(userId) {
-    return await Report.model.aggregate([
-      { $match: { idUser: new mongoose.Types.ObjectId(userId) } },
-      {
-        $group: {
-          _id: {
-            day: { $dateToString: { format: "%Y-%m-%d", date: "$loadDate" } }
-          },
-          totalLiters: { $sum: "$liters" }
-        }
-      },
-      { $sort: { "_id.day": 1 } }
-    ]);
-  }  
-
-  static async getPaginated(userId, page, limit) {
-    const skip = page * limit;
-    const reports = await Report.model.find({ idUser: userId })
-      .sort({ loadDate: -1 })
-      .skip(skip)
-      .limit(limit)
-      .populate("idUnit");
-
-    const total = await Report.model.countDocuments({ idUser: userId });
-    return { reports, total };
-  }
-
+// Método estático para buscar la unidad con un userId
+userSchema.statics.getUserWithUnit = function (userId) {
+  return  this.findById(userId).populate("idUnit");
 }
 
-module.exports = UserClass;
+module.exports = mongoose.model("User", userSchema, "user");

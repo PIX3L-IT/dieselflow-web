@@ -15,26 +15,42 @@ const reportSchema = new mongoose.Schema({
 
 delete mongoose.connection.models['Report'];
 
-const ReportModel = mongoose.model("Report", reportSchema, "report");
+const Report = mongoose.model("Report", reportSchema, "report");
 
 class ReportClass {
   static async countUserTrips(userId) {
-    return await ReportModel.countDocuments({ idUser: userId });
+    return await Report.countDocuments({ idUser: userId });
   }
 
   static async getPaginatedReports(userId, page, limit = 5) {
-    const reports = await ReportModel.find({ idUser: userId })
+    const reports = await Report.find({ idUser: userId })
       .sort({ loadDate: -1 })
       .skip(page * limit)
       .limit(limit)
       .populate("idUnit");
   
-    const total = await ReportModel.countDocuments({ idUser: userId });
+    const total = await Report.countDocuments({ idUser: userId });
     return { reports, total };
+  }
+    
+  //Obtener el diesel gastado por día de un camionero
+  static async getDieselByDay (userId) {
+    return  Report.aggregate([
+      { $match: { idUser: new mongoose.Types.ObjectId(userId) } },
+      {
+        $group: {
+          _id: {
+            day: { $dateToString: { format: "%Y-%m-%d", date: "$loadDate" } },
+          },
+          totalLiters: { $sum: "$liters" },
+        },
+      },
+      { $sort: { "_id.day": 1 } },
+    ]);
   }
 
   static get model() {
-    return ReportModel;
+    return Report;
   }
 }
 

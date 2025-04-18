@@ -9,7 +9,7 @@ exports.getDriver = async (req, res) => {
     console.log("Driver data:", driver);
     const totalTrips = await reportModel.countUserTrips(userId);
     console.log("Total Trips:", totalTrips);
-    const dieselByDay = await driverModel.getDieselByDay(userId);
+    const dieselByDay = await reportModel.getDieselByDay(userId);
     console.log("Diesel by day:", dieselByDay);
     const dieselData = dieselByDay.map(diesel => ({
       date: diesel._id.day,
@@ -36,7 +36,12 @@ exports.getDriver = async (req, res) => {
       currentPage: page,
       totalPages,
       BaseRoute: `/conductor/page/${userId}/reports`,
-      active: ""
+      active: "",
+      accessToken: req.cookies.accessToken,
+      refreshToken:  req.cookies.refreshToken,
+      hasToken: !!req.cookies.accessToken,
+      username: req.user.username,
+      lastname: req.user.lastname
     });
   } catch (err) {
     console.error(err);
@@ -63,7 +68,13 @@ exports.getPaginated = async (req, res) => {
       currentPage: page,
       totalPages,
       hasPrevPage: page > 1,
-      hasNextPage: page < totalPages
+      hasNextPage: page < totalPages,
+      active: "",
+      accessToken: req.cookies.accessToken,
+      refreshToken:  req.cookies.refreshToken,
+      hasToken: !!req.cookies.accessToken,
+      username: req.user.username,
+      lastname: req.user.lastname
     });
 
   } catch (err) {
