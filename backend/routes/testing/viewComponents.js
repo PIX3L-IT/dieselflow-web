@@ -54,4 +54,7 @@ router.get("/noDataBanner",componentController.getNoDataBanner);
 // Ruta para mostrar el header
 router.get("/header", componentController.getHeader);
 
+//ruta para mostrar la grafica reutilizable
+router.get("/line-chart", componentController.getChart);
+
 module.exports = router;

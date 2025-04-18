@@ -1,0 +1,220 @@
+<div id="<%= containerId %>"></div>
+
+<style>
+  .grid line {
+    stroke: #d9d9d9;
+    stroke-opacity: 1;
+    shape-rendering: crispEdges;
+  }
+
+  .grid path {
+    display: none;
+  }
+</style>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+  (() => {
+    const rawData = <%- JSON.stringify(chartData) %>.map(d => ({ ...d, date: new Date(d.date) }));
+    const months = [...new Set(rawData.map(d => d.date.getMonth()))];
+    const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+                        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    let currentMonthIndex = months.length - 1;
+
+    const container = d3.select("#<%= containerId %>");
+    const margin = { top: 40, right: 20, bottom: 40, left: 50 };
+    const width = 550 - margin.left - margin.right;
+    const height = 300 - margin.top - margin.bottom;
+
+    const svg = container.append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .style("display", "block")
+      .style("margin", "0 auto");
+
+    const g = svg.append("g")
+      .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    const tooltip = container.append("div")
+      .style("position", "absolute")
+      .style("background", "#182747")
+      .style("color", "white")
+      .style("padding", "6px")
+      .style("border-radius", "5px")
+      .style("font-size", "13px")
+      .style("pointer-events", "none")
+      .style("opacity", 0);
+
+    const noDataMessage = container.append("div")
+      .attr("id", `${"<%= containerId %>"}-no-data`)
+      .style("text-align", "center")
+      .style("margin-top", "20px")
+      .style("font-size", "18px")
+      .style("color", "#E30713")
+      .style("font-family", "Jaldi, sans-serif")
+      .style("display", "none")
+      .text("No hay datos que mostrar.");
+
+    const defs = svg.append("defs");
+    const shadow = defs.append("filter")
+      .attr("id", "line-shadow")
+      .attr("x", "-50%")
+      .attr("y", "-50%")
+      .attr("width", "200%")
+      .attr("height", "200%");
+    shadow.append("feDropShadow")
+      .attr("dx", 0)
+      .attr("dy", 4)
+      .attr("stdDeviation", 4)
+      .attr("flood-color", "#002B81")
+      .attr("flood-opacity", 0.2);
+
+    function updateChart(month) {
+      const data = rawData.filter(d => d.date.getMonth() === month);
+      d3.select(`#${"<%= containerId %>"}-monthLabel`).text(monthNames[month]);
+
+      if (data.length === 0) {
+        noDataMessage.style("display", "block");
+        g.selectAll("*").remove();
+        return;
+      } else {
+        noDataMessage.style("display", "none");
+      }
+
+      g.selectAll("*").remove();
+
+      const x = d3.scaleTime()
+        .domain(d3.extent(data, d => d.date))
+        .range([0, width]);
+
+      const y = d3.scaleLinear()
+        .domain([0, d3.max(data, d => d.liters)])
+        .range([height, 0]);
+
+      const xAxis = d3.axisBottom(x)
+        .ticks(4)
+        .tickFormat((d, i) => `Semana ${i + 1}`);
+
+      const yAxis = d3.axisLeft(y).ticks(5);
+
+      // Cuadrícula horizontal
+      g.append("g")
+        .attr("class", "grid")
+        .call(
+          d3.axisLeft(y)
+            .tickSize(-width)
+            .tickFormat("")
+        );
+
+      // Cuadrícula vertical
+      g.append("g")
+        .attr("class", "grid")
+        .attr("transform", `translate(0,${height})`)
+        .call(
+          d3.axisBottom(x)
+            .ticks(4)
+            .tickSize(-height)
+            .tickFormat("")
+        );
+
+      // Ejes
+      g.append("g").call(yAxis);
+      g.append("g")
+        .attr("transform", `translate(0,${height})`)
+        .call(xAxis);
+
+      // Línea
+      g.append("path")
+        .datum(data)
+        .attr("fill", "none")
+        .attr("stroke", "#002B81")
+        .attr("stroke-width", 2)
+        .attr("filter", "url(#line-shadow)")
+        .attr("d", d3.line()
+          .curve(d3.curveMonotoneX)
+          .x(d => x(d.date))
+          .y(d => y(d.liters))
+        );
+
+      // Puntos
+      g.selectAll("path.diamond")
+        .data(data)
+        .enter()
+        .append("path")
+        .attr("d", d3.symbol().type(d3.symbolDiamond).size(125))
+        .attr("transform", d => `translate(${x(d.date)},${y(d.liters)})`)
+        .attr("fill", "#002B81")
+        .attr("stroke", "#E8F4FD")
+        .attr("stroke-width", 2)
+        .on("mouseover", (event, d) => {
+          tooltip.transition().duration(200).style("opacity", 1);
+          tooltip
+            .html(`${d.date.toLocaleDateString()}<br/>${d.liters} L`)
+            .style("left", (event.pageX + 10) + "px")
+            .style("top", (event.pageY - 30) + "px");
+        })
+        .on("mouseout", () => tooltip.transition().duration(200).style("opacity", 0));
+
+      // Botones de navegación
+      prevButton.disabled = currentMonthIndex <= 0;
+      prevButton.style.opacity = prevButton.disabled ? 0.5 : 1;
+      prevButton.style.cursor = prevButton.disabled ? 'not-allowed' : 'pointer';
+
+      nextButton.disabled = currentMonthIndex >= months.length - 1;
+      nextButton.style.opacity = nextButton.disabled ? 0.5 : 1;
+      nextButton.style.cursor = nextButton.disabled ? 'not-allowed' : 'pointer';
+    }
+
+    // Controles (botones y etiqueta de mes)
+    container.append("div")
+      .attr("id", `${"<%= containerId %>"}-controls`)
+      .style("display", "flex")
+      .style("justify-content", "center")
+      .style("align-items", "center")
+      .style("gap", "15px")
+      .style("margin-top", "20px")
+      .style("font-family", "Jaldi, sans-serif")
+      .style("text-align", "center")
+      .html(`
+        <button id="${"<%= containerId %>"}-prev" style="
+          background-color: #182747;
+          color: white;
+          border: none;
+          font-size: 20px;
+          padding: 6px 14px;
+          border-radius: 6px;
+          cursor: pointer;
+        ">‹</button>
+        <span id="${"<%= containerId %>"}-monthLabel" style="font-size: 18px; font-weight: bold; color: #182747;">
+        </span>
+        <button id="${"<%= containerId %>"}-next" style="
+          background-color: #182747;
+          color: white;
+          border: none;
+          font-size: 20px;
+          padding: 6px 14px;
+          border-radius: 6px;
+          cursor: pointer;
+        ">›</button>
+      `);
+
+    const prevButton = document.getElementById(`${"<%= containerId %>"}-prev`);
+    const nextButton = document.getElementById(`${"<%= containerId %>"}-next`);
+
+    prevButton.addEventListener("click", () => {
+      if (currentMonthIndex > 0) {
+        currentMonthIndex--;
+        updateChart(months[currentMonthIndex]);
+      }
+    });
+
+    nextButton.addEventListener("click", () => {
+      if (currentMonthIndex < months.length - 1) {
+        currentMonthIndex++;
+        updateChart(months[currentMonthIndex]);
+      }
+    });
+
+    updateChart(months[currentMonthIndex]);
+  })();
+</script>
