@@ -1,7 +1,7 @@
 require("dotenv").config();
 const nodemailer = require('nodemailer');
 
-exports.sendEmail = (html, email, subject) => {
+exports.sendEmail = async (html, email, subject) => {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         port: 465,
@@ -28,8 +28,7 @@ exports.sendEmail = (html, email, subject) => {
 	// Enviar correo
     transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-        console.log('El correo no pudo ser enviado');
-        console.log(error);
+        console.error('El correo no pudo ser enviado');
     } else {
         console.log('El correo fue enviado: ' + info.response);
     }

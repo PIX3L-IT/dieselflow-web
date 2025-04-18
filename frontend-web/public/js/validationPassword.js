@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const confirmPasswordError = document.getElementById("confirmPasswordError");
   const togglePassword = document.getElementById("togglePassword");
   const toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
+  const regex = /^(?=.*\d).{8,}$/;
 
   // Función para alternar visibilidad
   togglePassword.addEventListener("click", () => {
@@ -24,7 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Validar contraseña en tiempo real
   function validatePassword() {
     const password = passwordField.value;
-    const regex = /^(?=.*\d).{8,}$/;
 
     if (!regex.test(password)) {
       passwordError.textContent = "La contraseña debe tener al menos 8 caracteres y un número.";
@@ -49,6 +49,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (confirmPassword && password !== confirmPassword) {
       confirmPasswordError.textContent = "Las contraseñas no coinciden.";
+      if (typeof window.disableButton === "function") {
+        window.disableButton();
+      }
+    } else if (!regex.test(password)) {
+      // Si las contraseñas coinciden pero no cumplen con el formato
+      confirmPasswordError.textContent = "La contraseña no cumple con el formato requerido.";
       if (typeof window.disableButton === "function") {
         window.disableButton();
       }

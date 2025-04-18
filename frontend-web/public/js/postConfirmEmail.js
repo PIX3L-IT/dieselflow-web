@@ -14,6 +14,21 @@ const postConfirmEmail = (email) => {
     });
 };
 
+function validateEmail(email){
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|mx)$/;
+    const errorMessage = document.getElementById("emailError");
+
+    if (email === "") {
+        errorMessage.textContent = "El correo no puede estar vacío.";
+        return false;
+    }
+    
+    if (!emailRegex.test(email)) {
+        errorMessage.textContent = "El correo debe tener un formato válido y terminar en '.com' o '.mx'.";
+        return false;
+    }
+    return true;
+}
 
 document.addEventListener("DOMContentLoaded", () => {
     const emailInput = document.getElementById("email");
@@ -22,7 +37,12 @@ document.addEventListener("DOMContentLoaded", () => {
         submitButton.addEventListener("click", (e) => {
             e.preventDefault();
             const email = emailInput.value.trim();
-            postConfirmEmail(email);
+            if (validateEmail(email)) {
+                postConfirmEmail(email);
+                if (typeof window.showModal === "function") {
+                    window.showModal();
+                }
+            } 
         });
     }
 });
