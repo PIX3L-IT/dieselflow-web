@@ -140,6 +140,9 @@ exports.getIndex = (req, res) => {
 }
 
 exports.getChart = (req, res) => {
+  const { username, lastname } = req.user;
+  const accessToken = req.cookies.accessToken;
+  const refreshToken = req.cookies.refreshToken;
   const dieselData = [
     // Enero
     { date: '2025-01-03', liters: 42 },
@@ -181,7 +184,11 @@ exports.getChart = (req, res) => {
 
   res.render("testing/lineChart", {
     chartData: dieselData,
-    containerId: "diesel-line-chart"
+    containerId: "diesel-line-chart",
+    username,
+    lastname,
+    accessToken,
+    refreshToken
   });
 };
 

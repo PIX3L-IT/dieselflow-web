@@ -59,6 +59,6 @@ router.get("/header", componentController.getHeader);
 router.get("/statBox",verifyToken, componentController.getStatBox);
 
 //ruta para mostrar la grafica reutilizable
-router.get("/line-chart", componentController.getChart);
+router.get("/line-chart", verifyToken, componentController.getChart);
 
 module.exports = router;
