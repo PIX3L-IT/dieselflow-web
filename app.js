@@ -57,7 +57,7 @@ app.get("/", (req, res) => {
 });
 
 // Ruta de reportes
-app.use("/reports", reportRoutes);
+app.use("/reportes", reportRoutes);
 
 // Manejo de rutas no encontradas
 app.use((req, res) => {

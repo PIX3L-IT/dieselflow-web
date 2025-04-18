@@ -60,7 +60,7 @@ document.getElementById("generarBtn").addEventListener("click", function (e) {
             selectedDriver
         };
     
-        fetch("/reports/generate", {
+        fetch("/reportes/generar", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

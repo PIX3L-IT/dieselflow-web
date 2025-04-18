@@ -10,7 +10,7 @@ const {
 // GET
 router.get('/', getFilters);
 
-// POST /reports/generate
-router.post('/generate', postReport);
+// POST /reportes/generar
+router.post('/generar', postReport);
 
 module.exports = router;

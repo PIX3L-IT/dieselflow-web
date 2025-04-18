@@ -3,7 +3,7 @@ const Unit = require("../../models/units/Unit");
 const User = require("../../models/users/User");
 const Role = require("../../models/users/Role");
 
-// Get filters for report page
+// Get filters para la página inicial de reportes
 async function getFilters(req, res) {
   try {
     const units = await Unit.find();
@@ -29,7 +29,7 @@ async function getFilters(req, res) {
   }
 }
 
-// Post to generate report
+// Post para generar el reporte basado en filtros seleccionado
 async function postReport(req, res) {
   const { startDate, endDate, selectedUnit, selectedDriver } = req.body;
 
