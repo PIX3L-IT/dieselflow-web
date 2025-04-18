@@ -5,7 +5,7 @@ const { getUsers } = require("../../controller/users/getUsersController");
 
 router.get("/usuarios", getUsers);
 
-router.get("/search", async (req, res) => {
+router.get("/users/search", async (req, res) => {
   const normalizeText = (str) =>
     str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 

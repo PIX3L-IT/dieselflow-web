@@ -8,7 +8,7 @@ function showLoader() {
 }
 
 // Ocultar el loader después de un tiempo mínimo (por defecto: 2 segundos)
-function hideLoader(minDuration = 2000) {
+function hideLoader(minDuration = 1000) {
     const loader = document.querySelector('.loader');
     if (!loader) return;
 
