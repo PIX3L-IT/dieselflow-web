@@ -36,6 +36,9 @@ router.get("/button", componentController.getButton);
 // Ruta para mostrar subtitulos
 router.get("/subtitle", componentController.getSubtitle);
 
+// Ruta para mostrar el botón de estadísticas
+router.get("/statsButton", componentController.getStatsButton);
+
 // Ruta para mostrar 404
 router.get("/404", componentController.get404);
 

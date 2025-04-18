@@ -193,3 +193,8 @@ exports.getChart = (req, res) => {
   });
 };
 
+
+
+exports.getStatsButton = (req, res) => {
+  res.render("includes/userStatsButton");
+}

@@ -23,8 +23,8 @@
 }
 
 .form-check-input.custom-toggle:checked {
-  background-color: #1d2951;
-  border-color: #1d2951;
+  background-color: #182747;
+  border-color: #182747;
 }
 
 /* Mostrar icono de checkmark y color cuando se haga check */
@@ -47,7 +47,7 @@
 .fa-check {
   pointer-events: none;
   position: relative;
-  color: #1d2951;
+  color: #182747;
   right: 1.6em;
   font-size: 0.6em;
   opacity: 0;

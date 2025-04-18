@@ -1,0 +1,44 @@
+<%- include('../includes/head.ejs') %>
+
+    <%- include('../includes/navbar.ejs', { active: 'usuarios' , username: username, lastname: lastname }) %>
+        <div class="content">
+            <div class="header-content">
+                <%- include('../includes/title.ejs', { title: 'Usuarios' }) %>
+                    <%- include('../includes/searchbar.ejs', { placeholder: 'Buscar usuario' ,
+                        endpoint: '/usuarios/buscar' , context: 'users' }) %>
+                        <div class="filter-container">
+                            <div class="filter-toggle">
+                                <input type="radio" id="conductores" name="userType" value="Conductor">
+                                <label for="conductores">Conductores</label>
+
+                                <input type="radio" id="administradores" name="userType" value="Administrador">
+                                <label for="administradores">Administradores</label>
+                            </div>
+                        </div>
+            </div>
+
+            <div class="usuarios-section">
+                <div class="row row-cols-1 row-cols-md-2 g-3">
+                    <% users.forEach(function(user) { %>
+                        <div class="col user-card <%= user.idRole.roleName   %>">
+                            <div class="d-flex align-items-center gap-2">
+                                <%- include('../includes/card.ejs', { text: user.username, userStatus: user.userStatus
+                                    }) %>
+                                    <%- include('../includes/userStatsButton.ejs') %>
+                            </div>
+                        </div>
+                        <% }); %>
+                </div>
+                <div id="noDataBanner" style="display: none;">
+                    <%- include('../includes/noDataBanner.ejs') %>
+                </div>
+            </div>
+            <div class="button-section">
+                <div class="button-container" style="width: fit-content">
+                    <button type="button" class="btn button button-primary">Registrar usuario</button>
+                </div>
+            </div>
+        </div>
+        <script src="/js/filterUsers.js"></script>
+
+        <%- include('../includes/foot.ejs') %>
