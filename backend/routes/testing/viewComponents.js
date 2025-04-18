@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const verifyToken = require('../../utils/verifyToken');
 const componentController = require("../../controller/testing/componentController");
 
 // Ruta para mostrar navbar
@@ -55,6 +56,6 @@ router.get("/noDataBanner",componentController.getNoDataBanner);
 router.get("/header", componentController.getHeader);
 
 // Ruta para mostrar stat box
-router.get("/statBox", componentController.getStatBox);
+router.get("/statBox",verifyToken, componentController.getStatBox);
 
 module.exports = router;

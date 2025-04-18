@@ -116,9 +116,17 @@ exports.getHeader = (req, res) => {
 };
 
 exports.getStatBox = (req, res) => { 
+  const { username, lastname } = req.user;
+  const accessToken = req.cookies.accessToken;
+  const refreshToken = req.cookies.refreshToken;
+
   res.render("testing/statBox", {
     title: "example",
-    value: "2"
+    value: "2",
+    username,
+    lastname,
+    accessToken,
+    refreshToken
   });
 }
 
