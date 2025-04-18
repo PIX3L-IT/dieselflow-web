@@ -116,7 +116,7 @@ exports.getHeader = (req, res) => {
 };
 
 exports.getStatBox = (req, res) => { 
-  res.render("includes/statBox", {
+  res.render("testing/statBox", {
     title: "example",
     value: "2"
   });
