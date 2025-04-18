@@ -38,6 +38,11 @@
           <%= error %>
             <% } %>
       </small>
+      <small id="inputMsg" class="info-message">
+        <% if (typeof msg !== 'undefined' && msg) { %>
+          <%= msg %>
+        <% } %>
+      </small>
       <button class="login-button" type="submit" disabled>
         Iniciar Sesión</button>
     </form>

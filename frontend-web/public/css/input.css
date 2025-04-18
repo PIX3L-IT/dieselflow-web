@@ -73,4 +73,13 @@
   font-size: 1.5rem;
 }
 
+.info-message {
+  color: #182747;
+  font-size: 1.2rem;
+  margin-top: 10px;
+  display: block;
+  font-family: 'Jaldi', sans-serif;
+  font-weight: bold;
+}
+
   
