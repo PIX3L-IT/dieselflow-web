@@ -113,17 +113,24 @@
   </div>
 
   <!-- REPORTE -->
-  <div id="reportContainer">
+  <div id="reportContainer" style="margin-top:10px; margin-left:8px;">
     <!-- ALERTA / TABLA -->
     <% if (!reportData) { %>
       <div class="alert alert-primary" role="alert" 
-        style="margin-left: 18px; margin-top: 10px;">
+        style="margin-left: 12px; margin-top: 10px;">
           Seleccione los filtros deseados para generar el reporte.
       </div>
     <% } %>
   </div>
 
 </div>
+
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
 
 <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>

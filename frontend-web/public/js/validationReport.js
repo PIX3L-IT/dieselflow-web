@@ -70,7 +70,25 @@ document.getElementById("generarBtn").addEventListener("click", function (e) {
         .then(res => res.text())
         .then(html => {
             document.getElementById("reportContainer").innerHTML = html;
-        })
+ 
+            setTimeout(() => {
+                $('#reportTable').DataTable({
+                    paging: true,
+                    ordering: true,
+                    searching: true,
+                    pageLength: 7,
+                    dom: 'Bfrtip',
+                    language: {
+                        url: 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
+                        paginate: {
+                            previous: "<",
+                            next: ">"
+                        }
+                    },
+                    buttons: ['csv', 'pdf']
+                });
+            }, 0);            
+            })
         .catch(err => {
             console.error("Error al generar el reporte", err);
         });

@@ -37,8 +37,8 @@ async function postReport(req, res) {
     const filter = {};
 
     filter.loadDate = {
-      $gte: new Date(startDate).toISOString(),
-      $lte: new Date(endDate).toISOString()
+      $gte: new Date(`${startDate}T00:00:00Z`),
+      $lte: new Date(`${endDate}T23:59:59Z`)
     };
 
     if (selectedDriver !== "todos") {
@@ -61,15 +61,17 @@ async function postReport(req, res) {
       }
     }
 
-    const reportData = await Report.find(filter);
+    const reportData = await Report.find(filter)
+      .populate('idUser')
+      .populate('idUnit');
     
     if (!reportData) {
         return res.render('statistics/partialReport',{
-          reportData: 'none'
+          reportData: []
         });
       } else {
-        res.render('statistics/partialReport',{          
-          reportData
+        return res.render('statistics/partialReport',{          
+          reportData: reportData
         });
       }
   } catch (error) {
