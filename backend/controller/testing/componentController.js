@@ -137,3 +137,7 @@ exports.getLoader = (req, res) => {
 exports.getIndex = (req, res) => {
   res.render("testing/index")
 }
+
+exports.getStatsButton = (req, res) => {
+  res.render("includes/userStatsButton");
+}

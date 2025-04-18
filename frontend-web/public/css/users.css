@@ -1,0 +1,83 @@
+/* Users */
+.button-section {
+    display: flex; 
+    justify-content: end;
+    min-width: 46.5rem;
+    padding-top: 1rem;
+    padding-right: 2rem;
+    padding-bottom: 1rem;
+}
+
+.usuarios-section {
+    position: relative;
+    padding: 0rem 1.5rem 0rem 1.5rem;
+    height: 100%;
+    overflow-x:hidden;
+    width: 100%;
+    min-width: 46.5rem;
+    align-items: flex-start;
+}
+
+#noDataBanner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    width: 80%;
+    max-width: 600px;
+    background-color: rgba(232, 232, 232, 0.95);
+    padding: 1.5rem;
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    pointer-events: none;
+}
+
+.content{
+    max-width: 100%; 
+    max-height: 100%;
+    margin-left: 11.25rem; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    height: 100%;
+}
+
+.usuarios-section::-webkit-scrollbar {
+    width: 10px;
+}
+  
+.usuarios-section::-webkit-scrollbar-thumb {
+    background-color: #8F8B88; 
+    border-radius: 10px;
+    border: 2px solid #f1f1f1; 
+}
+  
+.usuarios-section::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
+.header-content {
+    display: flex;
+    align-items: flex-end;
+    width: 100%;
+    justify-content: space-between;
+    padding-right: 2.1rem;
+    padding-left: 1.5rem;
+    padding-top: 2.5rem;
+    padding-bottom: 1.5rem;
+}
+
+@media (max-width: 1000px) {
+    .row-cols-md-2>* {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
