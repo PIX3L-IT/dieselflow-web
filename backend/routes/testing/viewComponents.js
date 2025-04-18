@@ -61,4 +61,7 @@ router.get("/header", componentController.getHeader);
 // Ruta para mostrar stat box
 router.get("/statBox",verifyToken, componentController.getStatBox);
 
+//ruta para mostrar la grafica reutilizable
+router.get("/line-chart", verifyToken, componentController.getChart);
+
 module.exports = router;
