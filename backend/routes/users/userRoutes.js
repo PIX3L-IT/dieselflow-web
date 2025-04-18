@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const verifyToken = require('../../utils/verifyToken');
 const { getUsers } = require("../../controller/users/getUsersController");
+const { getUser } = require("../../controller/users/getUserController");
 
 router.get("/usuarios", getUsers);
 
@@ -26,5 +27,7 @@ router.get("/search", async (req, res) => {
   
   res.json({ results });
 });  
+
+router.get("/usuarios/:id", getUser);
 
 module.exports = router;

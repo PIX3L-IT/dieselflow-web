@@ -1,0 +1,84 @@
+<%- include('../includes/head.ejs', { title: 'Consultar Usuario' }) %>
+
+<!-- CSS -->
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/button.css">
+<link rel="stylesheet" href="/css/text.css">
+<link rel="stylesheet" href="/css/users.css">
+<link rel="stylesheet" href="/css/error.css">
+<link rel="stylesheet" href="/css/navbar.css">
+<link rel="stylesheet" href="/css/filter.css">
+<link rel="stylesheet" href="/css/backArrow.css">
+<link rel="stylesheet" href="/css/input.css">
+<link rel="stylesheet" href="/css/subtitle.css">
+<link rel="stylesheet" href="/css/user.css">
+
+</head>
+<body>
+
+<!-- Navbar -->
+<%- include('../includes/navbar.ejs', { active: 'usuarios' }) %>
+
+<div class="content">
+  <div class="header-content">
+    <button class="backArrow" onclick="window.location.href='/usuarios'"></button>
+    <%- include('../includes/title.ejs', { title: 'Consultar Usuario' }) %>
+  </div>
+
+  <div class="container my-4">
+    <form class="single-input-form">
+      <!-- Nombre y Apellido -->
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <h2 class="subtitle">Nombre</h2>
+          <textarea class="auto-resize" disabled rows="1"><%= user.username %></textarea>
+        </div>
+        <div class="col-md-6">
+          <h2 class="subtitle">Apellido(s)</h2>
+          <textarea class="auto-resize" disabled rows="1"><%= user.lastName %></textarea>
+        </div>
+      </div>
+
+      <!-- Correo -->
+      <div class="row mb-4">
+        <div class="col-md-12">
+          <h2 class="subtitle">Correo</h2>
+          <input type="email" value="<%= user.email %>" disabled />
+        </div>
+      </div>
+
+      <!-- Rol y Código -->
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <h2 class="subtitle">Rol</h2>
+          <input type="text" value="<%= user.idRole.roleName %>" disabled />
+        </div>
+        <div class="col-md-6">
+          <h2 class="subtitle">Código de acceso</h2>
+          <input type="text" value="<%= user.accessCode %>" disabled />
+        </div>
+      </div>
+
+      <!-- Estado y Fecha -->
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <h2 class="subtitle">Estado</h2>
+          <input type="text" value="<%= user.userStatus ? 'Activo' : 'Inactivo' %>" disabled />
+        </div>
+        <div class="col-md-6">
+          <h2 class="subtitle">Fecha de Registro</h2>
+          <input type="text" value="<%= user.registrationDate.toLocaleDateString('es-MX') %>" disabled />
+        </div>
+      </div>
+
+      <!-- Botón solo para conductores -->
+      <% if (showModifyButton) { %>
+        <button id="submitBtn" class="btn btn-primary" type="button" onclick="window.location.href='/usuarios/<%= user._id %>/edit'">
+          Modificar usuario
+        </button>
+      <% } %>
+    </form>
+  </div>
+</div>
+
+<%- include('../includes/foot.ejs') %>

@@ -22,7 +22,12 @@
                     <% users.forEach(function(user) { %>
                         <div class="col user-card <%= user.idRole.roleName   %>">
                             <div class="d-flex align-items-center gap-2">
-                                <%- include('../includes/card.ejs', { text: user.username, userStatus: user.userStatus }) %>
+                                <a href="/usuarios/<%= user._id %>" style="text-decoration: none; color: inherit; width: 100%;">
+                                    <%- include('../includes/card.ejs', {
+                                      text: user.username,
+                                      userStatus: user.userStatus
+                                    }) %>
+                                  </a>                                                                                                      
                                 <%- include('../includes/userStatsButton.ejs') %>
                             </div>
                         </div>
