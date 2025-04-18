@@ -3,7 +3,7 @@ const Role = require("../../models/users/Role");
 
 exports.getUsers = async (req, res) => {
   try {
-    const users = await User.find().populate('idRole').exec();
+    const users = await User.getAllUsers();
     return res.status(200).render('users/users', { users: users });
   } catch (error) {
     console.error("Error al obtener los usuarios:", error);

@@ -15,4 +15,9 @@ const userSchema = new mongoose.Schema({
   accessCode: { type: String, required: true, maxlength: 10 },
 });
 
+// Función para consultar los usuarios con su rol
+userSchema.statics.getAllUsers = function () {
+  return this.find().populate("idRole").exec();
+};
+
 module.exports = mongoose.model("User", userSchema, "user");
