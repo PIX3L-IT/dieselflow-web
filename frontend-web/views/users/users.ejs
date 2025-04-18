@@ -1,6 +1,6 @@
 <%- include('../includes/head.ejs') %>
 
-    <%- include('../includes/navbar.ejs', { active: 'usuarios' }) %>
+    <%- include('../includes/navbar.ejs', { active: 'usuarios' , username: username, lastname: lastname }) %>
         <div class="content">
             <div class="header-content">
                 <%- include('../includes/title.ejs', { title: 'Usuarios' }) %>
@@ -45,4 +45,4 @@
         </div>
         <script src="/js/filterUsers.js"></script>
 
-<%- include('../includes/foot.ejs') %>
+        <%- include('../includes/foot.ejs') %>

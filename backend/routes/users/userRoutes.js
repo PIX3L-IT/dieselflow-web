@@ -4,9 +4,9 @@ const verifyToken = require('../../utils/verifyToken');
 const { getUsers } = require("../../controller/users/getUsersController");
 const { getUser } = require("../../controller/users/getUserController");
 
-router.get("/usuarios", getUsers);
+router.get("/usuarios", verifyToken, getUsers);
 
-router.get("/search", async (req, res) => {
+router.get("/users/search", async (req, res) => {
   const normalizeText = (str) =>
     str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 

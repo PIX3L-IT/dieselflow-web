@@ -1,120 +1,127 @@
 /* === 404 === */
 body {
-    font-family: 'Jaldi', sans-serif;
-    margin: 0;
-    font-weight: bold;
-    font-size: 1.5rem;
-    background-color: #f4f6fa; /* Si quieres mantener un fondo global */
-  }
-  
+  font-family: 'Jaldi', sans-serif;
+  margin: 0;
+  font-weight: bold;
+  font-size: 1.5rem;
+  background-color: #f4f6fa;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 2rem;
+  margin-left: 170px;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.main-title {
+  margin-top: 20px;
+  margin-left: 200px;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 600px;
+  padding: 3rem;
+  border-radius: 12px;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.single-input-form .form-group {
+  display: flex;
+  flex-direction: column;
+  color: #182747;
+}
+
+.single-input-form label {
+  font-size: 1.8rem;
+  color: #182747;
+  margin-bottom: 1rem;
+}
+
+.single-input-form input {
+  padding: 1.2rem 1.5rem;
+  font-size: 1.5rem;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  color: #182747;
+  background-color: #ffffff;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.single-input-form input::placeholder {
+  color: #908C89;
+  font-family: 'Jaldi', sans-serif;
+  font-size: 1.3rem;
+}
+
+.error-message {
+  color: #e74c3c;
+  font-size: 1.2rem;
+  margin-top: 10px;
+  display: block;
+  font-family: 'Jaldi', sans-serif;
+  font-weight: bold;
+}
+
+.input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-group input {
+  width: 100%;
+  padding-right: 3.5rem;
+}
+
+.input-group-text {
+  position: absolute;
+  right: 1rem;
+  cursor: pointer;
+  color: #182747;
+  font-size: 1.5rem;
+}
+
+.error-container {
+  margin-left: 220px;
+  padding: 2rem;
+  max-width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  color: #000;
+}
+
+@media (max-width: 768px) {
   .main-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* puedes usar center si quieres centrar verticalmente */
-    align-items: flex-start;     /* esto alinea con el título a la izquierda */
-    padding: 2rem;
-    margin-left: 220px; /* espacio del sidebar */
-    height: 100vh;
-    box-sizing: border-box;
-  }
-  
-  .form-container {
-    width: 100%;
-    max-width: 600px;
-    padding: 3rem;
-    border-radius: 12px;
-    /* Eliminamos el fondo y mantenemos la sombra solo si deseas */
-    background-color: transparent; /* o simplemente elimínalo */
-    box-shadow: none; /* O puedes eliminar esto si no quieres sombra en el contenedor */
-  }
-  
-  .single-input-form .form-group {
-    display: flex;
-    flex-direction: column;
-    color: #182747;
-  }
-  
-  .single-input-form label {
-    font-size: 1.8rem;
-    color: #182747;
-    margin-bottom: 1rem;
-  }
-  
-  .single-input-form input {
-    padding: 1.2rem 1.5rem;
-    font-size: 1.5rem;
-    border: 1px solid #000000;
-    border-radius: 10px;
-    color: #182747;
-    background-color: #ffffff; /* Mantén blanco si quieres el campo visible */
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1); /* Sombra para el input */
-  }
-  
-  .single-input-form input::placeholder {
-    color: #908C89;
-    font-family: 'Jaldi', sans-serif;
-    font-size: 1.3rem;
-  }
-  
-  .error-message {
-    color: #e74c3c;
-    font-size: 1.2rem;
-    margin-top: 10px;
-    display: block;
-    font-family: 'Jaldi', sans-serif;
-    font-weight: bold;
-  }
-  
-  .input-group {
-    position: relative;
-    display: flex;
+    margin-left: 0;
+    padding: 1rem;
     align-items: center;
-  }
-  
-  .input-group input {
-    width: 100%;
-    padding-right: 3.5rem; /* espacio para el ícono del ojo */
-  }
-  
-  .input-group-text {
-    position: absolute;
-    right: 1rem;
-    cursor: pointer;
-    color: #182747;
-    font-size: 1.5rem;
-  }
-
-  .error-container {
-    margin-left: 220px; /* Separación del sidebar */
-    padding: 2rem;
-    max-width: 100%;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
     text-align: center;
+  }
 
-  }
-  
   .subtitle {
-    font-size: 1.5rem;
-    margin-top: 2rem;
-    color: #000;
+    font-size: 1.2rem;
   }
-  
-  /* Responsivo para móviles */
-  @media (max-width: 768px) {
-    .main-content {
-      margin-left: 0;
-      padding: 1rem;
-      align-items: center;
-      text-align: center;
-    }
-  
-    .subtitle {
-      font-size: 1.2rem;
-    }
-  }
-  
-  
+}
+
+.large-button {
+  padding: 1.2rem 2.5rem;
+  font-size: 1.8rem;
+  border-radius: 12px;
+}
