@@ -13,4 +13,14 @@ const reportSchema = new mongoose.Schema({
   endTime: { type: Date, required: true },
 });
 
+// Función estática para crear un reporte
+reportSchema.statics.createReport = async function (data) {
+  try {
+    const newReport = await this.create(data);
+    return newReport;
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = mongoose.model("Report", reportSchema, "report");

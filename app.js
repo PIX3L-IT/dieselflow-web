@@ -18,6 +18,7 @@ const loginRoutes = require("./backend/routes/users/loginRoutes");
 const authRoutes = require("./backend/routes/users/authRoutes");
 const userRoutes = require("./backend/routes/users/userRoutes");
 const unitsRoutes = require("./backend/routes/units/unitRoutes");
+const reportsRoutes = require("./backend/routes/reports/createReporteRoutes");
 
 const app = express();
 app.use(cookieParser());
@@ -51,6 +52,9 @@ app.use("/", userRoutes);
 
 // Ruta de testing para obtener las unidades
 app.use("/", unitsRoutes);
+
+// Ruta de testing para subir reportes
+app.use("/", reportsRoutes);
 
 // Ruta principal
 app.get("/", (req, res) => {
