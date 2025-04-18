@@ -3,17 +3,17 @@ const Unit = require("../../models/units/Unit");
 const User = require("../../models/users/User");
 const Role = require("../../models/users/Role");
 
-// Get filters para la página inicial de reportes
+// Get filtros para la página inicial de reportes
 async function getFilters(req, res) {
   try {
-    const units = await Unit.find();
+    const units = await Unit.findAll();
 
-    const driverRole = await Role.findOne({ roleName: "Conductor"});
+    const driverRole = await Role.findRole("Conductor");
     if (!driverRole) {
-        return res.status(404).render('includes/404', { message: "Driver role not found" });
+        return res.status(404).render('includes/404', { message: "No se encontró el rol Conductor" });
       }
 
-    const drivers = await User.find({ idRole: driverRole._id});
+    const drivers = await User.findById(driverRole._id);
     
     res.render('statistics/report',{
         units,
@@ -44,9 +44,7 @@ async function postReport(req, res) {
     if (selectedDriver !== "todos") {
       const [username, lastName] = selectedDriver.split(" ");
       
-      const user = await User.findOne({username: new RegExp(`^${username}$`, "i"),
-        lastName: new RegExp(`^${lastName}$`, "i")
-      });
+      const user = await User.findByUsernameAndLastName(username, lastName);
       
       if (user) {
         filter.idUser = user._id;
@@ -54,16 +52,14 @@ async function postReport(req, res) {
     }
 
     if (selectedUnit !== "todos") {
-      const unit = await Unit.findOne({ unitName: { $regex: selectedUnit, $options: "i" } });
+      const unit = await Unit.findByName(selectedUnit);
       
       if (unit) {
         filter.idUnit = unit._id;
       }
     }
 
-    const reportData = await Report.find(filter)
-      .populate('idUser')
-      .populate('idUnit');
+    const reportData = await Report.findByFilters(filter);
     
     if (!reportData) {
         return res.render('statistics/partialReport',{
