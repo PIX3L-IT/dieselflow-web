@@ -10,12 +10,10 @@
       </div>
     </div>
     <div class="chart-section">
-      <h2>Diesel Consumption by Day</h2>
       <div id="chart-container"></div>
     </div>
   </div>
   <div class="table-section">
-    <h3>Last Reports (Page <%= currentPage %> of <%= totalPages %>)</h3>
     <%- include('../includes/simpleTable', {
           data: tableData,
           columns: tableColumns,
@@ -27,36 +25,152 @@
 </div>
 
 <script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<div id="chart-container"></div>
+
 <script>
-  const data = <%- JSON.stringify(dieselData) %>;
-  const margin = { top: 20, right: 30, bottom: 30, left: 40 },
-        width  = 600 - margin.left - margin.right,
+  const rawData = <%- JSON.stringify(dieselData) %>;
+  rawData.forEach(d => d.date = new Date(d.date));
+
+  const months = [...new Set(rawData.map(d => d.date.getMonth()))];
+  const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+                      "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+  let currentMonthIndex = months.length - 1;
+
+  const margin = { top: 40, right: 20, bottom: 40, left: 50 },
+        width = 550 - margin.left - margin.right,
         height = 300 - margin.top - margin.bottom;
-  const svg = d3.select("#chart-container")
-    .append("svg")
+
+  const wrapper = d3.select("#chart-container");
+
+  
+
+  const svg = wrapper.append("svg")
     .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
+    .attr("height", height + margin.top + margin.bottom);
+
+  const g = svg.append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);
-  data.forEach(d => { d.date = new Date(d.date); });
-  const x = d3.scaleTime()
-    .domain(d3.extent(data, d => d.date))
-    .range([0, width]);
-  const y = d3.scaleLinear()
-    .domain([0, d3.max(data, d => d.liters)])
-    .range([height, 0]);
-  const line = d3.line()
-    .x(d => x(d.date))
-    .y(d => y(d.liters));
-  svg.append("g")
-    .attr("transform", `translate(0,${height})`)
-    .call(d3.axisBottom(x));
-  svg.append("g")
-    .call(d3.axisLeft(y));
-  svg.append("path")
+
+  const tooltip = wrapper.append("div")
+    .style("position", "absolute")
+    .style("background", "#182747")
+    .style("color", "white")
+    .style("padding", "6px")
+    .style("border-radius", "5px")
+    .style("font-size", "13px")
+    .style("pointer-events", "none")
+    .style("opacity", 0);
+
+  function updateChart(month) {
+    const data = rawData.filter(d => d.date.getMonth() === month);
+
+    d3.select("#monthLabel").text(monthNames[month]);
+
+    const x = d3.scaleTime()
+      .domain(d3.extent(data, d => d.date))
+      .range([0, width]);
+
+    const y = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.liters)])
+      .range([height, 0]);
+
+    g.selectAll("*").remove();
+
+    g.append("g")
+      .attr("transform", `translate(0,${height})`)
+      .call(d3.axisBottom(x).tickFormat(d3.timeFormat("%d")));
+
+    g.append("g").call(d3.axisLeft(y));
+
+    const defs = svg.append("defs");
+  const shadow = defs.append("filter")
+    .attr("id", "line-shadow")
+    .attr("x", "-50%")
+    .attr("y", "-50%")
+    .attr("width", "200%")
+    .attr("height", "200%");
+
+  shadow.append("feDropShadow")
+    .attr("dx", 0)
+    .attr("dy", 4)
+    .attr("stdDeviation", 4)
+    .attr("flood-color", "#002B81")
+    .attr("flood-opacity", 0.2);
+
+  g.append("path")
     .datum(data)
     .attr("fill", "none")
-    .attr("stroke", "steelblue")
+    .attr("stroke", "#002B81")
     .attr("stroke-width", 2)
-    .attr("d", line);
+    .attr("filter", "url(#line-shadow)")
+    .attr("d", d3.line()
+      .x(d => x(d.date))
+      .y(d => y(d.liters))
+    );
+
+    g.selectAll("path.diamond")
+    .data(data)
+    .enter()
+    .append("path")
+    .attr("d", d3.symbol().type(d3.symbolDiamond).size(90))
+    .attr("transform", d => `translate(${x(d.date)},${y(d.liters)})`)
+    .attr("fill", "#002B81")
+    .attr("stroke", "#E8F4FD") 
+    .attr("stroke-width", 2)
+    .on("mouseover", (event, d) => {
+      tooltip.transition().duration(200).style("opacity", 1);
+      tooltip
+        .html(`${d.date.toLocaleDateString()}<br/>${d.liters} L`)
+        .style("left", (event.pageX + 10) + "px")
+        .style("top", (event.pageY - 30) + "px");
+    })
+    .on("mouseout", () => tooltip.transition().duration(200).style("opacity", 0));
+  }
+
+  wrapper.append("div")
+  .style("display", "flex")
+  .style("justify-content", "center")
+  .style("align-items", "center")
+  .style("gap", "15px")
+  .style("margin-top", "20px")
+  .style("font-family", "Jaldi, sans-serif")
+  .attr("id", "controls")
+  .html(`
+    <button id="prev" style="
+      background-color: #182747;
+      color: white;
+      border: none;
+      font-size: 20px;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+    ">‹</button>
+    <span id="monthLabel" style="font-size: 18px; font-weight: bold; color: #182747;"></span>
+    <button id="next" style="
+      background-color: #182747;
+      color: white;
+      border: none;
+      font-size: 20px;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+    ">›</button>
+  `);
+
+  document.getElementById("prev").addEventListener("click", () => {
+    if (currentMonthIndex > 0) {
+      currentMonthIndex--;
+      updateChart(months[currentMonthIndex]);
+    }
+  });
+
+  document.getElementById("next").addEventListener("click", () => {
+    if (currentMonthIndex < months.length - 1) {
+      currentMonthIndex++;
+      updateChart(months[currentMonthIndex]);
+    }
+  });
+
+  updateChart(months[currentMonthIndex]);
 </script>

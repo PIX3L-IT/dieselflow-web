@@ -2,7 +2,7 @@
 
 .main-driver-content {
   margin-left: 220px; 
-  padding: 40px 20px;
+  padding:  20px;
   box-sizing: border-box;
   max-width: calc(100% - 220px); 
   font-family: 'Jaldi', sans-serif;
@@ -33,7 +33,7 @@
 .stat-box {
   background-color: #E8F4FD;
   border-radius: 20px;
-  padding: 30px 20px;
+  padding: 20px;
   width: 250px;
   text-align: center;
   box-sizing: border-box;
@@ -54,7 +54,6 @@
 
 .chart-section {
     flex: 1;
-    margin-top: -60;
 }
 
 #chart-container {
@@ -63,8 +62,40 @@
   margin-top: 20px;
 }
 
-.table-section h3 {
-  margin-top: 50px;
+.chart-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  font-family: 'Jaldi', sans-serif;
+  margin-bottom: 20px;
+}
+
+.chart-controls button {
+  background-color: #182747;
+  color: white;
   font-size: 24px;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.chart-controls span {
+  font-size: 20px;
+  font-weight: bold;
   color: #182747;
+}
+
+.tooltip {
+  position: absolute;
+  text-align: center;
+  padding: 6px;
+  font-size: 14px;
+  background: #182747;
+  color: white;
+  border-radius: 6px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
 }
