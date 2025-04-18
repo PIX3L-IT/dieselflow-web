@@ -6,7 +6,7 @@ exports.getUsers = async (req, res) => {
     const users = await User.getAllUsers();
     return res.status(200).render('users/users', {
       users: users, username: req.user.username,
-      lastname: req.user.lastName
+      lastname: req.user.lastname
     });
   } catch (error) {
     console.error("Error al obtener los usuarios:", error);
