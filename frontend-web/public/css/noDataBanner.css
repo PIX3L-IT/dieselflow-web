@@ -1,0 +1,22 @@
+.no-data-banner {
+  width: 100%;
+  max-width: 92%;
+  box-sizing: border-box;
+  margin: 1rem auto;
+  padding: 1.5rem;
+  border-radius: 30px;
+  background-color: #E8E8E8;
+  font-family: "Jaldi", sans-serif;
+  color: #182747;
+  text-align: center;
+}
+
+.no-data-banner h3 {
+  margin-top: 1rem;
+}
+
+.no-data-banner p {
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 1.8rem;
+}

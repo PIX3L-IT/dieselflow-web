@@ -1,85 +1,76 @@
 /* === INPUT === */
-body {
-    font-family: 'Jaldi', sans-serif;
-    margin: 0;
-    font-weight: bold;
-    font-size: 1.5rem;
-    background-color: #f4f6fa; /* Si quieres mantener un fondo global */
-  }
-  
-  .main-content {
-    margin-left: 180px;
-    padding: 5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    box-sizing: border-box;
-  }
-  
-  .form-container {
-    width: 100%;
-    max-width: 600px;
-    padding: 3rem;
-    border-radius: 12px;
-    /* Eliminamos el fondo y mantenemos la sombra solo si deseas */
-    background-color: transparent; /* o simplemente elimínalo */
-    box-shadow: none; /* O puedes eliminar esto si no quieres sombra en el contenedor */
-  }
-  
-  .single-input-form .form-group {
-    display: flex;
-    flex-direction: column;
-    color: #182747;
-  }
-  
-  .single-input-form label {
-    font-size: 1.8rem;
-    color: #182747;
-    margin-bottom: 1rem;
-  }
-  
-  .single-input-form input {
-    padding: 1.2rem 1.5rem;
-    font-size: 1.5rem;
-    border: 1px solid #000000;
-    border-radius: 10px;
-    color: #182747;
-    background-color: #ffffff; /* Mantén blanco si quieres el campo visible */
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1); /* Sombra para el input */
-  }
-  
-  .single-input-form input::placeholder {
-    color: #908C89;
-    font-family: 'Jaldi', sans-serif;
-    font-size: 1.3rem;
-  }
-  
-  .error-message {
-    color: #e74c3c;
-    font-size: 1.2rem;
-    margin-top: 10px;
-    display: block;
-    font-family: 'Jaldi', sans-serif;
-    font-weight: bold;
-  }
-  
-  .input-group {
-    position: relative;
-    display: flex;
-    align-items: center;
-  }
-  
-  .input-group input {
-    width: 100%;
-    padding-right: 3.5rem; /* espacio para el ícono del ojo */
-  }
-  
-  .input-group-text {
-    position: absolute;
-    right: 1rem;
-    cursor: pointer;
-    color: #182747;
-    font-size: 1.5rem;
-  }
+.main-content {
+  margin-left: 180px;
+  padding: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 600px;
+  padding: 3rem;
+  border-radius: 12px;
+  background-color: transparent;
+}
+
+.single-input-form .form-group {
+  display: flex;
+  flex-direction: column;
+  color: #182747;
+}
+
+.single-input-form label {
+  font-size: 1.8rem;
+  color: #182747;
+  margin-bottom: 1rem;
+}
+
+.single-input-form input {
+  padding: 1.2rem 1.5rem;
+  font-size: 1.5rem;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  color: #182747;
+  background-color: #ffffff; /* Mantén blanco si quieres el campo visible */
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1); /* Sombra para el input */
+}
+
+.single-input-form input::placeholder {
+  color: #908C89;
+  font-family: 'Jaldi', sans-serif;
+  font-size: 1.3rem;
+}
+
+.error-message {
+  color: #e74c3c;
+  font-size: 1.2rem;
+  margin-top: 10px;
+  display: block;
+  font-family: 'Jaldi', sans-serif;
+  font-weight: bold;
+}
+
+.input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-group input {
+  width: 100%;
+  padding-right: 3.5rem; /* espacio para el ícono del ojo */
+}
+
+.input-group-text {
+  position: absolute;
+  right: 1rem;
+  cursor: pointer;
+  color: #182747;
+  font-size: 1.5rem;
+}
+
   
