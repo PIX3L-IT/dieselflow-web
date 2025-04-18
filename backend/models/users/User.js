@@ -25,4 +25,14 @@ userSchema.statics.findById = function(idRole) {
   return this.find({ idRole });
 };
 
+// Método estático para buscar por email
+userSchema.statics.findByEmail = function(email) {
+  return this.findOne({ email }).populate("idRole");
+};
+
+// Método estático para buscar por username solo
+userSchema.statics.findByUsername = function(username) {
+  return this.findOne({ username }).populate("idRole");
+};
+
 module.exports = mongoose.model("User", userSchema, "user");

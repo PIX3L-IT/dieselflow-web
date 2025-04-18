@@ -1,0 +1,13 @@
+.stat-box {
+  background-color: #e3f5ff;
+  border-radius: 25px;
+  padding: 10px 20px 10px 20px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+

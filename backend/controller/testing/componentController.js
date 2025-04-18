@@ -112,8 +112,24 @@ exports.getNoDataBanner = (req, res) => {
 };
 
 exports.getHeader = (req, res) => { 
-  res.render("testing/pruebahead")
+  res.render("testing/head")
 };
+
+exports.getStatBox = (req, res) => { 
+  const { username, lastname } = req.user;
+  const accessToken = req.cookies.accessToken;
+  const refreshToken = req.cookies.refreshToken;
+
+  res.render("testing/statBox", {
+    title: "example",
+    value: "2",
+    username,
+    lastname,
+    accessToken,
+    refreshToken
+  });
+}
+
 exports.getLoader = (req, res) => {
   res.render("includes/loader")
 }
