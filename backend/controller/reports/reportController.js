@@ -6,11 +6,14 @@ const Role = require("../../models/users/Role");
 // Get filtros para la página inicial de reportes
 async function getFilters(req, res) {
   try {
+    const { username, lastname } = req.user;
+    const accessToken = req.cookies.accessToken;
+  
     const units = await Unit.findAll();
 
     const driverRole = await Role.findRole("Conductor");
     if (!driverRole) {
-        return res.status(404).render('includes/404', { message: "No se encontró el rol Conductor" });
+        return res.status(404).render('includes/404');
       }
 
     const drivers = await User.findById(driverRole._id);
@@ -19,7 +22,10 @@ async function getFilters(req, res) {
         units,
         drivers,
         active: "reportes",
-        reportData: ''
+        reportData: '',
+        username,
+        lastname,
+        accessToken
       });
   } catch (error) {
     console.error("Error al obtener los elementos de filtros:", error);
@@ -32,6 +38,8 @@ async function getFilters(req, res) {
 // Post para generar el reporte basado en filtros seleccionado
 async function postReport(req, res) {
   const { startDate, endDate, selectedUnit, selectedDriver } = req.body;
+  const { username, lastname } = req.user;
+  const accessToken = req.cookies.accessToken;
 
   try {
     const filter = {};
@@ -42,9 +50,9 @@ async function postReport(req, res) {
     };
 
     if (selectedDriver !== "todos") {
-      const [username, lastName] = selectedDriver.split(" ");
+      const [driverName, driverLastName] = selectedDriver.split(" ");
       
-      const user = await User.findByUsernameAndLastName(username, lastName);
+      const user = await User.findByUsernameAndLastName(driverName, driverLastName);
       
       if (user) {
         filter.idUser = user._id;
@@ -63,11 +71,17 @@ async function postReport(req, res) {
     
     if (!reportData) {
         return res.render('statistics/partialReport',{
-          reportData: []
+          reportData: [],
+          username,
+          lastname,
+          accessToken
         });
       } else {
         return res.render('statistics/partialReport',{          
-          reportData: reportData
+          reportData: reportData,
+          username,
+          lastname,
+          accessToken
         });
       }
   } catch (error) {

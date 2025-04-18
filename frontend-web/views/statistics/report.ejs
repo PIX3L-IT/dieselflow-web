@@ -2,7 +2,9 @@
 <%- include('../includes/navbar.ejs') %>
 
 <div class="container ps-5" style="margin-left: 150px;">
-  <%- include('../includes/title.ejs', { title: 'Reportes' }) %>
+  <div id="titleContainer" style="margin-top: 40px; margin-left: 1rem; margin-bottom: 1rem;">
+    <%- include('../includes/title.ejs', { title: 'Reportes' }) %>
+  </div>
 
   <!-- FILTROS -->
   <div class="row align-items-start" style="margin-left: 7px;">  
@@ -137,6 +139,6 @@
 <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
 
 <script type="text/javascript" src="/../../js/reportButtons.js"></script>
-<script type="text/javascript" src="/../../js/validationReport.js"></script>
+<script type="module" src="/../../js/validationReport.js"></script>
 
 <%- include('../includes/foot.ejs') %>

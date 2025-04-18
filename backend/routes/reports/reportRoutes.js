@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const verifyToken = require('../../utils/verifyToken');
 
 const {
     getFilters,
@@ -8,9 +9,9 @@ const {
 
 
 // GET
-router.get('/', getFilters);
+router.get('/', verifyToken, getFilters);
 
 // POST /reportes/generar
-router.post('/generar', postReport);
+router.post('/generar', verifyToken, postReport);
 
 module.exports = router;
