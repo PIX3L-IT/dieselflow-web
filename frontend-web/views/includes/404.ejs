@@ -1,9 +1,32 @@
 <link rel="stylesheet" href="/css/error.css">
-<%- include('title.ejs', { title: 'Página no encontrada' }) %>
-<%- include('navbar.ejs') %>
+<link rel="stylesheet" href="/css/button.css">
+<%- include('head.ejs')%>
 
-<div class="main-content">
-  <h2 class="subtitle">
-    Por favor selecciona una de las opciones a la izquierda para regresar a la página
-  </h2>
+<div class="main-title">
+<%- include('title.ejs', { title: 'Página no encontrada' }) %>
 </div>
+
+  <% if (hasToken) { %>
+    <%- include('navbar.ejs') %>
+  <% } %>
+
+  <% if (!hasToken) { %>
+    <%- include('rectangle.ejs') %>
+  <% } %>
+
+  <% if (hasToken) { %>
+    <div class="main-content">
+      <h2 class="subtitle">
+        Por favor selecciona una de las opciones a la izquierda para regresar a la página
+      </h2>
+    </div>
+  <% } %>
+
+  <% if (!hasToken) { %>
+    <div class="main-content">
+      <h2 class="subtitle">
+        Por favor ingresa al login para acceder al sistema
+        <a href="/" class="btn button button-primary large-button">Login</a>
+      </h2>
+    </div>
+  <% } %>
