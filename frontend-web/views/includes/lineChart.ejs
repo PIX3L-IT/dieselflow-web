@@ -1,60 +1,76 @@
 <link rel="stylesheet" href="/css/chartStyles.css">
+
+<!-- Importar D3.js -->
 <script src="https://d3js.org/d3.v7.min.js"></script>
 
+<!-- Contenedor principal identificado dinámicamente por ID -->
 <div id="<%= containerId %>" class="line-chart-container"></div>
 
 <script>
   (() => {
+    // Convertir fechas a Date y mantener datos originales
     const rawData = <%- JSON.stringify(chartData) %>.map(
-        d => ({ ...d, date: new Date(d.date) }));
+      d => ({ ...d, date: new Date(d.date + 'T00:00') })
+    );
+
+    // Obtener los meses únicos presentes en los datos
     const months = [...new Set(rawData.map(d => d.date.getMonth()))];
-    const monthNames = ["Enero", "Febrero", "Marzo", "Abril", 
-                        "Mayo", "Junio","Julio", "Agosto",
-                         "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    const monthNames = [
+      "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+      "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+    ];
     let currentMonthIndex = months.length - 1;
 
+    // Seleccionar contenedor principal
     const container = d3.select("#<%= containerId %>");
 
+    // Definir márgenes y dimensiones del gráfico
     const margin = { top: 40, right: 20, bottom: 40, left: 50 };
     const width = 550 - margin.left - margin.right;
     const height = 300 - margin.top - margin.bottom;
 
+    // Crear el SVG del gráfico
     const svg = container.append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .attr("class", "line-chart-svg");
 
+    // Crear grupo para los elementos gráficos dentro del margen
     const g = svg.append("g")
       .attr("transform", `translate(${margin.left},${margin.top})`);
 
+    // Tooltip para mostrar información al pasar el mouse
     const tooltip = container.append("div")
       .attr("class", "line-chart-tooltip");
 
+    // Mensaje de "no hay datos"
     const noDataMessage = container.append("div")
       .attr("id", `${"<%= containerId %>"}-no-data`)
       .attr("class", "line-chart-no-data")
       .style("display", "none")
       .text("No hay datos que mostrar.");
 
+    // Definición de sombra para la línea
     const defs = svg.append("defs");
     const shadow = defs.append("filter")
       .attr("id", "line-shadow")
-      .attr("x", "-50%")
-      .attr("y", "-50%")
-      .attr("width", "200%")
-      .attr("height", "200%");
+      .attr("x", "-50%").attr("y", "-50%")
+      .attr("width", "200%").attr("height", "200%");
     shadow.append("feDropShadow")
-      .attr("dx", 0)
-      .attr("dy", 4)
+      .attr("dx", 0).attr("dy", 4)
       .attr("stdDeviation", 4)
       .attr("flood-color", "#002B81")
       .attr("flood-opacity", 0.2);
 
+    // Función principal para renderizar el gráfico por mes
     function updateChart(month) {
       const data = rawData.filter(d => d.date.getMonth() === month);
-      d3.select(`#${"<%= containerId %>"}-monthLabel`)
-      .text(monthNames[month]);
 
+      // Mostrar el nombre del mes actual
+      d3.select(`#${"<%= containerId %>"}-monthLabel`)
+        .text(monthNames[month]);
+
+      // Mostrar mensaje si no hay datos
       if (data.length === 0) {
         noDataMessage.style("display", "block");
         g.selectAll("*").remove();
@@ -63,8 +79,10 @@
         noDataMessage.style("display", "none");
       }
 
+      // Limpiar gráfica antes de redibujar
       g.selectAll("*").remove();
 
+      // Escalas
       const x = d3.scaleTime()
         .domain(d3.extent(data, d => d.date))
         .range([0, width]);
@@ -73,31 +91,29 @@
         .domain([0, d3.max(data, d => d.liters)])
         .range([height, 0]);
 
-      const xAxis = d3.axisBottom(x)
-        .ticks(4)
+      // Ejes
+      const xAxis = d3.axisBottom(x).ticks(4)
         .tickFormat((d, i) => `Semana ${i + 1}`);
-
       const yAxis = d3.axisLeft(y).ticks(5);
 
+      // Cuadrícula horizontal
       g.append("g")
         .attr("class", "line-chart-grid")
-        .call(d3.axisLeft(y)
-        .tickSize(-width)
-        .tickFormat(""));
+        .call(d3.axisLeft(y).tickSize(-width).tickFormat(""));
 
+      // Cuadrícula vertical
       g.append("g")
         .attr("class", "line-chart-grid")
         .attr("transform", `translate(0,${height})`)
-        .call(d3.axisBottom(x)
-        .ticks(4)
-        .tickSize(-height)
-        .tickFormat(""));
+        .call(d3.axisBottom(x).ticks(4).tickSize(-height).tickFormat(""));
 
+      // Dibujar los ejes
       g.append("g").call(yAxis);
       g.append("g")
         .attr("transform", `translate(0,${height})`)
         .call(xAxis);
 
+      // Dibujar la línea de datos
       g.append("path")
         .datum(data)
         .attr("fill", "none")
@@ -110,13 +126,15 @@
           .y(d => y(d.liters))
         );
 
+      // Obtener posición del contenedor para posicionar tooltip correctamente
       const containerRect = container.node().getBoundingClientRect();
+
+      // Dibujar los puntos tipo diamante
       g.selectAll("path.diamond")
         .data(data)
         .enter()
         .append("path")
-        .attr("d", d3.symbol()
-        .type(d3.symbolDiamond).size(125))
+        .attr("d", d3.symbol().type(d3.symbolDiamond).size(125))
         .attr("transform", d => `translate(${x(d.date)},${y(d.liters)})`)
         .attr("fill", "#002B81")
         .attr("stroke", "#E8F4FD")
@@ -124,35 +142,31 @@
         .on("mouseover", (event, d) => {
           tooltip.transition().duration(200).style("opacity", 1);
           tooltip
-          .html(`${d.date.toLocaleDateString()}<br/>${d.liters} L`)
-          .style("left", (event.clientX - containerRect.left - 5) + "px")
-          .style("top", (event.clientY - containerRect.top + 15) + "px");
+            .html(`${d.date.toLocaleDateString()}<br/>${d.liters} L`)
+            .style("left", (event.clientX - containerRect.left - 5) + "px")
+            .style("top", (event.clientY - containerRect.top + 15) + "px");
         })
-        .on("mouseout", () => tooltip.transition().duration(200)
-        .style("opacity", 0));
+        .on("mouseout", () => tooltip.transition().duration(200).style("opacity", 0));
 
+      // Activar o desactivar botones si ya estás en el primer o último mes
       prevButton.disabled = currentMonthIndex <= 0;
       nextButton.disabled = currentMonthIndex >= months.length - 1;
     }
 
+    // Crear controles (botones y etiqueta de mes)
     container.append("div")
       .attr("id", `${"<%= containerId %>"}-controls`)
       .attr("class", "line-chart-controls")
       .html(`
-        <button id="${"<%= containerId %>"}-prev" class="line-chart-button">
-        ‹</button>
-        <span 
-        id="${"<%= containerId %>"}-monthLabel" class="line-chart-month-label">
-        </span>
-        <button id="${"<%= containerId %>"}-next" class="line-chart-button">
-        ›</button>
+        <button id="${"<%= containerId %>"}-prev" class="line-chart-button">‹</button>
+        <span id="${"<%= containerId %>"}-monthLabel" class="line-chart-month-label"></span>
+        <button id="${"<%= containerId %>"}-next" class="line-chart-button">›</button>
       `);
 
-    const prevButton = document
-    .getElementById(`${"<%= containerId %>"}-prev`);
-    const nextButton = document
-    .getElementById(`${"<%= containerId %>"}-next`);
+    const prevButton = document.getElementById(`${"<%= containerId %>"}-prev`);
+    const nextButton = document.getElementById(`${"<%= containerId %>"}-next`);
 
+    // Eventos para navegación mensual
     prevButton.addEventListener("click", () => {
       if (currentMonthIndex > 0) {
         currentMonthIndex--;
@@ -167,6 +181,7 @@
       }
     });
 
+    // Dibujar por primera vez el mes actual
     updateChart(months[currentMonthIndex]);
   })();
 </script>
