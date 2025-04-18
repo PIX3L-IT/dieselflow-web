@@ -145,6 +145,7 @@ exports.getChart = (req, res) => {
   const refreshToken = req.cookies.refreshToken;
   const dieselData = [
     // Enero
+    { date: '2025-01-01', liters: 40 },
     { date: '2025-01-03', liters: 42 },
     { date: '2025-01-05', liters: 45 },
     { date: '2025-01-07', liters: 50 },

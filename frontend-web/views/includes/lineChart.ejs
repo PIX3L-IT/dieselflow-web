@@ -5,10 +5,12 @@
 
 <script>
   (() => {
-    const rawData = <%- JSON.stringify(chartData) %>.map(d => ({ ...d, date: new Date(d.date) }));
+    const rawData = <%- JSON.stringify(chartData) %>.map(
+        d => ({ ...d, date: new Date(d.date) }));
     const months = [...new Set(rawData.map(d => d.date.getMonth()))];
-    const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-                        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    const monthNames = ["Enero", "Febrero", "Marzo", "Abril", 
+                        "Mayo", "Junio","Julio", "Agosto",
+                         "Septiembre", "Octubre", "Noviembre", "Diciembre"];
     let currentMonthIndex = months.length - 1;
 
     const container = d3.select("#<%= containerId %>");
@@ -50,7 +52,8 @@
 
     function updateChart(month) {
       const data = rawData.filter(d => d.date.getMonth() === month);
-      d3.select(`#${"<%= containerId %>"}-monthLabel`).text(monthNames[month]);
+      d3.select(`#${"<%= containerId %>"}-monthLabel`)
+      .text(monthNames[month]);
 
       if (data.length === 0) {
         noDataMessage.style("display", "block");
@@ -78,12 +81,17 @@
 
       g.append("g")
         .attr("class", "line-chart-grid")
-        .call(d3.axisLeft(y).tickSize(-width).tickFormat(""));
+        .call(d3.axisLeft(y)
+        .tickSize(-width)
+        .tickFormat(""));
 
       g.append("g")
         .attr("class", "line-chart-grid")
         .attr("transform", `translate(0,${height})`)
-        .call(d3.axisBottom(x).ticks(4).tickSize(-height).tickFormat(""));
+        .call(d3.axisBottom(x)
+        .ticks(4)
+        .tickSize(-height)
+        .tickFormat(""));
 
       g.append("g").call(yAxis);
       g.append("g")
@@ -107,7 +115,8 @@
         .data(data)
         .enter()
         .append("path")
-        .attr("d", d3.symbol().type(d3.symbolDiamond).size(125))
+        .attr("d", d3.symbol()
+        .type(d3.symbolDiamond).size(125))
         .attr("transform", d => `translate(${x(d.date)},${y(d.liters)})`)
         .attr("fill", "#002B81")
         .attr("stroke", "#E8F4FD")
@@ -119,7 +128,8 @@
           .style("left", (event.clientX - containerRect.left - 5) + "px")
           .style("top", (event.clientY - containerRect.top + 15) + "px");
         })
-        .on("mouseout", () => tooltip.transition().duration(200).style("opacity", 0));
+        .on("mouseout", () => tooltip.transition().duration(200)
+        .style("opacity", 0));
 
       prevButton.disabled = currentMonthIndex <= 0;
       nextButton.disabled = currentMonthIndex >= months.length - 1;
@@ -129,13 +139,19 @@
       .attr("id", `${"<%= containerId %>"}-controls`)
       .attr("class", "line-chart-controls")
       .html(`
-        <button id="${"<%= containerId %>"}-prev" class="line-chart-button">‹</button>
-        <span id="${"<%= containerId %>"}-monthLabel" class="line-chart-month-label"></span>
-        <button id="${"<%= containerId %>"}-next" class="line-chart-button">›</button>
+        <button id="${"<%= containerId %>"}-prev" class="line-chart-button">
+        ‹</button>
+        <span 
+        id="${"<%= containerId %>"}-monthLabel" class="line-chart-month-label">
+        </span>
+        <button id="${"<%= containerId %>"}-next" class="line-chart-button">
+        ›</button>
       `);
 
-    const prevButton = document.getElementById(`${"<%= containerId %>"}-prev`);
-    const nextButton = document.getElementById(`${"<%= containerId %>"}-next`);
+    const prevButton = document
+    .getElementById(`${"<%= containerId %>"}-prev`);
+    const nextButton = document
+    .getElementById(`${"<%= containerId %>"}-next`);
 
     prevButton.addEventListener("click", () => {
       if (currentMonthIndex > 0) {
