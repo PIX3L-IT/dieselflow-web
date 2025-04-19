@@ -30,30 +30,10 @@
   gap: 30px;
 }
 
-.stat-box {
-  background-color: #E8F4FD;
-  border-radius: 20px;
-  padding: 20px;
-  width: 250px;
-  text-align: center;
-  box-sizing: border-box;
-}
-
-.stat-title {
-    white-space: nowrap;      
-    overflow: hidden;        
-    text-overflow: ellipsis;  
-  }
-
-.stat-value {
-  font-size: 70px;
-  font-weight: bold;
-  color: #182747;
-  line-height: 1;
-}
 
 .chart-section {
     flex: 1;
+    margin-bottom: 10px;
 }
 
 #chart-container {
