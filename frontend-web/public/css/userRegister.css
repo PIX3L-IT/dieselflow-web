@@ -153,3 +153,8 @@ textarea.auto-resize {
   border-radius: 0.5rem;
   transition: background-color 0.3s ease;
 }
+
+/* Subtítulos de campos de formulario */
+h2.subtitle {
+  color: #182747 !important; 
+}
