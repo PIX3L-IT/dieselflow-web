@@ -58,11 +58,15 @@ exports.postConfirmEmail = async (req, res, next) => {
         const subject = "Recuperación de contraseña";
 
         try {
-            await mailer.sendEmail(html, email, subject);
-            return res.status(200).json({
-                message: "Correo enviado correctamente",
-            });
+            const emailStatus = await mailer.sendEmail(html, email, subject);
+            if (emailStatus.success) {
+                console.log("El correo fue enviado correctamente");
+                return res.status(200).json({
+                    message: "Correo enviado correctamente",
+                });
+            }
         } catch (error) {
+            console.error("Error al enviar el correo:", error);
             return res.status(500).json({
                 error: "Error al enviar el correo",
             });
