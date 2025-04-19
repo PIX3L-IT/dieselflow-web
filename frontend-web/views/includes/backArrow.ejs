@@ -1,3 +1,5 @@
 <link rel="stylesheet" href="/css/backArrow.css">
 
-<button class="backArrow"></button>
+<a href="<%= backUrl || 'javascript:history.back()' %>">
+  <button class="backArrow" aria-label="Regresar"></button>
+</a>

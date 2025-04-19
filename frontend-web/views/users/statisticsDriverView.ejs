@@ -4,7 +4,7 @@
 <div class="main-driver-content">
   <!-- Título con flecha alineada -->
   <div class="driver-title-container">
-    <%- include('../includes/backArrow') %>
+    <%- include('../includes/backArrow', { backUrl: '/usuarios' }) %>
     <h1 class="driver-title"><%= unit?.username || 'Unknown Driver' %></h1>
   </div>
 
