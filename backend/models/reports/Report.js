@@ -13,55 +13,47 @@ const reportSchema = new mongoose.Schema({
   endTime: { type: Date, required: true },
 });
 
+// Obtener el número de viajes de un usuario
+reportSchema.statics.countUserTrips = function (userId) {
+  return this.countDocuments({ idUser: userId });
+};
+
+// Obtener los reportes paginados
+reportSchema.statics.getPaginatedReports = async function (userId, page, limit = 5) {
+  const reports = await this.find({ idUser: userId })
+    .sort({ loadDate: -1 })
+    .skip(page * limit)
+    .limit(limit)
+    .populate("idUnit");
+
+  const total = await this.countDocuments({ idUser: userId });
+  return { reports, total };
+};
+
+// Obtener consumo total de diesel por día
+reportSchema.statics.getDieselByDay = function (userId) {
+  return this.aggregate([
+    { $match: { idUser: new mongoose.Types.ObjectId(userId) } },
+    {
+      $group: {
+        _id: { day: { $dateToString: { format: "%Y-%m-%d", date: "$loadDate" } } },
+        totalLiters: { $sum: "$liters" },
+      }
+    },
+    { $sort: { "_id.day": 1 } }
+  ]);
+};
+
+// Contar rendimientos malos fuera del rango permitido
+reportSchema.statics.countBadEfficiencies = function (userId) {
+  return this.countDocuments({
+    idUser: userId,
+    $or: [
+      { efficiency: { $gt: 1.10 } },
+      { efficiency: { $lt: 0.90 } }
+    ]
+  });
+};
+
 delete mongoose.connection.models['Report'];
-
-const Report = mongoose.model("Report", reportSchema, "report");
-
-class ReportClass {
-  static async countUserTrips(userId) {
-    return await Report.countDocuments({ idUser: userId });
-  }
-
-  static async getPaginatedReports(userId, page, limit = 5) {
-    const reports = await Report.find({ idUser: userId })
-      .sort({ loadDate: -1 })
-      .skip(page * limit)
-      .limit(limit)
-      .populate("idUnit");
-  
-    const total = await Report.countDocuments({ idUser: userId });
-    return { reports, total };
-  }
-    
-  //Obtener el diesel gastado por día de un camionero
-  static async getDieselByDay (userId) {
-    return  Report.aggregate([
-      { $match: { idUser: new mongoose.Types.ObjectId(userId) } },
-      {
-        $group: {
-          _id: {
-            day: { $dateToString: { format: "%Y-%m-%d", date: "$loadDate" } },
-          },
-          totalLiters: { $sum: "$liters" },
-        },
-      },
-      { $sort: { "_id.day": 1 } },
-    ]);
-  }
-
-  static async countBadEfficiencies(userId) {
-    return await Report.countDocuments({
-      idUser: userId,
-      $or: [
-        { efficiency: { $gt: 1.10 } },
-        { efficiency: { $lt: 0.90 } }
-      ]
-    });
-  }
-
-  static get model() {
-    return Report;
-  }
-}
-
-module.exports = ReportClass;
+module.exports = mongoose.model("Report", reportSchema, "report");
