@@ -24,7 +24,7 @@
                             <div class="d-flex align-items-center gap-2">
                                 <%- include('../includes/card.ejs', { text: user.username, userStatus: user.userStatus
                                     }) %>
-                                    <%- include('../includes/userStatsButton.ejs') %>
+                                    <%- include('../includes/userStatsButton.ejs', { userId: user._id }) %>
                             </div>
                         </div>
                         <% }); %>
