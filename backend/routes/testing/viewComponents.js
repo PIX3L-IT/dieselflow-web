@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const verifyToken = require('../../utils/verifyToken');
 const componentController = require("../../controller/testing/componentController");
 
 // Ruta para mostrar navbar
@@ -35,6 +36,9 @@ router.get("/button", componentController.getButton);
 // Ruta para mostrar subtitulos
 router.get("/subtitle", componentController.getSubtitle);
 
+// Ruta para mostrar el botón de estadísticas
+router.get("/statsButton", componentController.getStatsButton);
+
 // Ruta para mostrar 404
 router.get("/404", componentController.get404);
 
@@ -53,5 +57,11 @@ router.get("/noDataBanner",componentController.getNoDataBanner);
 
 // Ruta para mostrar el header
 router.get("/header", componentController.getHeader);
+
+// Ruta para mostrar stat box
+router.get("/statBox",verifyToken, componentController.getStatBox);
+
+//ruta para mostrar la grafica reutilizable
+router.get("/line-chart", verifyToken, componentController.getChart);
 
 module.exports = router;

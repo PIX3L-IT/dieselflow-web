@@ -19,6 +19,11 @@ const userSchema = new mongoose.Schema({
   accessCode: { type: String, required: true, maxlength: 10 },
 });
 
+// Función para consultar los usuarios con su rol
+userSchema.statics.getAllUsers = function () {
+  return this.find().populate("idRole").exec();
+};
+
 // Método estático para buscar por username y lastName
 userSchema.statics.findByUsernameAndLastName = function(username, lastName) {
   return this.findOne({ username, lastName }).populate("idRole");
