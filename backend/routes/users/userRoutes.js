@@ -31,7 +31,7 @@ router.get("/users/search", async (req, res) => {
 router.post("/registrar", verifyToken, registerUser);
 
 router.get(
-  "/registrar",
+  "/registrarUsuario",
   verifyToken,
   (req, res) => {
     res.render("users/registerUser", {
