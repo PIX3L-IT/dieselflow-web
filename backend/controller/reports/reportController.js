@@ -8,7 +8,7 @@ async function getFilters(req, res) {
   try {
     const { username, lastname } = req.user;
     const accessToken = req.cookies.accessToken;
-  
+    const refreshToken = req.cookies.refreshToken;
     const units = await Unit.findAll();
 
     const driverRole = await Role.findRole("Conductor");
@@ -25,7 +25,8 @@ async function getFilters(req, res) {
         reportData: '',
         username,
         lastname,
-        accessToken
+        accessToken,
+        refreshToken
       });
   } catch (error) {
     console.error("Error al obtener los elementos de filtros:", error);
@@ -40,6 +41,7 @@ async function postReport(req, res) {
   const { startDate, endDate, selectedUnit, selectedDriver } = req.body;
   const { username, lastname } = req.user;
   const accessToken = req.cookies.accessToken;
+  const refreshToken = req.cookies.refreshToken;
 
   try {
     const filter = {};
@@ -74,14 +76,16 @@ async function postReport(req, res) {
           reportData: [],
           username,
           lastname,
-          accessToken
+          accessToken,
+          refreshToken
         });
       } else {
         return res.render('statistics/partialReport',{          
           reportData: reportData,
           username,
           lastname,
-          accessToken
+          accessToken,
+          refreshToken
         });
       }
   } catch (error) {
