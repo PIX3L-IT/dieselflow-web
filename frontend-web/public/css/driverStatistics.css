@@ -11,8 +11,8 @@
 .driver-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    gap: 30px;
+    align-items: center;
+    gap: 40px;
 }
 
 .driver-header .stat-box-container {
@@ -78,4 +78,18 @@
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.2s ease-in-out;
+}
+
+.driver-title-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.driver-content-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
 }

@@ -1,16 +1,22 @@
 <%- include('../includes/navbar.ejs') %>
 <link rel="stylesheet" href="/css/driverStatistics.css">
+
 <div class="main-driver-content">
-  <div class="driver-header">
-    <div>
-      <h1 class="driver-title"><%= unit?.username || 'Unknown Driver' %></h1>
-      <div class="stat-box-container">
-        <%- include('../includes/statBox', { title: 'Viajes hechos', 
-        value: totalTrips }) %>
-        <%- include('../includes/statBox', { title: 'Rendimientos malos',
-         value: badEfficiencies }) %>
-      </div>
+  <!-- Título con flecha alineada -->
+  <div class="driver-title-container">
+    <%- include('../includes/backArrow') %>
+    <h1 class="driver-title"><%= unit?.username || 'Unknown Driver' %></h1>
+  </div>
+
+  <!-- Stat boxes y gráfica -->
+  <div class="driver-content-row">
+    <!-- Stat boxes -->
+    <div class="stat-box-container">
+      <%- include('../includes/statBox', { title: 'Viajes hechos', value: totalTrips }) %>
+      <%- include('../includes/statBox', { title: 'Rendimientos malos', value: badEfficiencies }) %>
     </div>
+
+    <!-- Gráfica -->
     <div class="chart-section">
       <%- include('../includes/lineChart', {
         chartData: chartData,
@@ -18,13 +24,15 @@
       }) %>
     </div>
   </div>
+
+  <!-- Tabla de datos -->
   <div class="table-section">
     <%- include('../includes/simpleTable', {
-          data: tableData,
-          columns: tableColumns,
-          currentPage: currentPage,
-          totalPages: totalPages,
-          BaseRoute: BaseRoute
-        }) %>
+      data: tableData,
+      columns: tableColumns,
+      currentPage: currentPage,
+      totalPages: totalPages,
+      BaseRoute: BaseRoute
+    }) %>
   </div>
 </div>
