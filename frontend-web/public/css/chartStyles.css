@@ -1,0 +1,82 @@
+/* Contenedor principal */
+.line-chart-container {
+    position: relative;
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    font-family: 'Jaldi', sans-serif;
+  }
+  
+  /* SVG */
+  .line-chart-svg {
+    display: block;
+    margin: 0 auto;
+  }
+  
+  /* Cuadrícula */
+  .line-chart-grid line {
+    stroke: #d9d9d9;
+    stroke-opacity: 1;
+    shape-rendering: crispEdges;
+  }
+  
+  .line-chart-grid path {
+    display: none;
+  }
+  
+  /* Tooltip */
+  .line-chart-tooltip {
+    position: absolute;
+    background: #182747;
+    color: white;
+    padding: 6px;
+    border-radius: 5px;
+    font-size: 13px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: 10;
+  }
+  
+  /* Mensaje si no hay datos */
+  .line-chart-no-data {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 18px;
+    color: #E30713;
+  }
+  
+  /* Controles */
+  .line-chart-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  /* Boton */
+  .line-chart-button {
+    background-color: #182747;
+    color: white;
+    border: none;
+    font-size: 20px;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  /* Button desactivado */
+  .line-chart-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  /* Label del mes */
+  .line-chart-month-label {
+    font-size: 18px;
+    font-weight: bold;
+    color: #182747;
+  }
+  

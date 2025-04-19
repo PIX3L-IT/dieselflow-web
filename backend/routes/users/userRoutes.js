@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { getAllUsers } = require("../../controller/users/userController");
+const verifyToken = require('../../utils/verifyToken');
+const { getUsers } = require("../../controller/users/getUsersController");
 const recoveryPasswordController = require("../../controller/users/recoveryPasswordController");
 
-router.get("/users", getAllUsers);
+router.get("/usuarios", verifyToken, getUsers);
 
 router.get("/users/search", async (req, res) => {
   const normalizeText = (str) =>

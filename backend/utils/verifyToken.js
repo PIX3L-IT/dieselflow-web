@@ -1,19 +1,38 @@
 const jwt = require('jsonwebtoken');
 
 const verifyToken = (req, res, next) => {
-  const token = req.cookies.accessToken;
+  const accessToken = req.cookies.accessToken;
+  const refreshToken = req.cookies.refreshToken;
 
-  if (!token) {
-    return res.status(401).json({ message: 'No estás autenticada. Inicia sesión.' });
-  }
+  let payload = null;
+  let hasToken = false;
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded;
-    next();
+    if (accessToken) {
+      payload = jwt.verify(accessToken, process.env.JWT_SECRET);
+      hasToken = true;
+    } else if (refreshToken) {
+      payload = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
+      hasToken = true;
+    }
+
+    if (payload) {
+      req.user = payload;
+      return next();
+    }
   } catch (err) {
-    return res.status(403).json({ message: 'Token inválido o expirado' });
+    // Silenciado, pasará a renderizado abajo
   }
+
+  // Si no hay token o falló la verificación
+  return res.status(403).render("includes/404", {
+    active: "",
+    hasToken,
+    accessToken,
+    refreshToken,
+    username: payload ? payload.username : null,
+    lastname: payload ? payload.lastname : null
+  });
 };
 
 module.exports = verifyToken;
