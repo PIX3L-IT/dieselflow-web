@@ -7,14 +7,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const rolRadios       = document.querySelectorAll('input[name="roleName"]');
   const submitBtn       = document.getElementById("submitBtn");
 
-  // Código de conductor
+  // Para conductor
   const codeContainer = document.getElementById("codeContainer");
   const codigo        = document.getElementById("codigo");
   const codigoError   = document.getElementById("codigoError");
 
   // Regex
-  const isEmailValid = val => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
-  const isCodeValid  = val => /^\d{4}$/.test(val);
+  const isEmailValid    = val => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+  const isCodeValid     = val => /^\d{4}$/.test(val);
+  const isPasswordValid = val => /^(?=.*\d).{8,}$/.test(val); 
 
   // Mostrar u ocultar campo Código
   const updateRoleField = () => {
@@ -30,12 +31,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Validar todo el formulario
   const validarFormulario = () => {
-    const nombreValido      = nombre.value.trim() !== "";
-    const apellidoValido    = apellido.value.trim() !== "";
-    const emailValido       = isEmailValid(email.value.trim());
-    const passwordValido    = password.value.length >= 6;
-    const contrasIguales    = password.value === confirmPassword.value;
-    const rolSeleccionado   = Array.from(rolRadios).some(r => r.checked);
+    const nombreValido    = nombre.value.trim() !== "";
+    const apellidoValido  = apellido.value.trim() !== "";
+    const emailValido     = isEmailValid(email.value.trim());
+    const passwordValido  = isPasswordValid(password.value);
+    const contrasIguales  = password.value === confirmPassword.value;
+    const rolSeleccionado = Array.from(rolRadios).some(r => r.checked);
 
     // Validación de Código si es conductor
     const rol = document.querySelector('input[name="roleName"]:checked')?.value;

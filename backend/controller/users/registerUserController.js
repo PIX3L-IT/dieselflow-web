@@ -9,7 +9,7 @@
   - JSON con mensaje de éxito o error
 */
 
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const User = require("../../models/users/User");
 const Role = require("../../models/users/Role");
 
