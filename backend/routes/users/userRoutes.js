@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const verifyToken = require('../../utils/verifyToken');
 const { getUsers } = require("../../controller/users/getUsersController");
+const { registerUser } = require("../../controller/users/registerUserController");
 
 router.get("/usuarios", verifyToken, getUsers);
 
@@ -26,5 +27,11 @@ router.get("/users/search", async (req, res) => {
   
   res.json({ results });
 });  
+
+router.post("/registrar", registerUser);
+
+router.get("/registrar", (req, res) => {
+  res.render("users/registerUser");
+});
 
 module.exports = router;

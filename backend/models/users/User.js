@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
   registrationDate: { type: Date, required: true },
   email: { type: String, required: true, maxlength: 64 },
   userStatus: { type: Boolean, required: true },
-  accessCode: { type: String, required: true, maxlength: 10 },
+  accessCode: { type: String, maxlength: 10 },
 });
 
 // Función para consultar los usuarios con su rol
@@ -33,6 +33,17 @@ userSchema.statics.findByEmail = function(email) {
 // Método estático para buscar por username solo
 userSchema.statics.findByUsername = function(username) {
   return this.findOne({ username }).populate("idRole");
+};
+
+// Método estático para crear un nuevo usuario
+userSchema.statics.createUser = async function (userData) {
+  const newUser = new this(userData);
+  return await newUser.save();
+};
+
+// Método estático para buscar usuario por correo
+userSchema.statics.findByEmailRegister = async function (email) {
+  return await this.findOne({ email });
 };
 
 module.exports = mongoose.model("User", userSchema, "user");
