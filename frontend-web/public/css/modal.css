@@ -1,25 +1,21 @@
-body {
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  background-color: #ccc;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Jaldi', sans-serif;
-}
-
 .modal {
-  display: flex;
+  display: none;               
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.4);
   justify-content: center;
   align-items: center;
-  width: 100%;
+  z-index: 1000;
 }
 
 .modal-content.clean {
-  background-color: #e0e0e0; 
+  background-color: #e0e0e0;
   width: 400px;
   height: 400px;
+  box-sizing: border-box;      
   border-radius: 20px;
   padding: 2rem;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
@@ -30,6 +26,7 @@ body {
   justify-content: center;
   overflow: hidden;
 }
+
 
 .modal-title {
   font-size: 1.8rem;
@@ -51,8 +48,8 @@ body {
   display: flex;
   justify-content: center;
   gap: 1rem;
+  flex-wrap: wrap;
   z-index: 2;
-  flex-wrap: wrap; 
 }
 
 .btn-group button,
@@ -70,15 +67,13 @@ body {
 .btn-confirmacion {
   background-color: #1c2d4a;
   color: white;
-  border: 2px solid #1c2d4a; 
+  border: 2px solid #1c2d4a;
 }
 
 .btn-confirmacion:hover {
   background-color: #0f1c33;
   border-color: #0f1c33;
 }
-
-
 
 .btn-cancelar {
   background-color: white;
@@ -93,29 +88,25 @@ body {
 .modal-corner {
   position: absolute;
   width: 75px;
-  height: auto;
-  object-fit: contain;
   pointer-events: none;
   z-index: 1;
 }
 
-.top-left { top: 0; left: 0; }
-.top-right { top: 0; right: 0; }
-.bottom-left { bottom: 0; left: 0; }
-.bottom-right { bottom: 0; right: 0; }
+.top-left    { top: 0;   left: 0; }
+.top-right   { top: 0;   right: 0; }
+.bottom-left { bottom:0; left: 0; }
+.bottom-right{ bottom:0; right: 0; }
+
 
 @media (max-width: 450px) {
   .modal-content.clean {
-    width: 90%;
-    height: auto;
+    width: 300px;   
+    height: 300px;
     padding: 1.5rem;
   }
-
   .btn-group {
     flex-direction: column;
-    align-items: center;
   }
-
   .btn-group button {
     width: 100%;
     max-width: 250px;

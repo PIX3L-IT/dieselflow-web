@@ -1,0 +1,184 @@
+<%- include('../includes/head.ejs', { title: 'Registrar Usuario' }) %>
+
+<!-- CSS -->
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/button.css">
+<link rel="stylesheet" href="/css/text.css">
+<link rel="stylesheet" href="/css/users.css">
+<link rel="stylesheet" href="/css/error.css">
+<link rel="stylesheet" href="/css/navbar.css">
+<link rel="stylesheet" href="/css/filter.css">
+<link rel="stylesheet" href="/css/backArrow.css">
+<link rel="stylesheet" href="/css/input.css">
+<link rel="stylesheet" href="/css/subtitle.css">
+<link rel="stylesheet" href="/css/userRegister.css">
+<link rel="stylesheet" href="/css/modal.css">
+</head>
+
+<body>
+  <!-- Navbar fijo -->
+  <%- include('../includes/navbar.ejs', { active: 'usuarios' }) %>
+
+  <div class="content">
+    <div class="header-content">
+      <button class="backArrow" onclick="window.location.href='/usuarios'"></button>
+      <%- include('../includes/title.ejs', { title: 'Registrar Usuario' }) %>
+    </div>
+
+    <div class="container my-4">
+      <form id="registroForm" class="single-input-form" action="/registrar" method="POST">
+        <!-- Nombre y Apellido -->
+        <div class="row mb-4">
+          <div class="col-md-6">
+            <h2 class="subtitle">Nombre</h2>
+            <input
+              type="text"
+              id="inputNombre"
+              name="username"
+              maxlength="50"
+              placeholder="Ej. Juan"
+              class="text-input"
+            />
+            <small id="nombreError" class="error-message"></small>
+          </div>
+          <div class="col-md-6">
+            <h2 class="subtitle">Apellido(s)</h2>
+            <input
+              type="text"
+              id="inputApellido"
+              name="lastName"
+              maxlength="50"
+              placeholder="Ej. Pérez López"
+              class="text-input"
+            />
+            <small id="apellidoError" class="error-message"></small>
+          </div>
+        </div>
+
+        <!-- Correo -->
+        <div class="row mb-4">
+          <div class="col-md-12">
+            <h2 class="subtitle">Correo</h2>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="example@tubosGM.com"
+              class="text-input"
+            />
+            <small id="emailError" class="error-message"></small>
+          </div>
+        </div>
+
+        <!-- Contraseña y Confirmación -->
+        <div class="row mb-4">
+          <div class="col-md-6">
+            <h2 class="subtitle">Contraseña</h2>
+            <div class="input-group">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Ingresa tu contraseña"
+              />
+              <span class="input-group-text" id="togglePassword">
+                <i class="bi bi-eye-slash"></i>
+              </span>
+            </div>
+            <small id="passwordError" class="error-message"></small>
+          </div>
+          <div class="col-md-6">
+            <h2 class="subtitle">Confirmar Contraseña</h2>
+            <div class="input-group">
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                placeholder="Repite tu contraseña"
+              />
+              <span class="input-group-text" id="toggleConfirmPassword">
+                <i class="bi bi-eye-slash"></i>
+              </span>
+            </div>
+            <small id="confirmPasswordError" class="error-message"></small>
+          </div>
+        </div>
+
+        <!-- Rol + Código en dos columnas -->
+        <div class="row mb-4">
+          <!-- Columna 1: Rol -->
+          <div class="col-md-6">
+            <h2 class="subtitle">Rol</h2>
+            <div class="rol-options">
+              <label>
+                <input type="radio" name="roleName" value="Administrador" checked>
+                Administrador
+              </label>
+              <label>
+                <input type="radio" name="roleName" value="Conductor">
+                Conductor
+              </label>
+            </div>
+            <small id="rolError" class="error-message"></small>
+          </div>
+          <!-- Columna 2: Código -->
+          <div class="col-md-6 d-none" id="codeContainer">
+            <h2 class="subtitle">Código</h2>
+            <input
+              type="text"
+              id="codigo"
+              name="accessCode"
+              placeholder="1234"
+              maxlength="4"
+              class="text-input"
+            />
+            <small id="codigoError" class="error-message"></small>
+          </div>
+        </div>
+
+        <!-- Botón Registrar -->
+        <div class="row">
+          <div class="col-md-12">
+            <button
+              id="submitBtn"
+              type="submit"
+              class="btn button button-primary"
+              disabled
+            >
+              Registrar usuario
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modales -->
+  <%- include('../includes/modal.ejs', {
+    id: 'confirmModal',
+    titulo: '',
+    mensaje: '',
+    botonConfirmacionTexto: 'Aceptar',
+    botonCancelarTexto: 'Cancelar'
+  }) %>
+  <%- include('../includes/modal.ejs', {
+    id: 'successModal',
+    titulo: 'Registro exitoso',
+    mensaje: '',
+    botonConfirmacionTexto: 'Cerrar'
+  }) %>
+  <%- include('../includes/modal.ejs', {
+    id: 'errorModal',
+    titulo: 'Error',
+    mensaje: '',
+    botonConfirmacionTexto: 'Cerrar'
+  }) %>
+
+  <!-- Scripts propios -->
+  <script src="/js/input.js"></script>
+  <script src="/js/validationEmail.js"></script>
+  <script src="/js/validationPassword.js"></script>
+  <script src="/js/userRegisterValidation.js"></script>
+  <script src="/js/userRegisterModal.js"></script>
+
+<%- include('../includes/foot.ejs') %>

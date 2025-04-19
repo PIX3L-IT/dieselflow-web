@@ -1,4 +1,4 @@
-<div class="modal">
+<div class="modal" id="<%= typeof id !== 'undefined' ? id : '' %>" style="display: none;">
   <div class="modal-content clean">
     <!-- CÍRCULOS -->
     <img src="/imgs/modal1.png" class="modal-corner top-left">
@@ -11,15 +11,24 @@
     <p class="modal-message"><%= mensaje %></p>
 
     <div class="btn-group">
-      <% if (botonConfirmacionTexto && botonConfirmacionLink) { %>
-        <a href="<%= botonConfirmacionLink %>">
+      <% if (typeof botonConfirmacionTexto !== 'undefined') { %>
+        <% if (typeof botonConfirmacionLink !== 'undefined' && botonConfirmacionLink) { %>
+          <a href="<%= botonConfirmacionLink %>">
+            <button class="btn-confirmacion"><%= botonConfirmacionTexto %></button>
+          </a>
+        <% } else { %>
           <button class="btn-confirmacion"><%= botonConfirmacionTexto %></button>
-        </a>
+        <% } %>
       <% } %>
-      <% if (botonCancelarTexto && botonCancelarLink) { %>
-        <a href="<%= botonCancelarLink %>">
+
+      <% if (typeof botonCancelarTexto !== 'undefined') { %>
+        <% if (typeof botonCancelarLink !== 'undefined' && botonCancelarLink) { %>
+          <a href="<%= botonCancelarLink %>">
+            <button class="btn-cancelar"><%= botonCancelarTexto %></button>
+          </a>
+        <% } else { %>
           <button class="btn-cancelar"><%= botonCancelarTexto %></button>
-        </a>
+        <% } %>
       <% } %>
     </div>
   </div>

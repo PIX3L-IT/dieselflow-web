@@ -28,10 +28,18 @@ router.get("/users/search", async (req, res) => {
   res.json({ results });
 });  
 
-router.post("/registrar", registerUser);
+router.post("/registrar", verifyToken, registerUser);
 
-router.get("/registrar", (req, res) => {
-  res.render("users/registerUser");
-});
+router.get(
+  "/registrar",
+  verifyToken,
+  (req, res) => {
+    res.render("users/registerUser", {
+      active: "usuarios",
+      username: req.user.username,
+      lastname: req.user.lastname,    
+    });
+  }
+);
 
 module.exports = router;
