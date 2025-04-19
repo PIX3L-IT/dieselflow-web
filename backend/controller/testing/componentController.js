@@ -114,6 +114,23 @@ exports.getNoDataBanner = (req, res) => {
 exports.getHeader = (req, res) => { 
   res.render("testing/head")
 };
+
+exports.getStatBox = (req, res) => { 
+  const { username, lastname } = req.user;
+  const accessToken = req.cookies.accessToken;
+  const refreshToken = req.cookies.refreshToken;
+
+  res.render("testing/statBox", {
+    title: "example",
+    value: "2",
+    username,
+    lastname,
+    accessToken,
+    refreshToken
+  });
+}
+
+
 exports.getLoader = (req, res) => {
   res.render("includes/loader")
 }
@@ -121,6 +138,62 @@ exports.getLoader = (req, res) => {
 exports.getIndex = (req, res) => {
   res.render("testing/index")
 }
+
+exports.getChart = (req, res) => {
+  const { username, lastname } = req.user;
+  const accessToken = req.cookies.accessToken;
+  const refreshToken = req.cookies.refreshToken;
+  const dieselData = [
+    // Enero
+    { date: '2025-01-01', liters: 40 },
+    { date: '2025-01-03', liters: 42 },
+    { date: '2025-01-05', liters: 45 },
+    { date: '2025-01-07', liters: 50 },
+    { date: '2025-01-10', liters: 38 },
+    { date: '2025-01-15', liters: 46 },
+    { date: '2025-01-20', liters: 44 },
+    { date: '2025-01-25', liters: 41 },
+
+    // Febrero
+    { date: '2025-02-02', liters: 47 },
+    { date: '2025-02-04', liters: 49 },
+    { date: '2025-02-07', liters: 53 },
+    { date: '2025-02-12', liters: 39 },
+    { date: '2025-02-18', liters: 51 },
+    { date: '2025-02-22', liters: 45 },
+    { date: '2025-02-27', liters: 48 },
+
+    // Marzo
+    { date: '2025-03-03', liters: 52 },
+    { date: '2025-03-08', liters: 55 },
+    { date: '2025-03-12', liters: 49 },
+    { date: '2025-03-17', liters: 46 },
+    { date: '2025-03-21', liters: 50 },
+    { date: '2025-03-26', liters: 53 },
+    { date: '2025-03-29', liters: 51 },
+
+    // Abril
+    { date: '2025-04-01', liters: 43 },
+    { date: '2025-04-04', liters: 45 },
+    { date: '2025-04-08', liters: 40 },
+    { date: '2025-04-12', liters: 42 },
+    { date: '2025-04-15', liters: 47 },
+    { date: '2025-04-20', liters: 49 },
+    { date: '2025-04-25', liters: 46 },
+    { date: '2025-04-30', liters: 50 }
+  ];
+
+  res.render("testing/lineChart", {
+    chartData: dieselData,
+    containerId: "diesel-line-chart",
+    username,
+    lastname,
+    accessToken,
+    refreshToken
+  });
+};
+
+
 
 exports.getStatsButton = (req, res) => {
   res.render("includes/userStatsButton");
