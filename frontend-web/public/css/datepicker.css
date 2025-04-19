@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Jaldi&display=swap');
+
+.flatpickr-calendar,
+.flatpickr-calendar * {
+  font-family: 'Jaldi', sans-serif;
+}
+
+.flatpickr-day.today {
+    background-color: #F3F3F3;
+    border: 1px solid #8F8B88;
+    color: #3A3A3A;
+  }
+
+  .flatpickr-day.selected {
+    background: #304879;
+    color: #F3F3F3;
+  }
+  .flatpickr-day:hover {
+    background: #CFDFFF;
+    color: #3A3A3A;
+  }
+
+  .flatpickr-months .flatpickr-month {
+    background-color: #F3F3F3;
+    color: #304879;
+  }
+
+  .flatpickr-weekday {
+    color: #3A3A3A;
+  }

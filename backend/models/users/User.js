@@ -25,6 +25,11 @@ userSchema.statics.findByUsernameAndLastName = function(username, lastName) {
   return this.findOne({ username, lastName }).populate("idRole");
 };
 
+// Método estático para buscar usuarios por rol
+userSchema.statics.findById = function(idRole) {
+  return this.find({ idRole });
+};
+
 // Método estático para buscar por email
 userSchema.statics.findByEmail = function(email) {
   return this.findOne({ email }).populate("idRole");

@@ -1,7 +1,6 @@
 <link rel="stylesheet" href="/css/navbar.css">
 <%- include('../includes/head.ejs') %>
 
-<%- include('../includes/loader.ejs') %>
 <aside class="side-navbar">
   <div>
     <div class="logo">GUACHI-no</div>
@@ -26,7 +25,7 @@
           </a>
         </li>
         <li>
-          <a href="/" class="menu-item <%= active === 'reportes' ? 'active-item' : '' %>">
+          <a href="/reportes" class="menu-item <%= active === 'reportes' ? 'active-item' : '' %>">
             <i class="bi bi-card-checklist" style="font-size: 30px;"></i>
             Reportes
           </a>
@@ -53,5 +52,4 @@
   </div>
 </aside>
 
-<script src="/js/loader.js"></script>
 <script src="/js/index.js"></script>

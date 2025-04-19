@@ -18,6 +18,7 @@ const loginRoutes = require("./backend/routes/users/loginRoutes");
 const authRoutes = require("./backend/routes/users/authRoutes");
 const userRoutes = require("./backend/routes/users/userRoutes");
 const unitsRoutes = require("./backend/routes/units/unitRoutes");
+const reportRoutes = require("./backend/routes/reports/reportRoutes");
 
 const app = express();
 app.use(cookieParser());
@@ -85,6 +86,9 @@ app.get("/", (req, res) => {
 
   res.render("users/login", { error: null });
 });
+
+// Ruta de reportes
+app.use("/reportes", reportRoutes);
 
 // Manejo de rutas no encontradas
 app.use((req, res) => {

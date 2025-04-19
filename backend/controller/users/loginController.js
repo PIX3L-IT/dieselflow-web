@@ -28,19 +28,25 @@ exports.postLogin = async (req, res) => {
 
     if (!userLogin || !isUserActive || !isValidPassword) {
       const error = 'Credenciales inválidas';
-      return type === "Administrador"
-        ? res.render('users/login', { error })
-        : res.status(401).json({ error });
+    
+      if (type === "Administrador") {
+        return res.render('users/login', { error });
+      }
+    
+      return res.status(401).json({ error });
     }
-
+    
     // Validar rol
     if (userLogin.idRole.roleName !== type) {
       const error = 'Credenciales inválidas';
-      return type === "Administrador"
-        ? res.render('users/login', { error })
-        : res.status(401).json({ error });
+    
+      if (type === "Administrador") {
+        return res.render('users/login', { error });
+      }
+    
+      return res.status(401).json({ error });
     }
-
+    
     // Crear tokens
     const accessToken = jwt.sign(
       {
@@ -56,6 +62,7 @@ exports.postLogin = async (req, res) => {
     const refreshToken = jwt.sign(
       {
         id: userLogin._id,
+        email: userLogin.email,
         username: userLogin.username,
         lastname: userLogin.lastName
       },
@@ -66,14 +73,14 @@ exports.postLogin = async (req, res) => {
     // Guardar tokens en cookies
     res.cookie('accessToken', accessToken, {
       httpOnly: true,
-      maxAge: 60 * 1000,
+      maxAge: 3600 * 1000,
       sameSite: 'Strict',
       secure: false
     });
 
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true,
-      maxAge: 120 * 1000,
+      maxAge: 3600 * 1000,
       sameSite: 'Strict',
       secure: false
     });
@@ -102,5 +109,6 @@ exports.postLogin = async (req, res) => {
 
 // GET Login
 exports.getLogin = (req, res) => {
-  res.render('users/login');
+  const error = null
+  res.render('users/login', { error });
 };

@@ -17,8 +17,5 @@ function hideLoader(minDuration = 1000) {
 
     setTimeout(() => {
         loader.classList.add('hide-loader');
-        loader.addEventListener('transitionend', () => {
-            loader.remove();
-        });
     }, delay);
 }

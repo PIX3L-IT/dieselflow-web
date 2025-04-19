@@ -13,4 +13,11 @@ const reportSchema = new mongoose.Schema({
   endTime: { type: Date, required: true },
 });
 
+// Método estático para encontrar reportes que cumplen con filtros
+reportSchema.statics.findByFilters = function(filter) {
+  return this.find(filter)
+    .populate("idUser")
+    .populate("idUnit");
+};
+
 module.exports = mongoose.model("Report", reportSchema, "report");
