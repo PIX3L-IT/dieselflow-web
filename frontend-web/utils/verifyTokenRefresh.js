@@ -10,7 +10,7 @@ export async function fetchWithAuth(url, options = {}) {
 
     if (!refreshed) {
       alert('Tu sesión ha expirado. Inicia sesión otra vez.');
-      window.location.href = '/auth/login';
+      window.location.href = '/login';
       return;
     }
 
@@ -25,7 +25,7 @@ export async function fetchWithAuth(url, options = {}) {
 
 async function refreshTokens() {
 
-  const res = await fetch('/auth/refresh', {
+  const res = await fetch('/refresh', {
     method: 'POST',
     credentials: 'include'
   });
