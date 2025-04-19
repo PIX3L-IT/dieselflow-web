@@ -22,3 +22,9 @@
     color: #F3F3F3;
     border: 1px solid #8F8B88;
   }
+
+  .hide-loader {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    }  

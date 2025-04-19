@@ -19,6 +19,8 @@ document.querySelectorAll('#driverSelect + .dropdown-menu .dropdown-item')
 document.getElementById('generarBtn').addEventListener('click', async (e) => {
   e.preventDefault();
 
+  reportContainer.innerHTML = '';
+
   // Oculta todos los mensajes de error
   document.querySelectorAll('.error-message').forEach(el => el.classList.add('d-none'));
 
@@ -56,6 +58,9 @@ document.getElementById('generarBtn').addEventListener('click', async (e) => {
 
   // Lógica de fetch con refresco de token
   try {
+    $('#generarBtn').prop('disabled', true);
+    showLoader();
+
     const response = await fetchWithAuth('/reportes/generar', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -63,24 +68,33 @@ document.getElementById('generarBtn').addEventListener('click', async (e) => {
     });
 
     const html = await response.text();
-    document.getElementById('reportContainer').innerHTML = html;
 
-    // Inicializa DataTable
     setTimeout(() => {
-      $('#reportTable').DataTable({
-        paging: true,
-        ordering: true,
-        searching: true,
-        pageLength: 7,
-        dom: 'Bfrtip',
-        language: {
-          url: 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
-          paginate: { previous: '<', next: '>' },
-        },
-        buttons: ['csv', 'pdf'],
-      });
-    }, 0);
+        reportContainer.innerHTML = html;
 
+        // Inicializa DataTable
+        setTimeout(() => {
+            if ($.fn.DataTable.isDataTable('#reportTable')) {
+                $('#reportTable').DataTable().destroy();
+            }
+
+            $('#reportTable').DataTable({
+            paging: true,
+            ordering: true,
+            searching: true,
+            pageLength: 7,
+            dom: 'Bfrtip',
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
+                paginate: { previous: '<', next: '>' },
+            },
+            buttons: ['csv', 'pdf'],
+            });
+
+            hideLoader();
+            $('#generarBtn').prop('disabled', false);
+        }, 0);
+    }, 1100);
   } catch (err) {
     console.error('Error al generar el reporte', err);
     }
