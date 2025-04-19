@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="/css/subtitle.css">
 <link rel="stylesheet" href="/css/modal.css">
 <link rel="stylesheet" href="/css/user.css">
-
 </head>
 <body>
 
@@ -25,25 +24,21 @@
       <div class="row mb-4">
         <div class="col">
           <h2 class="subtitle">Nombre</h2>
-          <input type="text" value="<%= user.username %>" disabled />
+          <input type="text" value="<%= user.username %>" name="username" <%= isEditable ? '' : 'disabled' %> />
         </div>
         <div class="col">
           <h2 class="subtitle">Apellido(s)</h2>
-          <input type="text" value="<%= user.lastName %>" disabled />
+          <input type="text" value="<%= user.lastName %>" name="lastName" <%= isEditable ? '' : 'disabled' %> />
         </div>
       </div>
 
+      <% if (isEditable) { %>
       <!-- Contraseña y Confirmación -->
       <div class="row mb-4">
         <div class="col">
           <h2 class="subtitle">Contraseña</h2>
           <div class="input-group">
-            <input
-              type="password"
-              id="password"
-              placeholder="Ingresa nueva contraseña"
-              name="password"
-            />
+            <input type="password" id="password" placeholder="Ingresa nueva contraseña" name="password" />
             <span class="input-group-text" onclick="togglePasswordVisibility('password', 'togglePasswordIcon')">
               <i class="bi bi-eye-slash" id="togglePasswordIcon"></i>
             </span>
@@ -53,12 +48,7 @@
         <div class="col">
           <h2 class="subtitle">Confirmar Contraseña</h2>
           <div class="input-group">
-            <input
-              type="password"
-              id="confirmPassword"
-              placeholder="Repite la nueva contraseña"
-              name="confirmPassword"
-            />
+            <input type="password" id="confirmPassword" placeholder="Repite la nueva contraseña" name="confirmPassword" />
             <span class="input-group-text" onclick="togglePasswordVisibility('confirmPassword', 'toggleConfirmPasswordIcon')">
               <i class="bi bi-eye-slash" id="toggleConfirmPasswordIcon"></i>
             </span>
@@ -66,8 +56,7 @@
           <small id="confirmPasswordError" class="error-message"></small>
         </div>
       </div>
-
-
+      <% } %>
 
       <!-- Rol + Código en misma fila -->
       <div class="row mb-4">
@@ -76,30 +65,24 @@
           <h2 class="subtitle">Rol</h2>
           <div class="rol-options">
             <label>
-              <input type="radio" name="roleName" value="Administrador"
-                <%= user.idRole.roleName === 'Administrador' ? 'checked' : '' %>
-                disabled>
+              <input type="radio" name="roleName" value="Administrador" <%= user.idRole.roleName === 'Administrador' ? 'checked' : '' %> <%= isEditable ? '' : 'disabled' %> >
               Administrador
             </label>
             <label>
-              <input type="radio" name="roleName" value="Conductor"
-                <%= user.idRole.roleName === 'Conductor' ? 'checked' : '' %>
-                disabled>
+              <input type="radio" name="roleName" value="Conductor" <%= user.idRole.roleName === 'Conductor' ? 'checked' : '' %> <%= isEditable ? '' : 'disabled' %> >
               Conductor
             </label>
           </div>
         </div>
-      
+
         <!-- Código solo si es conductor -->
         <% if (user.idRole.roleName === 'Conductor') { %>
-          <div class="col">
-            <h2 class="subtitle">Código de acceso</h2>
-            <input type="text" value="<%= user.accessCode %>" disabled />
-          </div>
+        <div class="col">
+          <h2 class="subtitle">Código de acceso</h2>
+          <input type="text" value="<%= user.accessCode %>" name="accessCode" <%= isEditable ? '' : 'disabled' %> />
+        </div>
         <% } %>
       </div>
-
-
 
       <!-- Estado y Fecha -->
       <div class="row mb-4">
@@ -115,19 +98,15 @@
 
       <!-- Botón solo si es conductor -->
       <% if (showModifyButton) { %>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="button-container" style="width: fit-content; margin: auto;">
-              <button
-                id="submitBtn"
-                type="button"
-                class="btn button button-primary"
-                onclick="window.location.href='/usuarios/<%= user._id %>/edit'">
-                Modificar usuario
-              </button>
-            </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="button-container" style="width: fit-content; margin: auto;">
+            <button id="submitBtn" type="button" class="btn button button-primary" onclick="window.location.href='/usuarios/<%= user._id %>/edit'">
+              Modificar usuario
+            </button>
           </div>
         </div>
+      </div>
       <% } %>
     </form>
   </div>

@@ -4,19 +4,20 @@ const Role = require("../../models/users/Role");
 exports.getUser = async (req, res) => {
   try {
     const userId = req.params.id;
-
-    const user = await User.getOneUser(userId); // 🔁 usa método estático
+    const user = await User.getOneUser(userId);
 
     if (!user) {
       return res.status(404).render("includes/404", { active: "usuarios" });
     }
 
+    const isEditable = user.idRole.roleName === 'Conductor';
     const showModifyButton = user.idRole.roleName === "Conductor";
 
     res.render("users/user", {
       active: "usuarios",
       user,
       showModifyButton,
+      isEditable,
       username: req.user.username,
       lastname: req.user.lastname
     });
