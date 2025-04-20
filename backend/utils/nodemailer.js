@@ -1,6 +1,19 @@
 require("dotenv").config();
 const nodemailer = require('nodemailer');
 
+/*
+    Descripción sobre la función:
+    Esta función se encarga de enviar correos electrónicos utilizando el servicio de Gmail.
+    Se utiliza la librería nodemailer para facilitar el envío de correos electrónicos.
+    
+    Parámetros:
+    - html: Contenido HTML del correo electrónico.
+    - email: Dirección de correo electrónico del destinatario.
+    - subject: Asunto del correo electrónico.
+
+    Valor de retorno:
+    - Devuelve una promesa que se resuelve si el correo se envía correctamente o se rechaza si ocurre un error.
+*/
 exports.sendEmail = async (html, email, subject) => {
     return new Promise((resolve, reject) => {
         const transporter = nodemailer.createTransport({
